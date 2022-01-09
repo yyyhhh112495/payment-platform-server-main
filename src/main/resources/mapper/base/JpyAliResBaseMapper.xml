@@ -1,0 +1,2253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyAliResBaseMapper">
+
+
+    <insert id="insertJpyAliRes" >
+        INSERT INTO `jpy_ali_res`
+        (
+        <trim suffixOverrides=",">
+                    <if test="notify_id!=null">
+                        `notify_id`,
+                    </if>
+                    <if test="buyer_id!=null">
+                        `buyer_id`,
+                    </if>
+                    <if test="invoice_amount!=null">
+                        `invoice_amount`,
+                    </if>
+                    <if test="notify_type!=null">
+                        `notify_type`,
+                    </if>
+                    <if test="trade_status!=null">
+                        `trade_status`,
+                    </if>
+                    <if test="receipt_amount!=null">
+                        `receipt_amount`,
+                    </if>
+                    <if test="buyer_pay_amount!=null">
+                        `buyer_pay_amount`,
+                    </if>
+                    <if test="app_id!=null">
+                        `app_id`,
+                    </if>
+                    <if test="sign_type!=null">
+                        `sign_type`,
+                    </if>
+                    <if test="seller_id!=null">
+                        `seller_id`,
+                    </if>
+                    <if test="gmt_payment!=null">
+                        `gmt_payment`,
+                    </if>
+                    <if test="notify_time!=null">
+                        `notify_time`,
+                    </if>
+                    <if test="version!=null">
+                        `version`,
+                    </if>
+                    <if test="out_trade_no!=null">
+                        `out_trade_no`,
+                    </if>
+                    <if test="total_amount!=null">
+                        `total_amount`,
+                    </if>
+                    <if test="trade_no!=null">
+                        `trade_no`,
+                    </if>
+                    <if test="auth_app_id!=null">
+                        `auth_app_id`,
+                    </if>
+                    <if test="buyer_logon_id!=null">
+                        `buyer_logon_id`,
+                    </if>
+                    <if test="point_amount!=null">
+                        `point_amount`,
+                    </if>
+                    <if test="gmt_create!=null">
+                        `gmt_create`,
+                    </if>
+                    <if test="charset!=null">
+                        `charset`,
+                    </if>
+                    <if test="seller_email!=null">
+                        `seller_email`,
+                    </if>
+                    <if test="subject!=null">
+                        `subject`,
+                    </if>
+                    <if test="sign!=null">
+                        `sign`,
+                    </if>
+                    <if test="fund_bill_list!=null">
+                        `fund_bill_list`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="notify_id!=null">
+                    #{notify_id},
+                </if>
+                <if test="buyer_id!=null">
+                    #{buyer_id},
+                </if>
+                <if test="invoice_amount!=null">
+                    #{invoice_amount},
+                </if>
+                <if test="notify_type!=null">
+                    #{notify_type},
+                </if>
+                <if test="trade_status!=null">
+                    #{trade_status},
+                </if>
+                <if test="receipt_amount!=null">
+                    #{receipt_amount},
+                </if>
+                <if test="buyer_pay_amount!=null">
+                    #{buyer_pay_amount},
+                </if>
+                <if test="app_id!=null">
+                    #{app_id},
+                </if>
+                <if test="sign_type!=null">
+                    #{sign_type},
+                </if>
+                <if test="seller_id!=null">
+                    #{seller_id},
+                </if>
+                <if test="gmt_payment!=null">
+                    #{gmt_payment},
+                </if>
+                <if test="notify_time!=null">
+                    #{notify_time},
+                </if>
+                <if test="version!=null">
+                    #{version},
+                </if>
+                <if test="out_trade_no!=null">
+                    #{out_trade_no},
+                </if>
+                <if test="total_amount!=null">
+                    #{total_amount},
+                </if>
+                <if test="trade_no!=null">
+                    #{trade_no},
+                </if>
+                <if test="auth_app_id!=null">
+                    #{auth_app_id},
+                </if>
+                <if test="buyer_logon_id!=null">
+                    #{buyer_logon_id},
+                </if>
+                <if test="point_amount!=null">
+                    #{point_amount},
+                </if>
+                <if test="gmt_create!=null">
+                    #{gmt_create},
+                </if>
+                <if test="charset!=null">
+                    #{charset},
+                </if>
+                <if test="seller_email!=null">
+                    #{seller_email},
+                </if>
+                <if test="subject!=null">
+                    #{subject},
+                </if>
+                <if test="sign!=null">
+                    #{sign},
+                </if>
+                <if test="fund_bill_list!=null">
+                    #{fund_bill_list},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyAliRes">
+        UPDATE `jpy_ali_res`
+        SET
+        <trim suffixOverrides=",">
+            <if test="buyer_id != null and buyer_id!=''">
+                `buyer_id` = #{buyer_id},
+            </if>
+            <if test="invoice_amount != null and invoice_amount!=''">
+                `invoice_amount` = #{invoice_amount},
+            </if>
+            <if test="notify_type != null and notify_type!=''">
+                `notify_type` = #{notify_type},
+            </if>
+            <if test="trade_status != null and trade_status!=''">
+                `trade_status` = #{trade_status},
+            </if>
+            <if test="receipt_amount != null and receipt_amount!=''">
+                `receipt_amount` = #{receipt_amount},
+            </if>
+            <if test="buyer_pay_amount != null and buyer_pay_amount!=''">
+                `buyer_pay_amount` = #{buyer_pay_amount},
+            </if>
+            <if test="app_id != null and app_id!=''">
+                `app_id` = #{app_id},
+            </if>
+            <if test="sign_type != null and sign_type!=''">
+                `sign_type` = #{sign_type},
+            </if>
+            <if test="seller_id != null and seller_id!=''">
+                `seller_id` = #{seller_id},
+            </if>
+            <if test="gmt_payment != null and gmt_payment!=''">
+                `gmt_payment` = #{gmt_payment},
+            </if>
+            <if test="notify_time != null and notify_time!=''">
+                `notify_time` = #{notify_time},
+            </if>
+            <if test="version != null and version!=''">
+                `version` = #{version},
+            </if>
+            <if test="out_trade_no != null and out_trade_no!=''">
+                `out_trade_no` = #{out_trade_no},
+            </if>
+            <if test="total_amount != null and total_amount!=''">
+                `total_amount` = #{total_amount},
+            </if>
+            <if test="trade_no != null and trade_no!=''">
+                `trade_no` = #{trade_no},
+            </if>
+            <if test="auth_app_id != null and auth_app_id!=''">
+                `auth_app_id` = #{auth_app_id},
+            </if>
+            <if test="buyer_logon_id != null and buyer_logon_id!=''">
+                `buyer_logon_id` = #{buyer_logon_id},
+            </if>
+            <if test="point_amount != null and point_amount!=''">
+                `point_amount` = #{point_amount},
+            </if>
+            <if test="gmt_create != null and gmt_create!=''">
+                `gmt_create` = #{gmt_create},
+            </if>
+            <if test="charset != null and charset!=''">
+                `charset` = #{charset},
+            </if>
+            <if test="seller_email != null and seller_email!=''">
+                `seller_email` = #{seller_email},
+            </if>
+            <if test="subject != null and subject!=''">
+                `subject` = #{subject},
+            </if>
+            <if test="sign != null and sign!=''">
+                `sign` = #{sign},
+            </if>
+            <if test="fund_bill_list != null and fund_bill_list!=''">
+                `fund_bill_list` = #{fund_bill_list},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `notify_id` = #{notify_id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_ali_res`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.buyer_id != null and set.buyer_id!=''">
+            `buyer_id` = #{set.buyer_id},
+        </if>
+        <if test="set.invoice_amount != null and set.invoice_amount!=''">
+            `invoice_amount` = #{set.invoice_amount},
+        </if>
+        <if test="set.notify_type != null and set.notify_type!=''">
+            `notify_type` = #{set.notify_type},
+        </if>
+        <if test="set.trade_status != null and set.trade_status!=''">
+            `trade_status` = #{set.trade_status},
+        </if>
+        <if test="set.receipt_amount != null and set.receipt_amount!=''">
+            `receipt_amount` = #{set.receipt_amount},
+        </if>
+        <if test="set.buyer_pay_amount != null and set.buyer_pay_amount!=''">
+            `buyer_pay_amount` = #{set.buyer_pay_amount},
+        </if>
+        <if test="set.app_id != null and set.app_id!=''">
+            `app_id` = #{set.app_id},
+        </if>
+        <if test="set.sign_type != null and set.sign_type!=''">
+            `sign_type` = #{set.sign_type},
+        </if>
+        <if test="set.seller_id != null and set.seller_id!=''">
+            `seller_id` = #{set.seller_id},
+        </if>
+        <if test="set.gmt_payment != null and set.gmt_payment!=''">
+            `gmt_payment` = #{set.gmt_payment},
+        </if>
+        <if test="set.notify_time != null and set.notify_time!=''">
+            `notify_time` = #{set.notify_time},
+        </if>
+        <if test="set.version != null and set.version!=''">
+            `version` = #{set.version},
+        </if>
+        <if test="set.out_trade_no != null and set.out_trade_no!=''">
+            `out_trade_no` = #{set.out_trade_no},
+        </if>
+        <if test="set.total_amount != null and set.total_amount!=''">
+            `total_amount` = #{set.total_amount},
+        </if>
+        <if test="set.trade_no != null and set.trade_no!=''">
+            `trade_no` = #{set.trade_no},
+        </if>
+        <if test="set.auth_app_id != null and set.auth_app_id!=''">
+            `auth_app_id` = #{set.auth_app_id},
+        </if>
+        <if test="set.buyer_logon_id != null and set.buyer_logon_id!=''">
+            `buyer_logon_id` = #{set.buyer_logon_id},
+        </if>
+        <if test="set.point_amount != null and set.point_amount!=''">
+            `point_amount` = #{set.point_amount},
+        </if>
+        <if test="set.gmt_create != null and set.gmt_create!=''">
+            `gmt_create` = #{set.gmt_create},
+        </if>
+        <if test="set.charset != null and set.charset!=''">
+            `charset` = #{set.charset},
+        </if>
+        <if test="set.seller_email != null and set.seller_email!=''">
+            `seller_email` = #{set.seller_email},
+        </if>
+        <if test="set.subject != null and set.subject!=''">
+            `subject` = #{set.subject},
+        </if>
+        <if test="set.sign != null and set.sign!=''">
+            `sign` = #{set.sign},
+        </if>
+        <if test="set.fund_bill_list != null and set.fund_bill_list!=''">
+            `fund_bill_list` = #{set.fund_bill_list},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.notify_idList != null">
+                    `notify_id` in
+                    <foreach collection="where.notify_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyNotify_id!=null and where.fuzzyNotify_id.size()>0">
+                (
+                <foreach collection="where.fuzzyNotify_id"  separator="or" item="item">
+                    `Notify_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyNotify_id!=null and where.rightFuzzyNotify_id.size()>0">
+                (
+                <foreach collection="where.rightFuzzyNotify_id"  separator="or" item="item">
+                    `Notify_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.buyer_idList != null">
+                    `buyer_id` in
+                    <foreach collection="where.buyer_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBuyer_id!=null and where.fuzzyBuyer_id.size()>0">
+                (
+                <foreach collection="where.fuzzyBuyer_id"  separator="or" item="item">
+                    `Buyer_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBuyer_id!=null and where.rightFuzzyBuyer_id.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBuyer_id"  separator="or" item="item">
+                    `Buyer_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.invoice_amountList != null">
+                    `invoice_amount` in
+                    <foreach collection="where.invoice_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyInvoice_amount!=null and where.fuzzyInvoice_amount.size()>0">
+                (
+                <foreach collection="where.fuzzyInvoice_amount"  separator="or" item="item">
+                    `Invoice_amount` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyInvoice_amount!=null and where.rightFuzzyInvoice_amount.size()>0">
+                (
+                <foreach collection="where.rightFuzzyInvoice_amount"  separator="or" item="item">
+                    `Invoice_amount` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.notify_typeList != null">
+                    `notify_type` in
+                    <foreach collection="where.notify_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyNotify_type!=null and where.fuzzyNotify_type.size()>0">
+                (
+                <foreach collection="where.fuzzyNotify_type"  separator="or" item="item">
+                    `Notify_type` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyNotify_type!=null and where.rightFuzzyNotify_type.size()>0">
+                (
+                <foreach collection="where.rightFuzzyNotify_type"  separator="or" item="item">
+                    `Notify_type` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.trade_statusList != null">
+                    `trade_status` in
+                    <foreach collection="where.trade_statusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTrade_status!=null and where.fuzzyTrade_status.size()>0">
+                (
+                <foreach collection="where.fuzzyTrade_status"  separator="or" item="item">
+                    `Trade_status` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTrade_status!=null and where.rightFuzzyTrade_status.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTrade_status"  separator="or" item="item">
+                    `Trade_status` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.receipt_amountList != null">
+                    `receipt_amount` in
+                    <foreach collection="where.receipt_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyReceipt_amount!=null and where.fuzzyReceipt_amount.size()>0">
+                (
+                <foreach collection="where.fuzzyReceipt_amount"  separator="or" item="item">
+                    `Receipt_amount` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyReceipt_amount!=null and where.rightFuzzyReceipt_amount.size()>0">
+                (
+                <foreach collection="where.rightFuzzyReceipt_amount"  separator="or" item="item">
+                    `Receipt_amount` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.buyer_pay_amountList != null">
+                    `buyer_pay_amount` in
+                    <foreach collection="where.buyer_pay_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBuyer_pay_amount!=null and where.fuzzyBuyer_pay_amount.size()>0">
+                (
+                <foreach collection="where.fuzzyBuyer_pay_amount"  separator="or" item="item">
+                    `Buyer_pay_amount` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBuyer_pay_amount!=null and where.rightFuzzyBuyer_pay_amount.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBuyer_pay_amount"  separator="or" item="item">
+                    `Buyer_pay_amount` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.app_idList != null">
+                    `app_id` in
+                    <foreach collection="where.app_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyApp_id!=null and where.fuzzyApp_id.size()>0">
+                (
+                <foreach collection="where.fuzzyApp_id"  separator="or" item="item">
+                    `App_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyApp_id!=null and where.rightFuzzyApp_id.size()>0">
+                (
+                <foreach collection="where.rightFuzzyApp_id"  separator="or" item="item">
+                    `App_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.sign_typeList != null">
+                    `sign_type` in
+                    <foreach collection="where.sign_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySign_type!=null and where.fuzzySign_type.size()>0">
+                (
+                <foreach collection="where.fuzzySign_type"  separator="or" item="item">
+                    `Sign_type` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySign_type!=null and where.rightFuzzySign_type.size()>0">
+                (
+                <foreach collection="where.rightFuzzySign_type"  separator="or" item="item">
+                    `Sign_type` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.seller_idList != null">
+                    `seller_id` in
+                    <foreach collection="where.seller_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySeller_id!=null and where.fuzzySeller_id.size()>0">
+                (
+                <foreach collection="where.fuzzySeller_id"  separator="or" item="item">
+                    `Seller_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySeller_id!=null and where.rightFuzzySeller_id.size()>0">
+                (
+                <foreach collection="where.rightFuzzySeller_id"  separator="or" item="item">
+                    `Seller_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.gmt_paymentList != null">
+                    `gmt_payment` in
+                    <foreach collection="where.gmt_paymentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyGmt_payment!=null and where.fuzzyGmt_payment.size()>0">
+                (
+                <foreach collection="where.fuzzyGmt_payment"  separator="or" item="item">
+                    `Gmt_payment` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyGmt_payment!=null and where.rightFuzzyGmt_payment.size()>0">
+                (
+                <foreach collection="where.rightFuzzyGmt_payment"  separator="or" item="item">
+                    `Gmt_payment` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.notify_timeList != null">
+                    `notify_time` in
+                    <foreach collection="where.notify_timeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyNotify_time!=null and where.fuzzyNotify_time.size()>0">
+                (
+                <foreach collection="where.fuzzyNotify_time"  separator="or" item="item">
+                    `Notify_time` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyNotify_time!=null and where.rightFuzzyNotify_time.size()>0">
+                (
+                <foreach collection="where.rightFuzzyNotify_time"  separator="or" item="item">
+                    `Notify_time` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.versionList != null">
+                    `version` in
+                    <foreach collection="where.versionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyVersion!=null and where.fuzzyVersion.size()>0">
+                (
+                <foreach collection="where.fuzzyVersion"  separator="or" item="item">
+                    `Version` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyVersion!=null and where.rightFuzzyVersion.size()>0">
+                (
+                <foreach collection="where.rightFuzzyVersion"  separator="or" item="item">
+                    `Version` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.out_trade_noList != null">
+                    `out_trade_no` in
+                    <foreach collection="where.out_trade_noList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyOut_trade_no!=null and where.fuzzyOut_trade_no.size()>0">
+                (
+                <foreach collection="where.fuzzyOut_trade_no"  separator="or" item="item">
+                    `Out_trade_no` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyOut_trade_no!=null and where.rightFuzzyOut_trade_no.size()>0">
+                (
+                <foreach collection="where.rightFuzzyOut_trade_no"  separator="or" item="item">
+                    `Out_trade_no` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.total_amountList != null">
+                    `total_amount` in
+                    <foreach collection="where.total_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTotal_amount!=null and where.fuzzyTotal_amount.size()>0">
+                (
+                <foreach collection="where.fuzzyTotal_amount"  separator="or" item="item">
+                    `Total_amount` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTotal_amount!=null and where.rightFuzzyTotal_amount.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTotal_amount"  separator="or" item="item">
+                    `Total_amount` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.trade_noList != null">
+                    `trade_no` in
+                    <foreach collection="where.trade_noList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTrade_no!=null and where.fuzzyTrade_no.size()>0">
+                (
+                <foreach collection="where.fuzzyTrade_no"  separator="or" item="item">
+                    `Trade_no` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTrade_no!=null and where.rightFuzzyTrade_no.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTrade_no"  separator="or" item="item">
+                    `Trade_no` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.auth_app_idList != null">
+                    `auth_app_id` in
+                    <foreach collection="where.auth_app_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAuth_app_id!=null and where.fuzzyAuth_app_id.size()>0">
+                (
+                <foreach collection="where.fuzzyAuth_app_id"  separator="or" item="item">
+                    `Auth_app_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAuth_app_id!=null and where.rightFuzzyAuth_app_id.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAuth_app_id"  separator="or" item="item">
+                    `Auth_app_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.buyer_logon_idList != null">
+                    `buyer_logon_id` in
+                    <foreach collection="where.buyer_logon_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBuyer_logon_id!=null and where.fuzzyBuyer_logon_id.size()>0">
+                (
+                <foreach collection="where.fuzzyBuyer_logon_id"  separator="or" item="item">
+                    `Buyer_logon_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBuyer_logon_id!=null and where.rightFuzzyBuyer_logon_id.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBuyer_logon_id"  separator="or" item="item">
+                    `Buyer_logon_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.point_amountList != null">
+                    `point_amount` in
+                    <foreach collection="where.point_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPoint_amount!=null and where.fuzzyPoint_amount.size()>0">
+                (
+                <foreach collection="where.fuzzyPoint_amount"  separator="or" item="item">
+                    `Point_amount` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPoint_amount!=null and where.rightFuzzyPoint_amount.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPoint_amount"  separator="or" item="item">
+                    `Point_amount` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.gmt_createList != null">
+                    `gmt_create` in
+                    <foreach collection="where.gmt_createList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyGmt_create!=null and where.fuzzyGmt_create.size()>0">
+                (
+                <foreach collection="where.fuzzyGmt_create"  separator="or" item="item">
+                    `Gmt_create` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyGmt_create!=null and where.rightFuzzyGmt_create.size()>0">
+                (
+                <foreach collection="where.rightFuzzyGmt_create"  separator="or" item="item">
+                    `Gmt_create` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.charsetList != null">
+                    `charset` in
+                    <foreach collection="where.charsetList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCharset!=null and where.fuzzyCharset.size()>0">
+                (
+                <foreach collection="where.fuzzyCharset"  separator="or" item="item">
+                    `Charset` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCharset!=null and where.rightFuzzyCharset.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCharset"  separator="or" item="item">
+                    `Charset` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.seller_emailList != null">
+                    `seller_email` in
+                    <foreach collection="where.seller_emailList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySeller_email!=null and where.fuzzySeller_email.size()>0">
+                (
+                <foreach collection="where.fuzzySeller_email"  separator="or" item="item">
+                    `Seller_email` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySeller_email!=null and where.rightFuzzySeller_email.size()>0">
+                (
+                <foreach collection="where.rightFuzzySeller_email"  separator="or" item="item">
+                    `Seller_email` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.subjectList != null">
+                    `subject` in
+                    <foreach collection="where.subjectList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySubject!=null and where.fuzzySubject.size()>0">
+                (
+                <foreach collection="where.fuzzySubject"  separator="or" item="item">
+                    `Subject` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySubject!=null and where.rightFuzzySubject.size()>0">
+                (
+                <foreach collection="where.rightFuzzySubject"  separator="or" item="item">
+                    `Subject` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.signList != null">
+                    `sign` in
+                    <foreach collection="where.signList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySign!=null and where.fuzzySign.size()>0">
+                (
+                <foreach collection="where.fuzzySign"  separator="or" item="item">
+                    `Sign` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySign!=null and where.rightFuzzySign.size()>0">
+                (
+                <foreach collection="where.rightFuzzySign"  separator="or" item="item">
+                    `Sign` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.fund_bill_listList != null">
+                    `fund_bill_list` in
+                    <foreach collection="where.fund_bill_listList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyFund_bill_list!=null and where.fuzzyFund_bill_list.size()>0">
+                (
+                <foreach collection="where.fuzzyFund_bill_list"  separator="or" item="item">
+                    `Fund_bill_list` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyFund_bill_list!=null and where.rightFuzzyFund_bill_list.size()>0">
+                (
+                <foreach collection="where.rightFuzzyFund_bill_list"  separator="or" item="item">
+                    `Fund_bill_list` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyAliRes" id="JpyAliResMap">
+        <result property="notify_id" column="notify_id"/>
+        <result property="buyer_id" column="buyer_id"/>
+        <result property="invoice_amount" column="invoice_amount"/>
+        <result property="notify_type" column="notify_type"/>
+        <result property="trade_status" column="trade_status"/>
+        <result property="receipt_amount" column="receipt_amount"/>
+        <result property="buyer_pay_amount" column="buyer_pay_amount"/>
+        <result property="app_id" column="app_id"/>
+        <result property="sign_type" column="sign_type"/>
+        <result property="seller_id" column="seller_id"/>
+        <result property="gmt_payment" column="gmt_payment"/>
+        <result property="notify_time" column="notify_time"/>
+        <result property="version" column="version"/>
+        <result property="out_trade_no" column="out_trade_no"/>
+        <result property="total_amount" column="total_amount"/>
+        <result property="trade_no" column="trade_no"/>
+        <result property="auth_app_id" column="auth_app_id"/>
+        <result property="buyer_logon_id" column="buyer_logon_id"/>
+        <result property="point_amount" column="point_amount"/>
+        <result property="gmt_create" column="gmt_create"/>
+        <result property="charset" column="charset"/>
+        <result property="seller_email" column="seller_email"/>
+        <result property="subject" column="subject"/>
+        <result property="sign" column="sign"/>
+        <result property="fund_bill_list" column="fund_bill_list"/>
+    </resultMap>
+
+
+    <select id="queryJpyAliRes" resultMap="JpyAliResMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_ali_res`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="notify_id != null and notify_id!=''">
+                `notify_id` = #{notify_id} and
+            </if>
+            <if test="buyer_id != null and buyer_id!=''">
+                `buyer_id` = #{buyer_id} and
+            </if>
+            <if test="invoice_amount != null and invoice_amount!=''">
+                `invoice_amount` = #{invoice_amount} and
+            </if>
+            <if test="notify_type != null and notify_type!=''">
+                `notify_type` = #{notify_type} and
+            </if>
+            <if test="trade_status != null and trade_status!=''">
+                `trade_status` = #{trade_status} and
+            </if>
+            <if test="receipt_amount != null and receipt_amount!=''">
+                `receipt_amount` = #{receipt_amount} and
+            </if>
+            <if test="buyer_pay_amount != null and buyer_pay_amount!=''">
+                `buyer_pay_amount` = #{buyer_pay_amount} and
+            </if>
+            <if test="app_id != null and app_id!=''">
+                `app_id` = #{app_id} and
+            </if>
+            <if test="sign_type != null and sign_type!=''">
+                `sign_type` = #{sign_type} and
+            </if>
+            <if test="seller_id != null and seller_id!=''">
+                `seller_id` = #{seller_id} and
+            </if>
+            <if test="gmt_payment != null and gmt_payment!=''">
+                `gmt_payment` = #{gmt_payment} and
+            </if>
+            <if test="notify_time != null and notify_time!=''">
+                `notify_time` = #{notify_time} and
+            </if>
+            <if test="version != null and version!=''">
+                `version` = #{version} and
+            </if>
+            <if test="out_trade_no != null and out_trade_no!=''">
+                `out_trade_no` = #{out_trade_no} and
+            </if>
+            <if test="total_amount != null and total_amount!=''">
+                `total_amount` = #{total_amount} and
+            </if>
+            <if test="trade_no != null and trade_no!=''">
+                `trade_no` = #{trade_no} and
+            </if>
+            <if test="auth_app_id != null and auth_app_id!=''">
+                `auth_app_id` = #{auth_app_id} and
+            </if>
+            <if test="buyer_logon_id != null and buyer_logon_id!=''">
+                `buyer_logon_id` = #{buyer_logon_id} and
+            </if>
+            <if test="point_amount != null and point_amount!=''">
+                `point_amount` = #{point_amount} and
+            </if>
+            <if test="gmt_create != null and gmt_create!=''">
+                `gmt_create` = #{gmt_create} and
+            </if>
+            <if test="charset != null and charset!=''">
+                `charset` = #{charset} and
+            </if>
+            <if test="seller_email != null and seller_email!=''">
+                `seller_email` = #{seller_email} and
+            </if>
+            <if test="subject != null and subject!=''">
+                `subject` = #{subject} and
+            </if>
+            <if test="sign != null and sign!=''">
+                `sign` = #{sign} and
+            </if>
+            <if test="fund_bill_list != null and fund_bill_list!=''">
+                `fund_bill_list` = #{fund_bill_list} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyAliRes$QueryBuilder) == true">
+                <if test="notify_idList != null">
+                    `notify_id` in
+                    <foreach collection="notify_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyNotify_id!=null and fuzzyNotify_id.size()>0">
+                    (
+                    <foreach collection="fuzzyNotify_id"  separator="or" item="item">
+                        `Notify_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotify_id!=null and rightFuzzyNotify_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotify_id"  separator="or" item="item">
+                        `Notify_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="buyer_idList != null">
+                    `buyer_id` in
+                    <foreach collection="buyer_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBuyer_id!=null and fuzzyBuyer_id.size()>0">
+                    (
+                    <foreach collection="fuzzyBuyer_id"  separator="or" item="item">
+                        `Buyer_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBuyer_id!=null and rightFuzzyBuyer_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBuyer_id"  separator="or" item="item">
+                        `Buyer_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="invoice_amountList != null">
+                    `invoice_amount` in
+                    <foreach collection="invoice_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyInvoice_amount!=null and fuzzyInvoice_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyInvoice_amount"  separator="or" item="item">
+                        `Invoice_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyInvoice_amount!=null and rightFuzzyInvoice_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyInvoice_amount"  separator="or" item="item">
+                        `Invoice_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="notify_typeList != null">
+                    `notify_type` in
+                    <foreach collection="notify_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyNotify_type!=null and fuzzyNotify_type.size()>0">
+                    (
+                    <foreach collection="fuzzyNotify_type"  separator="or" item="item">
+                        `Notify_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotify_type!=null and rightFuzzyNotify_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotify_type"  separator="or" item="item">
+                        `Notify_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="trade_statusList != null">
+                    `trade_status` in
+                    <foreach collection="trade_statusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTrade_status!=null and fuzzyTrade_status.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_status"  separator="or" item="item">
+                        `Trade_status` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_status!=null and rightFuzzyTrade_status.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_status"  separator="or" item="item">
+                        `Trade_status` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="receipt_amountList != null">
+                    `receipt_amount` in
+                    <foreach collection="receipt_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyReceipt_amount!=null and fuzzyReceipt_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyReceipt_amount"  separator="or" item="item">
+                        `Receipt_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReceipt_amount!=null and rightFuzzyReceipt_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReceipt_amount"  separator="or" item="item">
+                        `Receipt_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="buyer_pay_amountList != null">
+                    `buyer_pay_amount` in
+                    <foreach collection="buyer_pay_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBuyer_pay_amount!=null and fuzzyBuyer_pay_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyBuyer_pay_amount"  separator="or" item="item">
+                        `Buyer_pay_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBuyer_pay_amount!=null and rightFuzzyBuyer_pay_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBuyer_pay_amount"  separator="or" item="item">
+                        `Buyer_pay_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="app_idList != null">
+                    `app_id` in
+                    <foreach collection="app_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyApp_id!=null and fuzzyApp_id.size()>0">
+                    (
+                    <foreach collection="fuzzyApp_id"  separator="or" item="item">
+                        `App_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyApp_id!=null and rightFuzzyApp_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyApp_id"  separator="or" item="item">
+                        `App_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="sign_typeList != null">
+                    `sign_type` in
+                    <foreach collection="sign_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySign_type!=null and fuzzySign_type.size()>0">
+                    (
+                    <foreach collection="fuzzySign_type"  separator="or" item="item">
+                        `Sign_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySign_type!=null and rightFuzzySign_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzySign_type"  separator="or" item="item">
+                        `Sign_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="seller_idList != null">
+                    `seller_id` in
+                    <foreach collection="seller_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySeller_id!=null and fuzzySeller_id.size()>0">
+                    (
+                    <foreach collection="fuzzySeller_id"  separator="or" item="item">
+                        `Seller_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySeller_id!=null and rightFuzzySeller_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzySeller_id"  separator="or" item="item">
+                        `Seller_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="gmt_paymentList != null">
+                    `gmt_payment` in
+                    <foreach collection="gmt_paymentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyGmt_payment!=null and fuzzyGmt_payment.size()>0">
+                    (
+                    <foreach collection="fuzzyGmt_payment"  separator="or" item="item">
+                        `Gmt_payment` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyGmt_payment!=null and rightFuzzyGmt_payment.size()>0">
+                    (
+                    <foreach collection="rightFuzzyGmt_payment"  separator="or" item="item">
+                        `Gmt_payment` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="notify_timeList != null">
+                    `notify_time` in
+                    <foreach collection="notify_timeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyNotify_time!=null and fuzzyNotify_time.size()>0">
+                    (
+                    <foreach collection="fuzzyNotify_time"  separator="or" item="item">
+                        `Notify_time` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotify_time!=null and rightFuzzyNotify_time.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotify_time"  separator="or" item="item">
+                        `Notify_time` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="versionList != null">
+                    `version` in
+                    <foreach collection="versionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyVersion!=null and fuzzyVersion.size()>0">
+                    (
+                    <foreach collection="fuzzyVersion"  separator="or" item="item">
+                        `Version` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyVersion!=null and rightFuzzyVersion.size()>0">
+                    (
+                    <foreach collection="rightFuzzyVersion"  separator="or" item="item">
+                        `Version` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="out_trade_noList != null">
+                    `out_trade_no` in
+                    <foreach collection="out_trade_noList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyOut_trade_no!=null and fuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="fuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOut_trade_no!=null and rightFuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="total_amountList != null">
+                    `total_amount` in
+                    <foreach collection="total_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTotal_amount!=null and fuzzyTotal_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyTotal_amount"  separator="or" item="item">
+                        `Total_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTotal_amount!=null and rightFuzzyTotal_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTotal_amount"  separator="or" item="item">
+                        `Total_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="trade_noList != null">
+                    `trade_no` in
+                    <foreach collection="trade_noList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTrade_no!=null and fuzzyTrade_no.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_no"  separator="or" item="item">
+                        `Trade_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_no!=null and rightFuzzyTrade_no.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_no"  separator="or" item="item">
+                        `Trade_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="auth_app_idList != null">
+                    `auth_app_id` in
+                    <foreach collection="auth_app_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAuth_app_id!=null and fuzzyAuth_app_id.size()>0">
+                    (
+                    <foreach collection="fuzzyAuth_app_id"  separator="or" item="item">
+                        `Auth_app_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAuth_app_id!=null and rightFuzzyAuth_app_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAuth_app_id"  separator="or" item="item">
+                        `Auth_app_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="buyer_logon_idList != null">
+                    `buyer_logon_id` in
+                    <foreach collection="buyer_logon_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBuyer_logon_id!=null and fuzzyBuyer_logon_id.size()>0">
+                    (
+                    <foreach collection="fuzzyBuyer_logon_id"  separator="or" item="item">
+                        `Buyer_logon_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBuyer_logon_id!=null and rightFuzzyBuyer_logon_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBuyer_logon_id"  separator="or" item="item">
+                        `Buyer_logon_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="point_amountList != null">
+                    `point_amount` in
+                    <foreach collection="point_amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPoint_amount!=null and fuzzyPoint_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyPoint_amount"  separator="or" item="item">
+                        `Point_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPoint_amount!=null and rightFuzzyPoint_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPoint_amount"  separator="or" item="item">
+                        `Point_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="gmt_createList != null">
+                    `gmt_create` in
+                    <foreach collection="gmt_createList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyGmt_create!=null and fuzzyGmt_create.size()>0">
+                    (
+                    <foreach collection="fuzzyGmt_create"  separator="or" item="item">
+                        `Gmt_create` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyGmt_create!=null and rightFuzzyGmt_create.size()>0">
+                    (
+                    <foreach collection="rightFuzzyGmt_create"  separator="or" item="item">
+                        `Gmt_create` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="charsetList != null">
+                    `charset` in
+                    <foreach collection="charsetList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCharset!=null and fuzzyCharset.size()>0">
+                    (
+                    <foreach collection="fuzzyCharset"  separator="or" item="item">
+                        `Charset` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCharset!=null and rightFuzzyCharset.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCharset"  separator="or" item="item">
+                        `Charset` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="seller_emailList != null">
+                    `seller_email` in
+                    <foreach collection="seller_emailList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySeller_email!=null and fuzzySeller_email.size()>0">
+                    (
+                    <foreach collection="fuzzySeller_email"  separator="or" item="item">
+                        `Seller_email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySeller_email!=null and rightFuzzySeller_email.size()>0">
+                    (
+                    <foreach collection="rightFuzzySeller_email"  separator="or" item="item">
+                        `Seller_email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="subjectList != null">
+                    `subject` in
+                    <foreach collection="subjectList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySubject!=null and fuzzySubject.size()>0">
+                    (
+                    <foreach collection="fuzzySubject"  separator="or" item="item">
+                        `Subject` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySubject!=null and rightFuzzySubject.size()>0">
+                    (
+                    <foreach collection="rightFuzzySubject"  separator="or" item="item">
+                        `Subject` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="signList != null">
+                    `sign` in
+                    <foreach collection="signList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySign!=null and fuzzySign.size()>0">
+                    (
+                    <foreach collection="fuzzySign"  separator="or" item="item">
+                        `Sign` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySign!=null and rightFuzzySign.size()>0">
+                    (
+                    <foreach collection="rightFuzzySign"  separator="or" item="item">
+                        `Sign` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="fund_bill_listList != null">
+                    `fund_bill_list` in
+                    <foreach collection="fund_bill_listList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyFund_bill_list!=null and fuzzyFund_bill_list.size()>0">
+                    (
+                    <foreach collection="fuzzyFund_bill_list"  separator="or" item="item">
+                        `Fund_bill_list` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyFund_bill_list!=null and rightFuzzyFund_bill_list.size()>0">
+                    (
+                    <foreach collection="rightFuzzyFund_bill_list"  separator="or" item="item">
+                        `Fund_bill_list` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyAliResLimit1" resultMap="JpyAliResMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_ali_res`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="notify_id != null and notify_id!=''">
+                `notify_id` = #{notify_id} and
+            </if>
+            <if test="buyer_id != null and buyer_id!=''">
+                `buyer_id` = #{buyer_id} and
+            </if>
+            <if test="invoice_amount != null and invoice_amount!=''">
+                `invoice_amount` = #{invoice_amount} and
+            </if>
+            <if test="notify_type != null and notify_type!=''">
+                `notify_type` = #{notify_type} and
+            </if>
+            <if test="trade_status != null and trade_status!=''">
+                `trade_status` = #{trade_status} and
+            </if>
+            <if test="receipt_amount != null and receipt_amount!=''">
+                `receipt_amount` = #{receipt_amount} and
+            </if>
+            <if test="buyer_pay_amount != null and buyer_pay_amount!=''">
+                `buyer_pay_amount` = #{buyer_pay_amount} and
+            </if>
+            <if test="app_id != null and app_id!=''">
+                `app_id` = #{app_id} and
+            </if>
+            <if test="sign_type != null and sign_type!=''">
+                `sign_type` = #{sign_type} and
+            </if>
+            <if test="seller_id != null and seller_id!=''">
+                `seller_id` = #{seller_id} and
+            </if>
+            <if test="gmt_payment != null and gmt_payment!=''">
+                `gmt_payment` = #{gmt_payment} and
+            </if>
+            <if test="notify_time != null and notify_time!=''">
+                `notify_time` = #{notify_time} and
+            </if>
+            <if test="version != null and version!=''">
+                `version` = #{version} and
+            </if>
+            <if test="out_trade_no != null and out_trade_no!=''">
+                `out_trade_no` = #{out_trade_no} and
+            </if>
+            <if test="total_amount != null and total_amount!=''">
+                `total_amount` = #{total_amount} and
+            </if>
+            <if test="trade_no != null and trade_no!=''">
+                `trade_no` = #{trade_no} and
+            </if>
+            <if test="auth_app_id != null and auth_app_id!=''">
+                `auth_app_id` = #{auth_app_id} and
+            </if>
+            <if test="buyer_logon_id != null and buyer_logon_id!=''">
+                `buyer_logon_id` = #{buyer_logon_id} and
+            </if>
+            <if test="point_amount != null and point_amount!=''">
+                `point_amount` = #{point_amount} and
+            </if>
+            <if test="gmt_create != null and gmt_create!=''">
+                `gmt_create` = #{gmt_create} and
+            </if>
+            <if test="charset != null and charset!=''">
+                `charset` = #{charset} and
+            </if>
+            <if test="seller_email != null and seller_email!=''">
+                `seller_email` = #{seller_email} and
+            </if>
+            <if test="subject != null and subject!=''">
+                `subject` = #{subject} and
+            </if>
+            <if test="sign != null and sign!=''">
+                `sign` = #{sign} and
+            </if>
+            <if test="fund_bill_list != null and fund_bill_list!=''">
+                `fund_bill_list` = #{fund_bill_list} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyAliRes$QueryBuilder) == true">
+                    <if test="notify_idList != null">
+                        `notify_id` in
+                        <foreach collection="notify_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyNotify_id!=null and fuzzyNotify_id.size()>0">
+                    (
+                    <foreach collection="fuzzyNotify_id"  separator="or" item="item">
+                        `Notify_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotify_id!=null and rightFuzzyNotify_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotify_id"  separator="or" item="item">
+                        `Notify_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="buyer_idList != null">
+                        `buyer_id` in
+                        <foreach collection="buyer_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBuyer_id!=null and fuzzyBuyer_id.size()>0">
+                    (
+                    <foreach collection="fuzzyBuyer_id"  separator="or" item="item">
+                        `Buyer_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBuyer_id!=null and rightFuzzyBuyer_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBuyer_id"  separator="or" item="item">
+                        `Buyer_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="invoice_amountList != null">
+                        `invoice_amount` in
+                        <foreach collection="invoice_amountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyInvoice_amount!=null and fuzzyInvoice_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyInvoice_amount"  separator="or" item="item">
+                        `Invoice_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyInvoice_amount!=null and rightFuzzyInvoice_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyInvoice_amount"  separator="or" item="item">
+                        `Invoice_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="notify_typeList != null">
+                        `notify_type` in
+                        <foreach collection="notify_typeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyNotify_type!=null and fuzzyNotify_type.size()>0">
+                    (
+                    <foreach collection="fuzzyNotify_type"  separator="or" item="item">
+                        `Notify_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotify_type!=null and rightFuzzyNotify_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotify_type"  separator="or" item="item">
+                        `Notify_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="trade_statusList != null">
+                        `trade_status` in
+                        <foreach collection="trade_statusList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTrade_status!=null and fuzzyTrade_status.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_status"  separator="or" item="item">
+                        `Trade_status` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_status!=null and rightFuzzyTrade_status.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_status"  separator="or" item="item">
+                        `Trade_status` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="receipt_amountList != null">
+                        `receipt_amount` in
+                        <foreach collection="receipt_amountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyReceipt_amount!=null and fuzzyReceipt_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyReceipt_amount"  separator="or" item="item">
+                        `Receipt_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReceipt_amount!=null and rightFuzzyReceipt_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReceipt_amount"  separator="or" item="item">
+                        `Receipt_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="buyer_pay_amountList != null">
+                        `buyer_pay_amount` in
+                        <foreach collection="buyer_pay_amountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBuyer_pay_amount!=null and fuzzyBuyer_pay_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyBuyer_pay_amount"  separator="or" item="item">
+                        `Buyer_pay_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBuyer_pay_amount!=null and rightFuzzyBuyer_pay_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBuyer_pay_amount"  separator="or" item="item">
+                        `Buyer_pay_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="app_idList != null">
+                        `app_id` in
+                        <foreach collection="app_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyApp_id!=null and fuzzyApp_id.size()>0">
+                    (
+                    <foreach collection="fuzzyApp_id"  separator="or" item="item">
+                        `App_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyApp_id!=null and rightFuzzyApp_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyApp_id"  separator="or" item="item">
+                        `App_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="sign_typeList != null">
+                        `sign_type` in
+                        <foreach collection="sign_typeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySign_type!=null and fuzzySign_type.size()>0">
+                    (
+                    <foreach collection="fuzzySign_type"  separator="or" item="item">
+                        `Sign_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySign_type!=null and rightFuzzySign_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzySign_type"  separator="or" item="item">
+                        `Sign_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="seller_idList != null">
+                        `seller_id` in
+                        <foreach collection="seller_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySeller_id!=null and fuzzySeller_id.size()>0">
+                    (
+                    <foreach collection="fuzzySeller_id"  separator="or" item="item">
+                        `Seller_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySeller_id!=null and rightFuzzySeller_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzySeller_id"  separator="or" item="item">
+                        `Seller_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="gmt_paymentList != null">
+                        `gmt_payment` in
+                        <foreach collection="gmt_paymentList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyGmt_payment!=null and fuzzyGmt_payment.size()>0">
+                    (
+                    <foreach collection="fuzzyGmt_payment"  separator="or" item="item">
+                        `Gmt_payment` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyGmt_payment!=null and rightFuzzyGmt_payment.size()>0">
+                    (
+                    <foreach collection="rightFuzzyGmt_payment"  separator="or" item="item">
+                        `Gmt_payment` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="notify_timeList != null">
+                        `notify_time` in
+                        <foreach collection="notify_timeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyNotify_time!=null and fuzzyNotify_time.size()>0">
+                    (
+                    <foreach collection="fuzzyNotify_time"  separator="or" item="item">
+                        `Notify_time` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotify_time!=null and rightFuzzyNotify_time.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotify_time"  separator="or" item="item">
+                        `Notify_time` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="versionList != null">
+                        `version` in
+                        <foreach collection="versionList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyVersion!=null and fuzzyVersion.size()>0">
+                    (
+                    <foreach collection="fuzzyVersion"  separator="or" item="item">
+                        `Version` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyVersion!=null and rightFuzzyVersion.size()>0">
+                    (
+                    <foreach collection="rightFuzzyVersion"  separator="or" item="item">
+                        `Version` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="out_trade_noList != null">
+                        `out_trade_no` in
+                        <foreach collection="out_trade_noList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyOut_trade_no!=null and fuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="fuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOut_trade_no!=null and rightFuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="total_amountList != null">
+                        `total_amount` in
+                        <foreach collection="total_amountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTotal_amount!=null and fuzzyTotal_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyTotal_amount"  separator="or" item="item">
+                        `Total_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTotal_amount!=null and rightFuzzyTotal_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTotal_amount"  separator="or" item="item">
+                        `Total_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="trade_noList != null">
+                        `trade_no` in
+                        <foreach collection="trade_noList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTrade_no!=null and fuzzyTrade_no.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_no"  separator="or" item="item">
+                        `Trade_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_no!=null and rightFuzzyTrade_no.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_no"  separator="or" item="item">
+                        `Trade_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="auth_app_idList != null">
+                        `auth_app_id` in
+                        <foreach collection="auth_app_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAuth_app_id!=null and fuzzyAuth_app_id.size()>0">
+                    (
+                    <foreach collection="fuzzyAuth_app_id"  separator="or" item="item">
+                        `Auth_app_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAuth_app_id!=null and rightFuzzyAuth_app_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAuth_app_id"  separator="or" item="item">
+                        `Auth_app_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="buyer_logon_idList != null">
+                        `buyer_logon_id` in
+                        <foreach collection="buyer_logon_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBuyer_logon_id!=null and fuzzyBuyer_logon_id.size()>0">
+                    (
+                    <foreach collection="fuzzyBuyer_logon_id"  separator="or" item="item">
+                        `Buyer_logon_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBuyer_logon_id!=null and rightFuzzyBuyer_logon_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBuyer_logon_id"  separator="or" item="item">
+                        `Buyer_logon_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="point_amountList != null">
+                        `point_amount` in
+                        <foreach collection="point_amountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPoint_amount!=null and fuzzyPoint_amount.size()>0">
+                    (
+                    <foreach collection="fuzzyPoint_amount"  separator="or" item="item">
+                        `Point_amount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPoint_amount!=null and rightFuzzyPoint_amount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPoint_amount"  separator="or" item="item">
+                        `Point_amount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="gmt_createList != null">
+                        `gmt_create` in
+                        <foreach collection="gmt_createList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyGmt_create!=null and fuzzyGmt_create.size()>0">
+                    (
+                    <foreach collection="fuzzyGmt_create"  separator="or" item="item">
+                        `Gmt_create` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyGmt_create!=null and rightFuzzyGmt_create.size()>0">
+                    (
+                    <foreach collection="rightFuzzyGmt_create"  separator="or" item="item">
+                        `Gmt_create` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="charsetList != null">
+                        `charset` in
+                        <foreach collection="charsetList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCharset!=null and fuzzyCharset.size()>0">
+                    (
+                    <foreach collection="fuzzyCharset"  separator="or" item="item">
+                        `Charset` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCharset!=null and rightFuzzyCharset.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCharset"  separator="or" item="item">
+                        `Charset` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="seller_emailList != null">
+                        `seller_email` in
+                        <foreach collection="seller_emailList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySeller_email!=null and fuzzySeller_email.size()>0">
+                    (
+                    <foreach collection="fuzzySeller_email"  separator="or" item="item">
+                        `Seller_email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySeller_email!=null and rightFuzzySeller_email.size()>0">
+                    (
+                    <foreach collection="rightFuzzySeller_email"  separator="or" item="item">
+                        `Seller_email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="subjectList != null">
+                        `subject` in
+                        <foreach collection="subjectList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySubject!=null and fuzzySubject.size()>0">
+                    (
+                    <foreach collection="fuzzySubject"  separator="or" item="item">
+                        `Subject` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySubject!=null and rightFuzzySubject.size()>0">
+                    (
+                    <foreach collection="rightFuzzySubject"  separator="or" item="item">
+                        `Subject` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="signList != null">
+                        `sign` in
+                        <foreach collection="signList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySign!=null and fuzzySign.size()>0">
+                    (
+                    <foreach collection="fuzzySign"  separator="or" item="item">
+                        `Sign` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySign!=null and rightFuzzySign.size()>0">
+                    (
+                    <foreach collection="rightFuzzySign"  separator="or" item="item">
+                        `Sign` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="fund_bill_listList != null">
+                        `fund_bill_list` in
+                        <foreach collection="fund_bill_listList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyFund_bill_list!=null and fuzzyFund_bill_list.size()>0">
+                    (
+                    <foreach collection="fuzzyFund_bill_list"  separator="or" item="item">
+                        `Fund_bill_list` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyFund_bill_list!=null and rightFuzzyFund_bill_list.size()>0">
+                    (
+                    <foreach collection="rightFuzzyFund_bill_list"  separator="or" item="item">
+                        `Fund_bill_list` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `notify_id`,
+        `buyer_id`,
+        `invoice_amount`,
+        `notify_type`,
+        `trade_status`,
+        `receipt_amount`,
+        `buyer_pay_amount`,
+        `app_id`,
+        `sign_type`,
+        `seller_id`,
+        `gmt_payment`,
+        `notify_time`,
+        `version`,
+        `out_trade_no`,
+        `total_amount`,
+        `trade_no`,
+        `auth_app_id`,
+        `buyer_logon_id`,
+        `point_amount`,
+        `gmt_create`,
+        `charset`,
+        `seller_email`,
+        `subject`,
+        `sign`,
+        `fund_bill_list`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyAliRes$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.notify_id==true">
+                        `notify_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.buyer_id==true">
+                        `buyer_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.invoice_amount==true">
+                        `invoice_amount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.notify_type==true">
+                        `notify_type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.trade_status==true">
+                        `trade_status`,
+                    </if>
+                    <if test="fetchFields.fetchFields.receipt_amount==true">
+                        `receipt_amount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.buyer_pay_amount==true">
+                        `buyer_pay_amount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.app_id==true">
+                        `app_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.sign_type==true">
+                        `sign_type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.seller_id==true">
+                        `seller_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.gmt_payment==true">
+                        `gmt_payment`,
+                    </if>
+                    <if test="fetchFields.fetchFields.notify_time==true">
+                        `notify_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.version==true">
+                        `version`,
+                    </if>
+                    <if test="fetchFields.fetchFields.out_trade_no==true">
+                        `out_trade_no`,
+                    </if>
+                    <if test="fetchFields.fetchFields.total_amount==true">
+                        `total_amount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.trade_no==true">
+                        `trade_no`,
+                    </if>
+                    <if test="fetchFields.fetchFields.auth_app_id==true">
+                        `auth_app_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.buyer_logon_id==true">
+                        `buyer_logon_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.point_amount==true">
+                        `point_amount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.gmt_create==true">
+                        `gmt_create`,
+                    </if>
+                    <if test="fetchFields.fetchFields.charset==true">
+                        `charset`,
+                    </if>
+                    <if test="fetchFields.fetchFields.seller_email==true">
+                        `seller_email`,
+                    </if>
+                    <if test="fetchFields.fetchFields.subject==true">
+                        `subject`,
+                    </if>
+                    <if test="fetchFields.fetchFields.sign==true">
+                        `sign`,
+                    </if>
+                    <if test="fetchFields.fetchFields.fund_bill_list==true">
+                        `fund_bill_list`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.notify_id==null">
+                        `notify_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.buyer_id==null">
+                        `buyer_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.invoice_amount==null">
+                        `invoice_amount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.notify_type==null">
+                        `notify_type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.trade_status==null">
+                        `trade_status`,
+                    </if>
+                    <if test="fetchFields.excludeFields.receipt_amount==null">
+                        `receipt_amount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.buyer_pay_amount==null">
+                        `buyer_pay_amount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.app_id==null">
+                        `app_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.sign_type==null">
+                        `sign_type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.seller_id==null">
+                        `seller_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.gmt_payment==null">
+                        `gmt_payment`,
+                    </if>
+                    <if test="fetchFields.excludeFields.notify_time==null">
+                        `notify_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.version==null">
+                        `version`,
+                    </if>
+                    <if test="fetchFields.excludeFields.out_trade_no==null">
+                        `out_trade_no`,
+                    </if>
+                    <if test="fetchFields.excludeFields.total_amount==null">
+                        `total_amount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.trade_no==null">
+                        `trade_no`,
+                    </if>
+                    <if test="fetchFields.excludeFields.auth_app_id==null">
+                        `auth_app_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.buyer_logon_id==null">
+                        `buyer_logon_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.point_amount==null">
+                        `point_amount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.gmt_create==null">
+                        `gmt_create`,
+                    </if>
+                    <if test="fetchFields.excludeFields.charset==null">
+                        `charset`,
+                    </if>
+                    <if test="fetchFields.excludeFields.seller_email==null">
+                        `seller_email`,
+                    </if>
+                    <if test="fetchFields.excludeFields.subject==null">
+                        `subject`,
+                    </if>
+                    <if test="fetchFields.excludeFields.sign==null">
+                        `sign`,
+                    </if>
+                    <if test="fetchFields.excludeFields.fund_bill_list==null">
+                        `fund_bill_list`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyAliRes$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

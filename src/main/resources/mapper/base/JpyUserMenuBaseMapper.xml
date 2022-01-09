@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyUserMenuBaseMapper">
+
+
+    <insert id="insertJpyUserMenu"  useGeneratedKeys="true" keyProperty="tid">
+        INSERT INTO `jpy_user_menu`
+        (
+        <trim suffixOverrides=",">
+                    <if test="userid!=null">
+                        `userid`,
+                    </if>
+                    <if test="menuid!=null">
+                        `menuid`,
+                    </if>
+                    <if test="timer!=null">
+                        `timer`,
+                    </if>
+                    <if test="tid!=null">
+                        `tid`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="userid!=null">
+                    #{userid},
+                </if>
+                <if test="menuid!=null">
+                    #{menuid},
+                </if>
+                <if test="timer!=null">
+                    #{timer},
+                </if>
+                <if test="tid!=null">
+                    #{tid},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyUserMenu">
+        UPDATE `jpy_user_menu`
+        SET
+        <trim suffixOverrides=",">
+            <if test="userid != null">
+                `userid` = #{userid},
+            </if>
+            <if test="menuid != null">
+                `menuid` = #{menuid},
+            </if>
+            <if test="timer != null and timer!=''">
+                `timer` = #{timer},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `tid` = #{tid} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_user_menu`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.userid != null">
+            `userid` = #{set.userid},
+        </if>
+        <if test="set.menuid != null">
+            `menuid` = #{set.menuid},
+        </if>
+        <if test="set.timer != null and set.timer!=''">
+            `timer` = #{set.timer},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.useridList != null">
+                    `userid` in
+                    <foreach collection="where.useridList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.useridSt !=null">
+                `userid` >= #{where.useridSt} and
+            </if>
+            <if test="where.useridEd!=null">
+                `userid` &lt;= #{where.useridEd} and
+            </if>
+                <if test="where.menuidList != null">
+                    `menuid` in
+                    <foreach collection="where.menuidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.menuidSt !=null">
+                `menuid` >= #{where.menuidSt} and
+            </if>
+            <if test="where.menuidEd!=null">
+                `menuid` &lt;= #{where.menuidEd} and
+            </if>
+                <if test="where.timerList != null">
+                    `timer` in
+                    <foreach collection="where.timerList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTimer!=null and where.fuzzyTimer.size()>0">
+                (
+                <foreach collection="where.fuzzyTimer"  separator="or" item="item">
+                    `Timer` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTimer!=null and where.rightFuzzyTimer.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTimer"  separator="or" item="item">
+                    `Timer` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.tidList != null">
+                    `tid` in
+                    <foreach collection="where.tidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.tidSt !=null">
+                `tid` >= #{where.tidSt} and
+            </if>
+            <if test="where.tidEd!=null">
+                `tid` &lt;= #{where.tidEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyUserMenu" id="JpyUserMenuMap">
+        <result property="userid" column="userid"/>
+        <result property="menuid" column="menuid"/>
+        <result property="timer" column="timer"/>
+        <result property="tid" column="tid"/>
+    </resultMap>
+
+
+    <select id="queryJpyUserMenu" resultMap="JpyUserMenuMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_user_menu`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="userid != null">
+                `userid` = #{userid} and
+            </if>
+            <if test="menuid != null">
+                `menuid` = #{menuid} and
+            </if>
+            <if test="timer != null and timer!=''">
+                `timer` = #{timer} and
+            </if>
+            <if test="tid != null">
+                `tid` = #{tid} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyUserMenu$QueryBuilder) == true">
+                <if test="useridList != null">
+                    `userid` in
+                    <foreach collection="useridList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="useridSt !=null">
+                    `userid` >= #{useridSt} and
+                </if>
+                <if test="useridEd!=null">
+                    `userid` &lt;= #{useridEd} and
+                </if>
+                <if test="menuidList != null">
+                    `menuid` in
+                    <foreach collection="menuidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="menuidSt !=null">
+                    `menuid` >= #{menuidSt} and
+                </if>
+                <if test="menuidEd!=null">
+                    `menuid` &lt;= #{menuidEd} and
+                </if>
+                <if test="timerList != null">
+                    `timer` in
+                    <foreach collection="timerList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTimer!=null and fuzzyTimer.size()>0">
+                    (
+                    <foreach collection="fuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTimer!=null and rightFuzzyTimer.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="tidList != null">
+                    `tid` in
+                    <foreach collection="tidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="tidSt !=null">
+                    `tid` >= #{tidSt} and
+                </if>
+                <if test="tidEd!=null">
+                    `tid` &lt;= #{tidEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyUserMenuLimit1" resultMap="JpyUserMenuMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_user_menu`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="userid != null">
+                `userid` = #{userid} and
+            </if>
+            <if test="menuid != null">
+                `menuid` = #{menuid} and
+            </if>
+            <if test="timer != null and timer!=''">
+                `timer` = #{timer} and
+            </if>
+            <if test="tid != null">
+                `tid` = #{tid} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyUserMenu$QueryBuilder) == true">
+                    <if test="useridList != null">
+                        `userid` in
+                        <foreach collection="useridList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="useridSt !=null">
+                    `userid` >= #{useridSt} and
+                </if>
+                <if test="useridEd!=null">
+                    `userid` &lt;= #{useridEd} and
+                </if>
+                    <if test="menuidList != null">
+                        `menuid` in
+                        <foreach collection="menuidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="menuidSt !=null">
+                    `menuid` >= #{menuidSt} and
+                </if>
+                <if test="menuidEd!=null">
+                    `menuid` &lt;= #{menuidEd} and
+                </if>
+                    <if test="timerList != null">
+                        `timer` in
+                        <foreach collection="timerList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTimer!=null and fuzzyTimer.size()>0">
+                    (
+                    <foreach collection="fuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTimer!=null and rightFuzzyTimer.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="tidList != null">
+                        `tid` in
+                        <foreach collection="tidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="tidSt !=null">
+                    `tid` >= #{tidSt} and
+                </if>
+                <if test="tidEd!=null">
+                    `tid` &lt;= #{tidEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `userid`,
+        `menuid`,
+        `timer`,
+        `tid`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyUserMenu$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.userid==true">
+                        `userid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.menuid==true">
+                        `menuid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.timer==true">
+                        `timer`,
+                    </if>
+                    <if test="fetchFields.fetchFields.tid==true">
+                        `tid`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.userid==null">
+                        `userid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.menuid==null">
+                        `menuid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.timer==null">
+                        `timer`,
+                    </if>
+                    <if test="fetchFields.excludeFields.tid==null">
+                        `tid`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyUserMenu$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

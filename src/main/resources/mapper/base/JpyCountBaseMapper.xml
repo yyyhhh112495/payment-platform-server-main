@@ -1,0 +1,1885 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyCountBaseMapper">
+
+
+    <insert id="insertJpyCount"  useGeneratedKeys="true" keyProperty="countid">
+        INSERT INTO `jpy_count`
+        (
+        <trim suffixOverrides=",">
+                    <if test="countid!=null">
+                        `countid`,
+                    </if>
+                    <if test="countname!=null">
+                        `countname`,
+                    </if>
+                    <if test="countnum!=null">
+                        `countnum`,
+                    </if>
+                    <if test="alipayration!=null">
+                        `alipayration`,
+                    </if>
+                    <if test="wechatration!=null">
+                        `wechatration`,
+                    </if>
+                    <if test="countsts!=null">
+                        `countsts`,
+                    </if>
+                    <if test="countminnum!=null">
+                        `countminnum`,
+                    </if>
+                    <if test="countmaxnum!=null">
+                        `countmaxnum`,
+                    </if>
+                    <if test="counttime!=null">
+                        `counttime`,
+                    </if>
+                    <if test="countuptime!=null">
+                        `countuptime`,
+                    </if>
+                    <if test="alipayprikey!=null">
+                        `alipayprikey`,
+                    </if>
+                    <if test="alipaypukey!=null">
+                        `alipaypukey`,
+                    </if>
+                    <if test="aliappid!=null">
+                        `aliappid`,
+                    </if>
+                    <if test="wechatappid!=null">
+                        `wechatappid`,
+                    </if>
+                    <if test="wechatkey!=null">
+                        `wechatkey`,
+                    </if>
+                    <if test="wechatmchid!=null">
+                        `wechatmchid`,
+                    </if>
+                    <if test="alipaycertpath!=null">
+                        `alipaycertpath`,
+                    </if>
+                    <if test="alipaypubliccertpath!=null">
+                        `alipaypubliccertpath`,
+                    </if>
+                    <if test="alipayrootcertpath!=null">
+                        `alipayrootcertpath`,
+                    </if>
+                    <if test="wechatmchno!=null">
+                        `wechatmchno`,
+                    </if>
+                    <if test="wechatprivatekey!=null">
+                        `wechatprivatekey`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="countid!=null">
+                    #{countid},
+                </if>
+                <if test="countname!=null">
+                    #{countname},
+                </if>
+                <if test="countnum!=null">
+                    #{countnum},
+                </if>
+                <if test="alipayration!=null">
+                    #{alipayration},
+                </if>
+                <if test="wechatration!=null">
+                    #{wechatration},
+                </if>
+                <if test="countsts!=null">
+                    #{countsts},
+                </if>
+                <if test="countminnum!=null">
+                    #{countminnum},
+                </if>
+                <if test="countmaxnum!=null">
+                    #{countmaxnum},
+                </if>
+                <if test="counttime!=null">
+                    #{counttime},
+                </if>
+                <if test="countuptime!=null">
+                    #{countuptime},
+                </if>
+                <if test="alipayprikey!=null">
+                    #{alipayprikey},
+                </if>
+                <if test="alipaypukey!=null">
+                    #{alipaypukey},
+                </if>
+                <if test="aliappid!=null">
+                    #{aliappid},
+                </if>
+                <if test="wechatappid!=null">
+                    #{wechatappid},
+                </if>
+                <if test="wechatkey!=null">
+                    #{wechatkey},
+                </if>
+                <if test="wechatmchid!=null">
+                    #{wechatmchid},
+                </if>
+                <if test="alipaycertpath!=null">
+                    #{alipaycertpath},
+                </if>
+                <if test="alipaypubliccertpath!=null">
+                    #{alipaypubliccertpath},
+                </if>
+                <if test="alipayrootcertpath!=null">
+                    #{alipayrootcertpath},
+                </if>
+                <if test="wechatmchno!=null">
+                    #{wechatmchno},
+                </if>
+                <if test="wechatprivatekey!=null">
+                    #{wechatprivatekey},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyCount">
+        UPDATE `jpy_count`
+        SET
+        <trim suffixOverrides=",">
+            <if test="countname != null and countname!=''">
+                `countname` = #{countname},
+            </if>
+            <if test="countnum != null and countnum!=''">
+                `countnum` = #{countnum},
+            </if>
+            <if test="alipayration != null and alipayration!=''">
+                `alipayration` = #{alipayration},
+            </if>
+            <if test="wechatration != null and wechatration!=''">
+                `wechatration` = #{wechatration},
+            </if>
+            <if test="countsts != null and countsts!=''">
+                `countsts` = #{countsts},
+            </if>
+            <if test="countminnum != null and countminnum!=''">
+                `countminnum` = #{countminnum},
+            </if>
+            <if test="countmaxnum != null and countmaxnum!=''">
+                `countmaxnum` = #{countmaxnum},
+            </if>
+            <if test="counttime != null and counttime!=''">
+                `counttime` = #{counttime},
+            </if>
+            <if test="countuptime != null and countuptime!=''">
+                `countuptime` = #{countuptime},
+            </if>
+            <if test="alipayprikey != null and alipayprikey!=''">
+                `alipayprikey` = #{alipayprikey},
+            </if>
+            <if test="alipaypukey != null and alipaypukey!=''">
+                `alipaypukey` = #{alipaypukey},
+            </if>
+            <if test="aliappid != null and aliappid!=''">
+                `aliappid` = #{aliappid},
+            </if>
+            <if test="wechatappid != null and wechatappid!=''">
+                `wechatappid` = #{wechatappid},
+            </if>
+            <if test="wechatkey != null and wechatkey!=''">
+                `wechatkey` = #{wechatkey},
+            </if>
+            <if test="wechatmchid != null and wechatmchid!=''">
+                `wechatmchid` = #{wechatmchid},
+            </if>
+            <if test="alipaycertpath != null and alipaycertpath!=''">
+                `alipaycertpath` = #{alipaycertpath},
+            </if>
+            <if test="alipaypubliccertpath != null and alipaypubliccertpath!=''">
+                `alipaypubliccertpath` = #{alipaypubliccertpath},
+            </if>
+            <if test="alipayrootcertpath != null and alipayrootcertpath!=''">
+                `alipayrootcertpath` = #{alipayrootcertpath},
+            </if>
+            <if test="wechatmchno != null and wechatmchno!=''">
+                `wechatmchno` = #{wechatmchno},
+            </if>
+            <if test="wechatprivatekey != null and wechatprivatekey!=''">
+                `wechatprivatekey` = #{wechatprivatekey},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `countid` = #{countid} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_count`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.countname != null and set.countname!=''">
+            `countname` = #{set.countname},
+        </if>
+        <if test="set.countnum != null and set.countnum!=''">
+            `countnum` = #{set.countnum},
+        </if>
+        <if test="set.alipayration != null and set.alipayration!=''">
+            `alipayration` = #{set.alipayration},
+        </if>
+        <if test="set.wechatration != null and set.wechatration!=''">
+            `wechatration` = #{set.wechatration},
+        </if>
+        <if test="set.countsts != null and set.countsts!=''">
+            `countsts` = #{set.countsts},
+        </if>
+        <if test="set.countminnum != null and set.countminnum!=''">
+            `countminnum` = #{set.countminnum},
+        </if>
+        <if test="set.countmaxnum != null and set.countmaxnum!=''">
+            `countmaxnum` = #{set.countmaxnum},
+        </if>
+        <if test="set.counttime != null and set.counttime!=''">
+            `counttime` = #{set.counttime},
+        </if>
+        <if test="set.countuptime != null and set.countuptime!=''">
+            `countuptime` = #{set.countuptime},
+        </if>
+        <if test="set.alipayprikey != null and set.alipayprikey!=''">
+            `alipayprikey` = #{set.alipayprikey},
+        </if>
+        <if test="set.alipaypukey != null and set.alipaypukey!=''">
+            `alipaypukey` = #{set.alipaypukey},
+        </if>
+        <if test="set.aliappid != null and set.aliappid!=''">
+            `aliappid` = #{set.aliappid},
+        </if>
+        <if test="set.wechatappid != null and set.wechatappid!=''">
+            `wechatappid` = #{set.wechatappid},
+        </if>
+        <if test="set.wechatkey != null and set.wechatkey!=''">
+            `wechatkey` = #{set.wechatkey},
+        </if>
+        <if test="set.wechatmchid != null and set.wechatmchid!=''">
+            `wechatmchid` = #{set.wechatmchid},
+        </if>
+        <if test="set.alipaycertpath != null and set.alipaycertpath!=''">
+            `alipaycertpath` = #{set.alipaycertpath},
+        </if>
+        <if test="set.alipaypubliccertpath != null and set.alipaypubliccertpath!=''">
+            `alipaypubliccertpath` = #{set.alipaypubliccertpath},
+        </if>
+        <if test="set.alipayrootcertpath != null and set.alipayrootcertpath!=''">
+            `alipayrootcertpath` = #{set.alipayrootcertpath},
+        </if>
+        <if test="set.wechatmchno != null and set.wechatmchno!=''">
+            `wechatmchno` = #{set.wechatmchno},
+        </if>
+        <if test="set.wechatprivatekey != null and set.wechatprivatekey!=''">
+            `wechatprivatekey` = #{set.wechatprivatekey},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.countidList != null">
+                    `countid` in
+                    <foreach collection="where.countidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.countidSt !=null">
+                `countid` >= #{where.countidSt} and
+            </if>
+            <if test="where.countidEd!=null">
+                `countid` &lt;= #{where.countidEd} and
+            </if>
+                <if test="where.countnameList != null">
+                    `countname` in
+                    <foreach collection="where.countnameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCountname!=null and where.fuzzyCountname.size()>0">
+                (
+                <foreach collection="where.fuzzyCountname"  separator="or" item="item">
+                    `Countname` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCountname!=null and where.rightFuzzyCountname.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCountname"  separator="or" item="item">
+                    `Countname` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.countnumList != null">
+                    `countnum` in
+                    <foreach collection="where.countnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCountnum!=null and where.fuzzyCountnum.size()>0">
+                (
+                <foreach collection="where.fuzzyCountnum"  separator="or" item="item">
+                    `Countnum` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCountnum!=null and where.rightFuzzyCountnum.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCountnum"  separator="or" item="item">
+                    `Countnum` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.alipayrationList != null">
+                    `alipayration` in
+                    <foreach collection="where.alipayrationList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAlipayration!=null and where.fuzzyAlipayration.size()>0">
+                (
+                <foreach collection="where.fuzzyAlipayration"  separator="or" item="item">
+                    `Alipayration` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAlipayration!=null and where.rightFuzzyAlipayration.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAlipayration"  separator="or" item="item">
+                    `Alipayration` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.wechatrationList != null">
+                    `wechatration` in
+                    <foreach collection="where.wechatrationList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyWechatration!=null and where.fuzzyWechatration.size()>0">
+                (
+                <foreach collection="where.fuzzyWechatration"  separator="or" item="item">
+                    `Wechatration` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyWechatration!=null and where.rightFuzzyWechatration.size()>0">
+                (
+                <foreach collection="where.rightFuzzyWechatration"  separator="or" item="item">
+                    `Wechatration` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.countstsList != null">
+                    `countsts` in
+                    <foreach collection="where.countstsList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCountsts!=null and where.fuzzyCountsts.size()>0">
+                (
+                <foreach collection="where.fuzzyCountsts"  separator="or" item="item">
+                    `Countsts` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCountsts!=null and where.rightFuzzyCountsts.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCountsts"  separator="or" item="item">
+                    `Countsts` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.countminnumList != null">
+                    `countminnum` in
+                    <foreach collection="where.countminnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCountminnum!=null and where.fuzzyCountminnum.size()>0">
+                (
+                <foreach collection="where.fuzzyCountminnum"  separator="or" item="item">
+                    `Countminnum` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCountminnum!=null and where.rightFuzzyCountminnum.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCountminnum"  separator="or" item="item">
+                    `Countminnum` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.countmaxnumList != null">
+                    `countmaxnum` in
+                    <foreach collection="where.countmaxnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCountmaxnum!=null and where.fuzzyCountmaxnum.size()>0">
+                (
+                <foreach collection="where.fuzzyCountmaxnum"  separator="or" item="item">
+                    `Countmaxnum` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCountmaxnum!=null and where.rightFuzzyCountmaxnum.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCountmaxnum"  separator="or" item="item">
+                    `Countmaxnum` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.counttimeList != null">
+                    `counttime` in
+                    <foreach collection="where.counttimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCounttime!=null and where.fuzzyCounttime.size()>0">
+                (
+                <foreach collection="where.fuzzyCounttime"  separator="or" item="item">
+                    `Counttime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCounttime!=null and where.rightFuzzyCounttime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCounttime"  separator="or" item="item">
+                    `Counttime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.countuptimeList != null">
+                    `countuptime` in
+                    <foreach collection="where.countuptimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCountuptime!=null and where.fuzzyCountuptime.size()>0">
+                (
+                <foreach collection="where.fuzzyCountuptime"  separator="or" item="item">
+                    `Countuptime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCountuptime!=null and where.rightFuzzyCountuptime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCountuptime"  separator="or" item="item">
+                    `Countuptime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.alipayprikeyList != null">
+                    `alipayprikey` in
+                    <foreach collection="where.alipayprikeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAlipayprikey!=null and where.fuzzyAlipayprikey.size()>0">
+                (
+                <foreach collection="where.fuzzyAlipayprikey"  separator="or" item="item">
+                    `Alipayprikey` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAlipayprikey!=null and where.rightFuzzyAlipayprikey.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAlipayprikey"  separator="or" item="item">
+                    `Alipayprikey` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.alipaypukeyList != null">
+                    `alipaypukey` in
+                    <foreach collection="where.alipaypukeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAlipaypukey!=null and where.fuzzyAlipaypukey.size()>0">
+                (
+                <foreach collection="where.fuzzyAlipaypukey"  separator="or" item="item">
+                    `Alipaypukey` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAlipaypukey!=null and where.rightFuzzyAlipaypukey.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAlipaypukey"  separator="or" item="item">
+                    `Alipaypukey` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.aliappidList != null">
+                    `aliappid` in
+                    <foreach collection="where.aliappidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAliappid!=null and where.fuzzyAliappid.size()>0">
+                (
+                <foreach collection="where.fuzzyAliappid"  separator="or" item="item">
+                    `Aliappid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAliappid!=null and where.rightFuzzyAliappid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAliappid"  separator="or" item="item">
+                    `Aliappid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.wechatappidList != null">
+                    `wechatappid` in
+                    <foreach collection="where.wechatappidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyWechatappid!=null and where.fuzzyWechatappid.size()>0">
+                (
+                <foreach collection="where.fuzzyWechatappid"  separator="or" item="item">
+                    `Wechatappid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyWechatappid!=null and where.rightFuzzyWechatappid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyWechatappid"  separator="or" item="item">
+                    `Wechatappid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.wechatkeyList != null">
+                    `wechatkey` in
+                    <foreach collection="where.wechatkeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyWechatkey!=null and where.fuzzyWechatkey.size()>0">
+                (
+                <foreach collection="where.fuzzyWechatkey"  separator="or" item="item">
+                    `Wechatkey` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyWechatkey!=null and where.rightFuzzyWechatkey.size()>0">
+                (
+                <foreach collection="where.rightFuzzyWechatkey"  separator="or" item="item">
+                    `Wechatkey` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.wechatmchidList != null">
+                    `wechatmchid` in
+                    <foreach collection="where.wechatmchidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyWechatmchid!=null and where.fuzzyWechatmchid.size()>0">
+                (
+                <foreach collection="where.fuzzyWechatmchid"  separator="or" item="item">
+                    `Wechatmchid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyWechatmchid!=null and where.rightFuzzyWechatmchid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyWechatmchid"  separator="or" item="item">
+                    `Wechatmchid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.alipaycertpathList != null">
+                    `alipaycertpath` in
+                    <foreach collection="where.alipaycertpathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAlipaycertpath!=null and where.fuzzyAlipaycertpath.size()>0">
+                (
+                <foreach collection="where.fuzzyAlipaycertpath"  separator="or" item="item">
+                    `Alipaycertpath` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAlipaycertpath!=null and where.rightFuzzyAlipaycertpath.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAlipaycertpath"  separator="or" item="item">
+                    `Alipaycertpath` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.alipaypubliccertpathList != null">
+                    `alipaypubliccertpath` in
+                    <foreach collection="where.alipaypubliccertpathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAlipaypubliccertpath!=null and where.fuzzyAlipaypubliccertpath.size()>0">
+                (
+                <foreach collection="where.fuzzyAlipaypubliccertpath"  separator="or" item="item">
+                    `Alipaypubliccertpath` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAlipaypubliccertpath!=null and where.rightFuzzyAlipaypubliccertpath.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAlipaypubliccertpath"  separator="or" item="item">
+                    `Alipaypubliccertpath` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.alipayrootcertpathList != null">
+                    `alipayrootcertpath` in
+                    <foreach collection="where.alipayrootcertpathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAlipayrootcertpath!=null and where.fuzzyAlipayrootcertpath.size()>0">
+                (
+                <foreach collection="where.fuzzyAlipayrootcertpath"  separator="or" item="item">
+                    `Alipayrootcertpath` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAlipayrootcertpath!=null and where.rightFuzzyAlipayrootcertpath.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAlipayrootcertpath"  separator="or" item="item">
+                    `Alipayrootcertpath` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.wechatmchnoList != null">
+                    `wechatmchno` in
+                    <foreach collection="where.wechatmchnoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyWechatmchno!=null and where.fuzzyWechatmchno.size()>0">
+                (
+                <foreach collection="where.fuzzyWechatmchno"  separator="or" item="item">
+                    `Wechatmchno` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyWechatmchno!=null and where.rightFuzzyWechatmchno.size()>0">
+                (
+                <foreach collection="where.rightFuzzyWechatmchno"  separator="or" item="item">
+                    `Wechatmchno` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.wechatprivatekeyList != null">
+                    `wechatprivatekey` in
+                    <foreach collection="where.wechatprivatekeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyWechatprivatekey!=null and where.fuzzyWechatprivatekey.size()>0">
+                (
+                <foreach collection="where.fuzzyWechatprivatekey"  separator="or" item="item">
+                    `Wechatprivatekey` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyWechatprivatekey!=null and where.rightFuzzyWechatprivatekey.size()>0">
+                (
+                <foreach collection="where.rightFuzzyWechatprivatekey"  separator="or" item="item">
+                    `Wechatprivatekey` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyCount" id="JpyCountMap">
+        <result property="countid" column="countid"/>
+        <result property="countname" column="countname"/>
+        <result property="countnum" column="countnum"/>
+        <result property="alipayration" column="alipayration"/>
+        <result property="wechatration" column="wechatration"/>
+        <result property="countsts" column="countsts"/>
+        <result property="countminnum" column="countminnum"/>
+        <result property="countmaxnum" column="countmaxnum"/>
+        <result property="counttime" column="counttime"/>
+        <result property="countuptime" column="countuptime"/>
+        <result property="alipayprikey" column="alipayprikey"/>
+        <result property="alipaypukey" column="alipaypukey"/>
+        <result property="aliappid" column="aliappid"/>
+        <result property="wechatappid" column="wechatappid"/>
+        <result property="wechatkey" column="wechatkey"/>
+        <result property="wechatmchid" column="wechatmchid"/>
+        <result property="alipaycertpath" column="alipaycertpath"/>
+        <result property="alipaypubliccertpath" column="alipaypubliccertpath"/>
+        <result property="alipayrootcertpath" column="alipayrootcertpath"/>
+        <result property="wechatmchno" column="wechatmchno"/>
+        <result property="wechatprivatekey" column="wechatprivatekey"/>
+    </resultMap>
+
+
+    <select id="queryJpyCount" resultMap="JpyCountMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_count`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="countid != null">
+                `countid` = #{countid} and
+            </if>
+            <if test="countname != null and countname!=''">
+                `countname` = #{countname} and
+            </if>
+            <if test="countnum != null and countnum!=''">
+                `countnum` = #{countnum} and
+            </if>
+            <if test="alipayration != null and alipayration!=''">
+                `alipayration` = #{alipayration} and
+            </if>
+            <if test="wechatration != null and wechatration!=''">
+                `wechatration` = #{wechatration} and
+            </if>
+            <if test="countsts != null and countsts!=''">
+                `countsts` = #{countsts} and
+            </if>
+            <if test="countminnum != null and countminnum!=''">
+                `countminnum` = #{countminnum} and
+            </if>
+            <if test="countmaxnum != null and countmaxnum!=''">
+                `countmaxnum` = #{countmaxnum} and
+            </if>
+            <if test="counttime != null and counttime!=''">
+                `counttime` = #{counttime} and
+            </if>
+            <if test="countuptime != null and countuptime!=''">
+                `countuptime` = #{countuptime} and
+            </if>
+            <if test="alipayprikey != null and alipayprikey!=''">
+                `alipayprikey` = #{alipayprikey} and
+            </if>
+            <if test="alipaypukey != null and alipaypukey!=''">
+                `alipaypukey` = #{alipaypukey} and
+            </if>
+            <if test="aliappid != null and aliappid!=''">
+                `aliappid` = #{aliappid} and
+            </if>
+            <if test="wechatappid != null and wechatappid!=''">
+                `wechatappid` = #{wechatappid} and
+            </if>
+            <if test="wechatkey != null and wechatkey!=''">
+                `wechatkey` = #{wechatkey} and
+            </if>
+            <if test="wechatmchid != null and wechatmchid!=''">
+                `wechatmchid` = #{wechatmchid} and
+            </if>
+            <if test="alipaycertpath != null and alipaycertpath!=''">
+                `alipaycertpath` = #{alipaycertpath} and
+            </if>
+            <if test="alipaypubliccertpath != null and alipaypubliccertpath!=''">
+                `alipaypubliccertpath` = #{alipaypubliccertpath} and
+            </if>
+            <if test="alipayrootcertpath != null and alipayrootcertpath!=''">
+                `alipayrootcertpath` = #{alipayrootcertpath} and
+            </if>
+            <if test="wechatmchno != null and wechatmchno!=''">
+                `wechatmchno` = #{wechatmchno} and
+            </if>
+            <if test="wechatprivatekey != null and wechatprivatekey!=''">
+                `wechatprivatekey` = #{wechatprivatekey} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyCount$QueryBuilder) == true">
+                <if test="countidList != null">
+                    `countid` in
+                    <foreach collection="countidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="countidSt !=null">
+                    `countid` >= #{countidSt} and
+                </if>
+                <if test="countidEd!=null">
+                    `countid` &lt;= #{countidEd} and
+                </if>
+                <if test="countnameList != null">
+                    `countname` in
+                    <foreach collection="countnameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCountname!=null and fuzzyCountname.size()>0">
+                    (
+                    <foreach collection="fuzzyCountname"  separator="or" item="item">
+                        `Countname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountname!=null and rightFuzzyCountname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountname"  separator="or" item="item">
+                        `Countname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="countnumList != null">
+                    `countnum` in
+                    <foreach collection="countnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCountnum!=null and fuzzyCountnum.size()>0">
+                    (
+                    <foreach collection="fuzzyCountnum"  separator="or" item="item">
+                        `Countnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountnum!=null and rightFuzzyCountnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountnum"  separator="or" item="item">
+                        `Countnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="alipayrationList != null">
+                    `alipayration` in
+                    <foreach collection="alipayrationList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAlipayration!=null and fuzzyAlipayration.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipayration"  separator="or" item="item">
+                        `Alipayration` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipayration!=null and rightFuzzyAlipayration.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipayration"  separator="or" item="item">
+                        `Alipayration` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="wechatrationList != null">
+                    `wechatration` in
+                    <foreach collection="wechatrationList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyWechatration!=null and fuzzyWechatration.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatration"  separator="or" item="item">
+                        `Wechatration` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatration!=null and rightFuzzyWechatration.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatration"  separator="or" item="item">
+                        `Wechatration` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="countstsList != null">
+                    `countsts` in
+                    <foreach collection="countstsList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCountsts!=null and fuzzyCountsts.size()>0">
+                    (
+                    <foreach collection="fuzzyCountsts"  separator="or" item="item">
+                        `Countsts` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountsts!=null and rightFuzzyCountsts.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountsts"  separator="or" item="item">
+                        `Countsts` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="countminnumList != null">
+                    `countminnum` in
+                    <foreach collection="countminnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCountminnum!=null and fuzzyCountminnum.size()>0">
+                    (
+                    <foreach collection="fuzzyCountminnum"  separator="or" item="item">
+                        `Countminnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountminnum!=null and rightFuzzyCountminnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountminnum"  separator="or" item="item">
+                        `Countminnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="countmaxnumList != null">
+                    `countmaxnum` in
+                    <foreach collection="countmaxnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCountmaxnum!=null and fuzzyCountmaxnum.size()>0">
+                    (
+                    <foreach collection="fuzzyCountmaxnum"  separator="or" item="item">
+                        `Countmaxnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountmaxnum!=null and rightFuzzyCountmaxnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountmaxnum"  separator="or" item="item">
+                        `Countmaxnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="counttimeList != null">
+                    `counttime` in
+                    <foreach collection="counttimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCounttime!=null and fuzzyCounttime.size()>0">
+                    (
+                    <foreach collection="fuzzyCounttime"  separator="or" item="item">
+                        `Counttime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCounttime!=null and rightFuzzyCounttime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCounttime"  separator="or" item="item">
+                        `Counttime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="countuptimeList != null">
+                    `countuptime` in
+                    <foreach collection="countuptimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCountuptime!=null and fuzzyCountuptime.size()>0">
+                    (
+                    <foreach collection="fuzzyCountuptime"  separator="or" item="item">
+                        `Countuptime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountuptime!=null and rightFuzzyCountuptime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountuptime"  separator="or" item="item">
+                        `Countuptime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="alipayprikeyList != null">
+                    `alipayprikey` in
+                    <foreach collection="alipayprikeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAlipayprikey!=null and fuzzyAlipayprikey.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipayprikey"  separator="or" item="item">
+                        `Alipayprikey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipayprikey!=null and rightFuzzyAlipayprikey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipayprikey"  separator="or" item="item">
+                        `Alipayprikey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="alipaypukeyList != null">
+                    `alipaypukey` in
+                    <foreach collection="alipaypukeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAlipaypukey!=null and fuzzyAlipaypukey.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipaypukey"  separator="or" item="item">
+                        `Alipaypukey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipaypukey!=null and rightFuzzyAlipaypukey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipaypukey"  separator="or" item="item">
+                        `Alipaypukey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="aliappidList != null">
+                    `aliappid` in
+                    <foreach collection="aliappidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAliappid!=null and fuzzyAliappid.size()>0">
+                    (
+                    <foreach collection="fuzzyAliappid"  separator="or" item="item">
+                        `Aliappid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAliappid!=null and rightFuzzyAliappid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAliappid"  separator="or" item="item">
+                        `Aliappid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="wechatappidList != null">
+                    `wechatappid` in
+                    <foreach collection="wechatappidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyWechatappid!=null and fuzzyWechatappid.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatappid"  separator="or" item="item">
+                        `Wechatappid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatappid!=null and rightFuzzyWechatappid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatappid"  separator="or" item="item">
+                        `Wechatappid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="wechatkeyList != null">
+                    `wechatkey` in
+                    <foreach collection="wechatkeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyWechatkey!=null and fuzzyWechatkey.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatkey"  separator="or" item="item">
+                        `Wechatkey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatkey!=null and rightFuzzyWechatkey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatkey"  separator="or" item="item">
+                        `Wechatkey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="wechatmchidList != null">
+                    `wechatmchid` in
+                    <foreach collection="wechatmchidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyWechatmchid!=null and fuzzyWechatmchid.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatmchid"  separator="or" item="item">
+                        `Wechatmchid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatmchid!=null and rightFuzzyWechatmchid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatmchid"  separator="or" item="item">
+                        `Wechatmchid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="alipaycertpathList != null">
+                    `alipaycertpath` in
+                    <foreach collection="alipaycertpathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAlipaycertpath!=null and fuzzyAlipaycertpath.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipaycertpath"  separator="or" item="item">
+                        `Alipaycertpath` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipaycertpath!=null and rightFuzzyAlipaycertpath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipaycertpath"  separator="or" item="item">
+                        `Alipaycertpath` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="alipaypubliccertpathList != null">
+                    `alipaypubliccertpath` in
+                    <foreach collection="alipaypubliccertpathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAlipaypubliccertpath!=null and fuzzyAlipaypubliccertpath.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipaypubliccertpath"  separator="or" item="item">
+                        `Alipaypubliccertpath` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipaypubliccertpath!=null and rightFuzzyAlipaypubliccertpath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipaypubliccertpath"  separator="or" item="item">
+                        `Alipaypubliccertpath` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="alipayrootcertpathList != null">
+                    `alipayrootcertpath` in
+                    <foreach collection="alipayrootcertpathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAlipayrootcertpath!=null and fuzzyAlipayrootcertpath.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipayrootcertpath"  separator="or" item="item">
+                        `Alipayrootcertpath` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipayrootcertpath!=null and rightFuzzyAlipayrootcertpath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipayrootcertpath"  separator="or" item="item">
+                        `Alipayrootcertpath` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="wechatmchnoList != null">
+                    `wechatmchno` in
+                    <foreach collection="wechatmchnoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyWechatmchno!=null and fuzzyWechatmchno.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatmchno"  separator="or" item="item">
+                        `Wechatmchno` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatmchno!=null and rightFuzzyWechatmchno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatmchno"  separator="or" item="item">
+                        `Wechatmchno` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="wechatprivatekeyList != null">
+                    `wechatprivatekey` in
+                    <foreach collection="wechatprivatekeyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyWechatprivatekey!=null and fuzzyWechatprivatekey.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatprivatekey"  separator="or" item="item">
+                        `Wechatprivatekey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatprivatekey!=null and rightFuzzyWechatprivatekey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatprivatekey"  separator="or" item="item">
+                        `Wechatprivatekey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyCountLimit1" resultMap="JpyCountMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_count`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="countid != null">
+                `countid` = #{countid} and
+            </if>
+            <if test="countname != null and countname!=''">
+                `countname` = #{countname} and
+            </if>
+            <if test="countnum != null and countnum!=''">
+                `countnum` = #{countnum} and
+            </if>
+            <if test="alipayration != null and alipayration!=''">
+                `alipayration` = #{alipayration} and
+            </if>
+            <if test="wechatration != null and wechatration!=''">
+                `wechatration` = #{wechatration} and
+            </if>
+            <if test="countsts != null and countsts!=''">
+                `countsts` = #{countsts} and
+            </if>
+            <if test="countminnum != null and countminnum!=''">
+                `countminnum` = #{countminnum} and
+            </if>
+            <if test="countmaxnum != null and countmaxnum!=''">
+                `countmaxnum` = #{countmaxnum} and
+            </if>
+            <if test="counttime != null and counttime!=''">
+                `counttime` = #{counttime} and
+            </if>
+            <if test="countuptime != null and countuptime!=''">
+                `countuptime` = #{countuptime} and
+            </if>
+            <if test="alipayprikey != null and alipayprikey!=''">
+                `alipayprikey` = #{alipayprikey} and
+            </if>
+            <if test="alipaypukey != null and alipaypukey!=''">
+                `alipaypukey` = #{alipaypukey} and
+            </if>
+            <if test="aliappid != null and aliappid!=''">
+                `aliappid` = #{aliappid} and
+            </if>
+            <if test="wechatappid != null and wechatappid!=''">
+                `wechatappid` = #{wechatappid} and
+            </if>
+            <if test="wechatkey != null and wechatkey!=''">
+                `wechatkey` = #{wechatkey} and
+            </if>
+            <if test="wechatmchid != null and wechatmchid!=''">
+                `wechatmchid` = #{wechatmchid} and
+            </if>
+            <if test="alipaycertpath != null and alipaycertpath!=''">
+                `alipaycertpath` = #{alipaycertpath} and
+            </if>
+            <if test="alipaypubliccertpath != null and alipaypubliccertpath!=''">
+                `alipaypubliccertpath` = #{alipaypubliccertpath} and
+            </if>
+            <if test="alipayrootcertpath != null and alipayrootcertpath!=''">
+                `alipayrootcertpath` = #{alipayrootcertpath} and
+            </if>
+            <if test="wechatmchno != null and wechatmchno!=''">
+                `wechatmchno` = #{wechatmchno} and
+            </if>
+            <if test="wechatprivatekey != null and wechatprivatekey!=''">
+                `wechatprivatekey` = #{wechatprivatekey} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyCount$QueryBuilder) == true">
+                    <if test="countidList != null">
+                        `countid` in
+                        <foreach collection="countidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="countidSt !=null">
+                    `countid` >= #{countidSt} and
+                </if>
+                <if test="countidEd!=null">
+                    `countid` &lt;= #{countidEd} and
+                </if>
+                    <if test="countnameList != null">
+                        `countname` in
+                        <foreach collection="countnameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCountname!=null and fuzzyCountname.size()>0">
+                    (
+                    <foreach collection="fuzzyCountname"  separator="or" item="item">
+                        `Countname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountname!=null and rightFuzzyCountname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountname"  separator="or" item="item">
+                        `Countname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="countnumList != null">
+                        `countnum` in
+                        <foreach collection="countnumList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCountnum!=null and fuzzyCountnum.size()>0">
+                    (
+                    <foreach collection="fuzzyCountnum"  separator="or" item="item">
+                        `Countnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountnum!=null and rightFuzzyCountnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountnum"  separator="or" item="item">
+                        `Countnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="alipayrationList != null">
+                        `alipayration` in
+                        <foreach collection="alipayrationList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAlipayration!=null and fuzzyAlipayration.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipayration"  separator="or" item="item">
+                        `Alipayration` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipayration!=null and rightFuzzyAlipayration.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipayration"  separator="or" item="item">
+                        `Alipayration` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="wechatrationList != null">
+                        `wechatration` in
+                        <foreach collection="wechatrationList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyWechatration!=null and fuzzyWechatration.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatration"  separator="or" item="item">
+                        `Wechatration` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatration!=null and rightFuzzyWechatration.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatration"  separator="or" item="item">
+                        `Wechatration` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="countstsList != null">
+                        `countsts` in
+                        <foreach collection="countstsList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCountsts!=null and fuzzyCountsts.size()>0">
+                    (
+                    <foreach collection="fuzzyCountsts"  separator="or" item="item">
+                        `Countsts` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountsts!=null and rightFuzzyCountsts.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountsts"  separator="or" item="item">
+                        `Countsts` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="countminnumList != null">
+                        `countminnum` in
+                        <foreach collection="countminnumList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCountminnum!=null and fuzzyCountminnum.size()>0">
+                    (
+                    <foreach collection="fuzzyCountminnum"  separator="or" item="item">
+                        `Countminnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountminnum!=null and rightFuzzyCountminnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountminnum"  separator="or" item="item">
+                        `Countminnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="countmaxnumList != null">
+                        `countmaxnum` in
+                        <foreach collection="countmaxnumList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCountmaxnum!=null and fuzzyCountmaxnum.size()>0">
+                    (
+                    <foreach collection="fuzzyCountmaxnum"  separator="or" item="item">
+                        `Countmaxnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountmaxnum!=null and rightFuzzyCountmaxnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountmaxnum"  separator="or" item="item">
+                        `Countmaxnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="counttimeList != null">
+                        `counttime` in
+                        <foreach collection="counttimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCounttime!=null and fuzzyCounttime.size()>0">
+                    (
+                    <foreach collection="fuzzyCounttime"  separator="or" item="item">
+                        `Counttime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCounttime!=null and rightFuzzyCounttime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCounttime"  separator="or" item="item">
+                        `Counttime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="countuptimeList != null">
+                        `countuptime` in
+                        <foreach collection="countuptimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCountuptime!=null and fuzzyCountuptime.size()>0">
+                    (
+                    <foreach collection="fuzzyCountuptime"  separator="or" item="item">
+                        `Countuptime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCountuptime!=null and rightFuzzyCountuptime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCountuptime"  separator="or" item="item">
+                        `Countuptime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="alipayprikeyList != null">
+                        `alipayprikey` in
+                        <foreach collection="alipayprikeyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAlipayprikey!=null and fuzzyAlipayprikey.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipayprikey"  separator="or" item="item">
+                        `Alipayprikey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipayprikey!=null and rightFuzzyAlipayprikey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipayprikey"  separator="or" item="item">
+                        `Alipayprikey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="alipaypukeyList != null">
+                        `alipaypukey` in
+                        <foreach collection="alipaypukeyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAlipaypukey!=null and fuzzyAlipaypukey.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipaypukey"  separator="or" item="item">
+                        `Alipaypukey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipaypukey!=null and rightFuzzyAlipaypukey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipaypukey"  separator="or" item="item">
+                        `Alipaypukey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="aliappidList != null">
+                        `aliappid` in
+                        <foreach collection="aliappidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAliappid!=null and fuzzyAliappid.size()>0">
+                    (
+                    <foreach collection="fuzzyAliappid"  separator="or" item="item">
+                        `Aliappid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAliappid!=null and rightFuzzyAliappid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAliappid"  separator="or" item="item">
+                        `Aliappid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="wechatappidList != null">
+                        `wechatappid` in
+                        <foreach collection="wechatappidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyWechatappid!=null and fuzzyWechatappid.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatappid"  separator="or" item="item">
+                        `Wechatappid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatappid!=null and rightFuzzyWechatappid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatappid"  separator="or" item="item">
+                        `Wechatappid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="wechatkeyList != null">
+                        `wechatkey` in
+                        <foreach collection="wechatkeyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyWechatkey!=null and fuzzyWechatkey.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatkey"  separator="or" item="item">
+                        `Wechatkey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatkey!=null and rightFuzzyWechatkey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatkey"  separator="or" item="item">
+                        `Wechatkey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="wechatmchidList != null">
+                        `wechatmchid` in
+                        <foreach collection="wechatmchidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyWechatmchid!=null and fuzzyWechatmchid.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatmchid"  separator="or" item="item">
+                        `Wechatmchid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatmchid!=null and rightFuzzyWechatmchid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatmchid"  separator="or" item="item">
+                        `Wechatmchid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="alipaycertpathList != null">
+                        `alipaycertpath` in
+                        <foreach collection="alipaycertpathList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAlipaycertpath!=null and fuzzyAlipaycertpath.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipaycertpath"  separator="or" item="item">
+                        `Alipaycertpath` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipaycertpath!=null and rightFuzzyAlipaycertpath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipaycertpath"  separator="or" item="item">
+                        `Alipaycertpath` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="alipaypubliccertpathList != null">
+                        `alipaypubliccertpath` in
+                        <foreach collection="alipaypubliccertpathList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAlipaypubliccertpath!=null and fuzzyAlipaypubliccertpath.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipaypubliccertpath"  separator="or" item="item">
+                        `Alipaypubliccertpath` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipaypubliccertpath!=null and rightFuzzyAlipaypubliccertpath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipaypubliccertpath"  separator="or" item="item">
+                        `Alipaypubliccertpath` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="alipayrootcertpathList != null">
+                        `alipayrootcertpath` in
+                        <foreach collection="alipayrootcertpathList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAlipayrootcertpath!=null and fuzzyAlipayrootcertpath.size()>0">
+                    (
+                    <foreach collection="fuzzyAlipayrootcertpath"  separator="or" item="item">
+                        `Alipayrootcertpath` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlipayrootcertpath!=null and rightFuzzyAlipayrootcertpath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlipayrootcertpath"  separator="or" item="item">
+                        `Alipayrootcertpath` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="wechatmchnoList != null">
+                        `wechatmchno` in
+                        <foreach collection="wechatmchnoList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyWechatmchno!=null and fuzzyWechatmchno.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatmchno"  separator="or" item="item">
+                        `Wechatmchno` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatmchno!=null and rightFuzzyWechatmchno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatmchno"  separator="or" item="item">
+                        `Wechatmchno` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="wechatprivatekeyList != null">
+                        `wechatprivatekey` in
+                        <foreach collection="wechatprivatekeyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyWechatprivatekey!=null and fuzzyWechatprivatekey.size()>0">
+                    (
+                    <foreach collection="fuzzyWechatprivatekey"  separator="or" item="item">
+                        `Wechatprivatekey` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWechatprivatekey!=null and rightFuzzyWechatprivatekey.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWechatprivatekey"  separator="or" item="item">
+                        `Wechatprivatekey` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `countid`,
+        `countname`,
+        `countnum`,
+        `alipayration`,
+        `wechatration`,
+        `countsts`,
+        `countminnum`,
+        `countmaxnum`,
+        `counttime`,
+        `countuptime`,
+        `alipayprikey`,
+        `alipaypukey`,
+        `aliappid`,
+        `wechatappid`,
+        `wechatkey`,
+        `wechatmchid`,
+        `alipaycertpath`,
+        `alipaypubliccertpath`,
+        `alipayrootcertpath`,
+        `wechatmchno`,
+        `wechatprivatekey`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyCount$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.countid==true">
+                        `countid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.countname==true">
+                        `countname`,
+                    </if>
+                    <if test="fetchFields.fetchFields.countnum==true">
+                        `countnum`,
+                    </if>
+                    <if test="fetchFields.fetchFields.alipayration==true">
+                        `alipayration`,
+                    </if>
+                    <if test="fetchFields.fetchFields.wechatration==true">
+                        `wechatration`,
+                    </if>
+                    <if test="fetchFields.fetchFields.countsts==true">
+                        `countsts`,
+                    </if>
+                    <if test="fetchFields.fetchFields.countminnum==true">
+                        `countminnum`,
+                    </if>
+                    <if test="fetchFields.fetchFields.countmaxnum==true">
+                        `countmaxnum`,
+                    </if>
+                    <if test="fetchFields.fetchFields.counttime==true">
+                        `counttime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.countuptime==true">
+                        `countuptime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.alipayprikey==true">
+                        `alipayprikey`,
+                    </if>
+                    <if test="fetchFields.fetchFields.alipaypukey==true">
+                        `alipaypukey`,
+                    </if>
+                    <if test="fetchFields.fetchFields.aliappid==true">
+                        `aliappid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.wechatappid==true">
+                        `wechatappid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.wechatkey==true">
+                        `wechatkey`,
+                    </if>
+                    <if test="fetchFields.fetchFields.wechatmchid==true">
+                        `wechatmchid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.alipaycertpath==true">
+                        `alipaycertpath`,
+                    </if>
+                    <if test="fetchFields.fetchFields.alipaypubliccertpath==true">
+                        `alipaypubliccertpath`,
+                    </if>
+                    <if test="fetchFields.fetchFields.alipayrootcertpath==true">
+                        `alipayrootcertpath`,
+                    </if>
+                    <if test="fetchFields.fetchFields.wechatmchno==true">
+                        `wechatmchno`,
+                    </if>
+                    <if test="fetchFields.fetchFields.wechatprivatekey==true">
+                        `wechatprivatekey`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.countid==null">
+                        `countid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.countname==null">
+                        `countname`,
+                    </if>
+                    <if test="fetchFields.excludeFields.countnum==null">
+                        `countnum`,
+                    </if>
+                    <if test="fetchFields.excludeFields.alipayration==null">
+                        `alipayration`,
+                    </if>
+                    <if test="fetchFields.excludeFields.wechatration==null">
+                        `wechatration`,
+                    </if>
+                    <if test="fetchFields.excludeFields.countsts==null">
+                        `countsts`,
+                    </if>
+                    <if test="fetchFields.excludeFields.countminnum==null">
+                        `countminnum`,
+                    </if>
+                    <if test="fetchFields.excludeFields.countmaxnum==null">
+                        `countmaxnum`,
+                    </if>
+                    <if test="fetchFields.excludeFields.counttime==null">
+                        `counttime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.countuptime==null">
+                        `countuptime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.alipayprikey==null">
+                        `alipayprikey`,
+                    </if>
+                    <if test="fetchFields.excludeFields.alipaypukey==null">
+                        `alipaypukey`,
+                    </if>
+                    <if test="fetchFields.excludeFields.aliappid==null">
+                        `aliappid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.wechatappid==null">
+                        `wechatappid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.wechatkey==null">
+                        `wechatkey`,
+                    </if>
+                    <if test="fetchFields.excludeFields.wechatmchid==null">
+                        `wechatmchid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.alipaycertpath==null">
+                        `alipaycertpath`,
+                    </if>
+                    <if test="fetchFields.excludeFields.alipaypubliccertpath==null">
+                        `alipaypubliccertpath`,
+                    </if>
+                    <if test="fetchFields.excludeFields.alipayrootcertpath==null">
+                        `alipayrootcertpath`,
+                    </if>
+                    <if test="fetchFields.excludeFields.wechatmchno==null">
+                        `wechatmchno`,
+                    </if>
+                    <if test="fetchFields.excludeFields.wechatprivatekey==null">
+                        `wechatprivatekey`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyCount$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

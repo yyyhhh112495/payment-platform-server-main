@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyOrgBaseMapper">
+
+    <insert id="insertJpyOrg"  useGeneratedKeys="true" keyProperty="bussinessid">
+        INSERT INTO `jpy_org`
+        (
+        <trim suffixOverrides=",">
+                    <if test="bussinessid!=null">
+                        `bussinessid`,
+                    </if>
+                    <if test="bussinessname!=null">
+                        `bussinessname`,
+                    </if>
+                    <if test="addtime!=null">
+                        `addtime`,
+                    </if>
+                    <if test="bussratio!=null">
+                        `bussratio`,
+                    </if>
+                    <if test="bussstatus!=null">
+                        `bussstatus`,
+                    </if>
+                    <if test="uptime!=null">
+                        `uptime`,
+                    </if>
+                    <if test="bussphone!=null">
+                        `bussphone`,
+                    </if>
+            <if test="prikey!=null">
+                `prikey`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="bussinessid!=null">
+                    #{bussinessid},
+                </if>
+                <if test="bussinessname!=null">
+                    #{bussinessname},
+                </if>
+                <if test="addtime!=null">
+                    #{addtime},
+                </if>
+                <if test="bussratio!=null">
+                    #{bussratio},
+                </if>
+                <if test="bussstatus!=null">
+                    #{bussstatus},
+                </if>
+                <if test="uptime!=null">
+                    #{uptime},
+                </if>
+                <if test="bussphone!=null">
+                    #{bussphone},
+                </if>
+            <if test="prikey!=null">
+                #{prikey},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyOrg">
+        UPDATE `jpy_org`
+        SET
+        <trim suffixOverrides=",">
+            <if test="bussinessname != null and bussinessname!=''">
+                `bussinessname` = #{bussinessname},
+            </if>
+            <if test="addtime != null and addtime!=''">
+                `addtime` = #{addtime},
+            </if>
+            <if test="bussratio != null and bussratio!=''">
+                `bussratio` = #{bussratio},
+            </if>
+            <if test="bussstatus != null and bussstatus!=''">
+                `bussstatus` = #{bussstatus},
+            </if>
+            <if test="uptime != null and uptime!=''">
+                `uptime` = #{uptime},
+            </if>
+            <if test="bussphone != null and bussphone!=''">
+                `bussphone` = #{bussphone},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `bussinessid` = #{bussinessid} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_org`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.bussinessname != null and set.bussinessname!=''">
+            `bussinessname` = #{set.bussinessname},
+        </if>
+        <if test="set.addtime != null and set.addtime!=''">
+            `addtime` = #{set.addtime},
+        </if>
+        <if test="set.bussratio != null and set.bussratio!=''">
+            `bussratio` = #{set.bussratio},
+        </if>
+        <if test="set.bussstatus != null and set.bussstatus!=''">
+            `bussstatus` = #{set.bussstatus},
+        </if>
+        <if test="set.uptime != null and set.uptime!=''">
+            `uptime` = #{set.uptime},
+        </if>
+        <if test="set.bussphone != null and set.bussphone!=''">
+            `bussphone` = #{set.bussphone},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.bussinessidList != null">
+                    `bussinessid` in
+                    <foreach collection="where.bussinessidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.bussinessidSt !=null">
+                `bussinessid` >= #{where.bussinessidSt} and
+            </if>
+            <if test="where.bussinessidEd!=null">
+                `bussinessid` &lt;= #{where.bussinessidEd} and
+            </if>
+                <if test="where.bussinessnameList != null">
+                    `bussinessname` in
+                    <foreach collection="where.bussinessnameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBussinessname!=null and where.fuzzyBussinessname.size()>0">
+                (
+                <foreach collection="where.fuzzyBussinessname"  separator="or" item="item">
+                    `Bussinessname` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBussinessname!=null and where.rightFuzzyBussinessname.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBussinessname"  separator="or" item="item">
+                    `Bussinessname` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.addtimeList != null">
+                    `addtime` in
+                    <foreach collection="where.addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAddtime!=null and where.fuzzyAddtime.size()>0">
+                (
+                <foreach collection="where.fuzzyAddtime"  separator="or" item="item">
+                    `Addtime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAddtime!=null and where.rightFuzzyAddtime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAddtime"  separator="or" item="item">
+                    `Addtime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.bussratioList != null">
+                    `bussratio` in
+                    <foreach collection="where.bussratioList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBussratio!=null and where.fuzzyBussratio.size()>0">
+                (
+                <foreach collection="where.fuzzyBussratio"  separator="or" item="item">
+                    `Bussratio` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBussratio!=null and where.rightFuzzyBussratio.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBussratio"  separator="or" item="item">
+                    `Bussratio` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.bussstatusList != null">
+                    `bussstatus` in
+                    <foreach collection="where.bussstatusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBussstatus!=null and where.fuzzyBussstatus.size()>0">
+                (
+                <foreach collection="where.fuzzyBussstatus"  separator="or" item="item">
+                    `Bussstatus` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBussstatus!=null and where.rightFuzzyBussstatus.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBussstatus"  separator="or" item="item">
+                    `Bussstatus` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.uptimeList != null">
+                    `uptime` in
+                    <foreach collection="where.uptimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUptime!=null and where.fuzzyUptime.size()>0">
+                (
+                <foreach collection="where.fuzzyUptime"  separator="or" item="item">
+                    `Uptime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUptime!=null and where.rightFuzzyUptime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUptime"  separator="or" item="item">
+                    `Uptime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.bussphoneList != null">
+                    `bussphone` in
+                    <foreach collection="where.bussphoneList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBussphone!=null and where.fuzzyBussphone.size()>0">
+                (
+                <foreach collection="where.fuzzyBussphone"  separator="or" item="item">
+                    `Bussphone` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBussphone!=null and where.rightFuzzyBussphone.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBussphone"  separator="or" item="item">
+                    `Bussphone` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyOrg" id="JpyOrgMap">
+        <result property="bussinessid" column="bussinessid"/>
+        <result property="bussinessname" column="bussinessname"/>
+        <result property="addtime" column="addtime"/>
+        <result property="bussratio" column="bussratio"/>
+        <result property="bussstatus" column="bussstatus"/>
+        <result property="uptime" column="uptime"/>
+        <result property="bussphone" column="bussphone"/>
+        <result property="prikey" column="prikey"/>
+    </resultMap>
+
+
+    <select id="queryJpyOrg" resultMap="JpyOrgMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_org`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="bussinessid != null">
+                `bussinessid` = #{bussinessid} and
+            </if>
+            <if test="bussinessname != null and bussinessname!=''">
+                `bussinessname` = #{bussinessname} and
+            </if>
+            <if test="addtime != null and addtime!=''">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="bussratio != null and bussratio!=''">
+                `bussratio` = #{bussratio} and
+            </if>
+            <if test="bussstatus != null and bussstatus!=''">
+                `bussstatus` = #{bussstatus} and
+            </if>
+            <if test="uptime != null and uptime!=''">
+                `uptime` = #{uptime} and
+            </if>
+            <if test="bussphone != null and bussphone!=''">
+                `bussphone` = #{bussphone} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyOrg$QueryBuilder) == true">
+                <if test="bussinessidList != null">
+                    `bussinessid` in
+                    <foreach collection="bussinessidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="bussinessidSt !=null">
+                    `bussinessid` >= #{bussinessidSt} and
+                </if>
+                <if test="bussinessidEd!=null">
+                    `bussinessid` &lt;= #{bussinessidEd} and
+                </if>
+                <if test="bussinessnameList != null">
+                    `bussinessname` in
+                    <foreach collection="bussinessnameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBussinessname!=null and fuzzyBussinessname.size()>0">
+                    (
+                    <foreach collection="fuzzyBussinessname"  separator="or" item="item">
+                        `Bussinessname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussinessname!=null and rightFuzzyBussinessname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussinessname"  separator="or" item="item">
+                        `Bussinessname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="addtimeList != null">
+                    `addtime` in
+                    <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAddtime!=null and fuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="fuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAddtime!=null and rightFuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="bussratioList != null">
+                    `bussratio` in
+                    <foreach collection="bussratioList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBussratio!=null and fuzzyBussratio.size()>0">
+                    (
+                    <foreach collection="fuzzyBussratio"  separator="or" item="item">
+                        `Bussratio` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussratio!=null and rightFuzzyBussratio.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussratio"  separator="or" item="item">
+                        `Bussratio` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="bussstatusList != null">
+                    `bussstatus` in
+                    <foreach collection="bussstatusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBussstatus!=null and fuzzyBussstatus.size()>0">
+                    (
+                    <foreach collection="fuzzyBussstatus"  separator="or" item="item">
+                        `Bussstatus` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussstatus!=null and rightFuzzyBussstatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussstatus"  separator="or" item="item">
+                        `Bussstatus` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="uptimeList != null">
+                    `uptime` in
+                    <foreach collection="uptimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUptime!=null and fuzzyUptime.size()>0">
+                    (
+                    <foreach collection="fuzzyUptime"  separator="or" item="item">
+                        `Uptime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUptime!=null and rightFuzzyUptime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUptime"  separator="or" item="item">
+                        `Uptime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="bussphoneList != null">
+                    `bussphone` in
+                    <foreach collection="bussphoneList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBussphone!=null and fuzzyBussphone.size()>0">
+                    (
+                    <foreach collection="fuzzyBussphone"  separator="or" item="item">
+                        `Bussphone` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussphone!=null and rightFuzzyBussphone.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussphone"  separator="or" item="item">
+                        `Bussphone` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyOrgLimit1" resultMap="JpyOrgMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_org`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="bussinessid != null">
+                `bussinessid` = #{bussinessid} and
+            </if>
+            <if test="bussinessname != null and bussinessname!=''">
+                `bussinessname` = #{bussinessname} and
+            </if>
+            <if test="addtime != null and addtime!=''">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="bussratio != null and bussratio!=''">
+                `bussratio` = #{bussratio} and
+            </if>
+            <if test="bussstatus != null and bussstatus!=''">
+                `bussstatus` = #{bussstatus} and
+            </if>
+            <if test="uptime != null and uptime!=''">
+                `uptime` = #{uptime} and
+            </if>
+            <if test="bussphone != null and bussphone!=''">
+                `bussphone` = #{bussphone} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyOrg$QueryBuilder) == true">
+                    <if test="bussinessidList != null">
+                        `bussinessid` in
+                        <foreach collection="bussinessidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="bussinessidSt !=null">
+                    `bussinessid` >= #{bussinessidSt} and
+                </if>
+                <if test="bussinessidEd!=null">
+                    `bussinessid` &lt;= #{bussinessidEd} and
+                </if>
+                    <if test="bussinessnameList != null">
+                        `bussinessname` in
+                        <foreach collection="bussinessnameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBussinessname!=null and fuzzyBussinessname.size()>0">
+                    (
+                    <foreach collection="fuzzyBussinessname"  separator="or" item="item">
+                        `Bussinessname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussinessname!=null and rightFuzzyBussinessname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussinessname"  separator="or" item="item">
+                        `Bussinessname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="addtimeList != null">
+                        `addtime` in
+                        <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAddtime!=null and fuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="fuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAddtime!=null and rightFuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="bussratioList != null">
+                        `bussratio` in
+                        <foreach collection="bussratioList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBussratio!=null and fuzzyBussratio.size()>0">
+                    (
+                    <foreach collection="fuzzyBussratio"  separator="or" item="item">
+                        `Bussratio` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussratio!=null and rightFuzzyBussratio.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussratio"  separator="or" item="item">
+                        `Bussratio` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="bussstatusList != null">
+                        `bussstatus` in
+                        <foreach collection="bussstatusList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBussstatus!=null and fuzzyBussstatus.size()>0">
+                    (
+                    <foreach collection="fuzzyBussstatus"  separator="or" item="item">
+                        `Bussstatus` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussstatus!=null and rightFuzzyBussstatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussstatus"  separator="or" item="item">
+                        `Bussstatus` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="uptimeList != null">
+                        `uptime` in
+                        <foreach collection="uptimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUptime!=null and fuzzyUptime.size()>0">
+                    (
+                    <foreach collection="fuzzyUptime"  separator="or" item="item">
+                        `Uptime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUptime!=null and rightFuzzyUptime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUptime"  separator="or" item="item">
+                        `Uptime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="bussphoneList != null">
+                        `bussphone` in
+                        <foreach collection="bussphoneList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBussphone!=null and fuzzyBussphone.size()>0">
+                    (
+                    <foreach collection="fuzzyBussphone"  separator="or" item="item">
+                        `Bussphone` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussphone!=null and rightFuzzyBussphone.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussphone"  separator="or" item="item">
+                        `Bussphone` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `bussinessid`,
+        `bussinessname`,
+        `addtime`,
+        `bussratio`,
+        `bussstatus`,
+        `uptime`,
+        `bussphone`,
+        `prikey`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyOrg$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.bussinessid==true">
+                        `bussinessid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.bussinessname==true">
+                        `bussinessname`,
+                    </if>
+                    <if test="fetchFields.fetchFields.addtime==true">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.bussratio==true">
+                        `bussratio`,
+                    </if>
+                    <if test="fetchFields.fetchFields.bussstatus==true">
+                        `bussstatus`,
+                    </if>
+                    <if test="fetchFields.fetchFields.uptime==true">
+                        `uptime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.bussphone==true">
+                        `bussphone`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.bussinessid==null">
+                        `bussinessid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.bussinessname==null">
+                        `bussinessname`,
+                    </if>
+                    <if test="fetchFields.excludeFields.addtime==null">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.bussratio==null">
+                        `bussratio`,
+                    </if>
+                    <if test="fetchFields.excludeFields.bussstatus==null">
+                        `bussstatus`,
+                    </if>
+                    <if test="fetchFields.excludeFields.uptime==null">
+                        `uptime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.bussphone==null">
+                        `bussphone`,
+                    </if>
+                    <if test="fetchFields.excludeFields.prikey==null">
+                        `prikey`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyOrg$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

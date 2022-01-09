@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpySessionBaseMapper">
+
+
+    <delete id="deleteUserSession" parameterType="java.lang.Integer">
+        delete from jpy_session where userid=#{userid}
+    </delete>
+
+    <insert id="insertJpySession" >
+        INSERT INTO `jpy_session`
+        (
+        <trim suffixOverrides=",">
+                    <if test="userid!=null">
+                        `userid`,
+                    </if>
+                    <if test="session!=null">
+                        `session`,
+                    </if>
+                    <if test="timer!=null">
+                        `timer`,
+                    </if>
+                    <if test="sessionip!=null">
+                        `sessionip`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="userid!=null">
+                    #{userid},
+                </if>
+                <if test="session!=null">
+                    #{session},
+                </if>
+                <if test="timer!=null">
+                    #{timer},
+                </if>
+                <if test="sessionip!=null">
+                    #{sessionip},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpySession">
+        UPDATE `jpy_session`
+        SET
+        <trim suffixOverrides=",">
+            <if test="session != null and session!=''">
+                `session` = #{session},
+            </if>
+            <if test="timer != null and timer!=''">
+                `timer` = #{timer},
+            </if>
+            <if test="sessionip != null and sessionip!=''">
+                `sessionip` = #{sessionip},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `userid` = #{userid} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_session`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.session != null and set.session!=''">
+            `session` = #{set.session},
+        </if>
+        <if test="set.timer != null and set.timer!=''">
+            `timer` = #{set.timer},
+        </if>
+        <if test="set.sessionip != null and set.sessionip!=''">
+            `sessionip` = #{set.sessionip},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.useridList != null">
+                    `userid` in
+                    <foreach collection="where.useridList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.useridSt !=null">
+                `userid` >= #{where.useridSt} and
+            </if>
+            <if test="where.useridEd!=null">
+                `userid` &lt;= #{where.useridEd} and
+            </if>
+                <if test="where.sessionList != null">
+                    `session` in
+                    <foreach collection="where.sessionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySession!=null and where.fuzzySession.size()>0">
+                (
+                <foreach collection="where.fuzzySession"  separator="or" item="item">
+                    `Session` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySession!=null and where.rightFuzzySession.size()>0">
+                (
+                <foreach collection="where.rightFuzzySession"  separator="or" item="item">
+                    `Session` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.timerList != null">
+                    `timer` in
+                    <foreach collection="where.timerList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTimer!=null and where.fuzzyTimer.size()>0">
+                (
+                <foreach collection="where.fuzzyTimer"  separator="or" item="item">
+                    `Timer` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTimer!=null and where.rightFuzzyTimer.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTimer"  separator="or" item="item">
+                    `Timer` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.sessionipList != null">
+                    `sessionip` in
+                    <foreach collection="where.sessionipList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySessionip!=null and where.fuzzySessionip.size()>0">
+                (
+                <foreach collection="where.fuzzySessionip"  separator="or" item="item">
+                    `Sessionip` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySessionip!=null and where.rightFuzzySessionip.size()>0">
+                (
+                <foreach collection="where.rightFuzzySessionip"  separator="or" item="item">
+                    `Sessionip` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpySession" id="JpySessionMap">
+        <result property="userid" column="userid"/>
+        <result property="session" column="session"/>
+        <result property="timer" column="timer"/>
+        <result property="sessionip" column="sessionip"/>
+    </resultMap>
+
+
+    <select id="queryJpySession" resultMap="JpySessionMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_session`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="userid != null">
+                `userid` = #{userid} and
+            </if>
+            <if test="session != null and session!=''">
+                `session` = #{session} and
+            </if>
+            <if test="timer != null and timer!=''">
+                `timer` = #{timer} and
+            </if>
+            <if test="sessionip != null and sessionip!=''">
+                `sessionip` = #{sessionip} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpySession$QueryBuilder) == true">
+                <if test="useridList != null">
+                    `userid` in
+                    <foreach collection="useridList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="useridSt !=null">
+                    `userid` >= #{useridSt} and
+                </if>
+                <if test="useridEd!=null">
+                    `userid` &lt;= #{useridEd} and
+                </if>
+                <if test="sessionList != null">
+                    `session` in
+                    <foreach collection="sessionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySession!=null and fuzzySession.size()>0">
+                    (
+                    <foreach collection="fuzzySession"  separator="or" item="item">
+                        `Session` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySession!=null and rightFuzzySession.size()>0">
+                    (
+                    <foreach collection="rightFuzzySession"  separator="or" item="item">
+                        `Session` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="timerList != null">
+                    `timer` in
+                    <foreach collection="timerList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTimer!=null and fuzzyTimer.size()>0">
+                    (
+                    <foreach collection="fuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTimer!=null and rightFuzzyTimer.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="sessionipList != null">
+                    `sessionip` in
+                    <foreach collection="sessionipList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySessionip!=null and fuzzySessionip.size()>0">
+                    (
+                    <foreach collection="fuzzySessionip"  separator="or" item="item">
+                        `Sessionip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySessionip!=null and rightFuzzySessionip.size()>0">
+                    (
+                    <foreach collection="rightFuzzySessionip"  separator="or" item="item">
+                        `Sessionip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpySessionLimit1" resultMap="JpySessionMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_session`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="userid != null">
+                `userid` = #{userid} and
+            </if>
+            <if test="session != null and session!=''">
+                `session` = #{session} and
+            </if>
+            <if test="timer != null and timer!=''">
+                `timer` = #{timer} and
+            </if>
+            <if test="sessionip != null and sessionip!=''">
+                `sessionip` = #{sessionip} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpySession$QueryBuilder) == true">
+                    <if test="useridList != null">
+                        `userid` in
+                        <foreach collection="useridList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="useridSt !=null">
+                    `userid` >= #{useridSt} and
+                </if>
+                <if test="useridEd!=null">
+                    `userid` &lt;= #{useridEd} and
+                </if>
+                    <if test="sessionList != null">
+                        `session` in
+                        <foreach collection="sessionList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySession!=null and fuzzySession.size()>0">
+                    (
+                    <foreach collection="fuzzySession"  separator="or" item="item">
+                        `Session` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySession!=null and rightFuzzySession.size()>0">
+                    (
+                    <foreach collection="rightFuzzySession"  separator="or" item="item">
+                        `Session` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="timerList != null">
+                        `timer` in
+                        <foreach collection="timerList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTimer!=null and fuzzyTimer.size()>0">
+                    (
+                    <foreach collection="fuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTimer!=null and rightFuzzyTimer.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTimer"  separator="or" item="item">
+                        `Timer` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="sessionipList != null">
+                        `sessionip` in
+                        <foreach collection="sessionipList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySessionip!=null and fuzzySessionip.size()>0">
+                    (
+                    <foreach collection="fuzzySessionip"  separator="or" item="item">
+                        `Sessionip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySessionip!=null and rightFuzzySessionip.size()>0">
+                    (
+                    <foreach collection="rightFuzzySessionip"  separator="or" item="item">
+                        `Sessionip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `userid`,
+        `session`,
+        `timer`,
+        `sessionip`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpySession$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.userid==true">
+                        `userid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.session==true">
+                        `session`,
+                    </if>
+                    <if test="fetchFields.fetchFields.timer==true">
+                        `timer`,
+                    </if>
+                    <if test="fetchFields.fetchFields.sessionip==true">
+                        `sessionip`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.userid==null">
+                        `userid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.session==null">
+                        `session`,
+                    </if>
+                    <if test="fetchFields.excludeFields.timer==null">
+                        `timer`,
+                    </if>
+                    <if test="fetchFields.excludeFields.sessionip==null">
+                        `sessionip`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpySession$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

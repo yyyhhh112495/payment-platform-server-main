@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyUserBaseMapper">
+
+    <select id="queryUserMenus" resultType="java.util.Map"
+    parameterType="java.lang.String">
+        SELECT
+            iconname ruleIcon,
+            menuurl ruleUrl,
+            menuname ruleDesc
+        FROM
+                (select * from jpy_user_menu where userid=#{userid} ) jpy_user_menu
+                LEFT JOIN jpy_menu ON jpy_user_menu.menuid = jpy_menu.menuid
+    </select>
+
+    <insert id="insertJpyUser"  useGeneratedKeys="true" keyProperty="userid">
+        INSERT INTO `jpy_user`
+        (
+        <trim suffixOverrides=",">
+                    <if test="userid!=null">
+                        `userid`,
+                    </if>
+                    <if test="username!=null">
+                        `username`,
+                    </if>
+                    <if test="userphone!=null">
+                        `userphone`,
+                    </if>
+                    <if test="bussinessid!=null">
+                        `bussinessid`,
+                    </if>
+                    <if test="addtime!=null">
+                        `addtime`,
+                    </if>
+                    <if test="userpasswd!=null">
+                        `userpasswd`,
+                    </if>
+                    <if test="userstatus!=null">
+                        `userstatus`,
+                    </if>
+                    <if test="wrongnum!=null">
+                        `wrongnum`,
+                    </if>
+                    <if test="latestlogip!=null">
+                        `latestlogip`,
+                    </if>
+                    <if test="latesttime!=null">
+                        `latesttime`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="userid!=null">
+                    #{userid},
+                </if>
+                <if test="username!=null">
+                    #{username},
+                </if>
+                <if test="userphone!=null">
+                    #{userphone},
+                </if>
+                <if test="bussinessid!=null">
+                    #{bussinessid},
+                </if>
+                <if test="addtime!=null">
+                    #{addtime},
+                </if>
+                <if test="userpasswd!=null">
+                    #{userpasswd},
+                </if>
+                <if test="userstatus!=null">
+                    #{userstatus},
+                </if>
+                <if test="wrongnum!=null">
+                    #{wrongnum},
+                </if>
+                <if test="latestlogip!=null">
+                    #{latestlogip},
+                </if>
+                <if test="latesttime!=null">
+                    #{latesttime},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyUser">
+        UPDATE `jpy_user`
+        SET
+        <trim suffixOverrides=",">
+            <if test="username != null and username!=''">
+                `username` = #{username},
+            </if>
+            <if test="userphone != null and userphone!=''">
+                `userphone` = #{userphone},
+            </if>
+            <if test="bussinessid != null and bussinessid!=''">
+                `bussinessid` = #{bussinessid},
+            </if>
+            <if test="addtime != null and addtime!=''">
+                `addtime` = #{addtime},
+            </if>
+            <if test="userpasswd != null and userpasswd!=''">
+                `userpasswd` = #{userpasswd},
+            </if>
+            <if test="userstatus != null and userstatus!=''">
+                `userstatus` = #{userstatus},
+            </if>
+            <if test="wrongnum != null and wrongnum!=''">
+                `wrongnum` = #{wrongnum},
+            </if>
+            <if test="latestlogip != null and latestlogip!=''">
+                `latestlogip` = #{latestlogip},
+            </if>
+            <if test="latesttime != null and latesttime!=''">
+                `latesttime` = #{latesttime},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `userid` = #{userid} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_user`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.username != null and set.username!=''">
+            `username` = #{set.username},
+        </if>
+        <if test="set.userphone != null and set.userphone!=''">
+            `userphone` = #{set.userphone},
+        </if>
+        <if test="set.bussinessid != null and set.bussinessid!=''">
+            `bussinessid` = #{set.bussinessid},
+        </if>
+        <if test="set.addtime != null and set.addtime!=''">
+            `addtime` = #{set.addtime},
+        </if>
+        <if test="set.userpasswd != null and set.userpasswd!=''">
+            `userpasswd` = #{set.userpasswd},
+        </if>
+        <if test="set.userstatus != null and set.userstatus!=''">
+            `userstatus` = #{set.userstatus},
+        </if>
+        <if test="set.wrongnum != null and set.wrongnum!=''">
+            `wrongnum` = #{set.wrongnum},
+        </if>
+        <if test="set.latestlogip != null and set.latestlogip!=''">
+            `latestlogip` = #{set.latestlogip},
+        </if>
+        <if test="set.latesttime != null and set.latesttime!=''">
+            `latesttime` = #{set.latesttime},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.useridList != null">
+                    `userid` in
+                    <foreach collection="where.useridList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.useridSt !=null">
+                `userid` >= #{where.useridSt} and
+            </if>
+            <if test="where.useridEd!=null">
+                `userid` &lt;= #{where.useridEd} and
+            </if>
+                <if test="where.usernameList != null">
+                    `username` in
+                    <foreach collection="where.usernameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUsername!=null and where.fuzzyUsername.size()>0">
+                (
+                <foreach collection="where.fuzzyUsername"  separator="or" item="item">
+                    `Username` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUsername!=null and where.rightFuzzyUsername.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUsername"  separator="or" item="item">
+                    `Username` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.userphoneList != null">
+                    `userphone` in
+                    <foreach collection="where.userphoneList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUserphone!=null and where.fuzzyUserphone.size()>0">
+                (
+                <foreach collection="where.fuzzyUserphone"  separator="or" item="item">
+                    `Userphone` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUserphone!=null and where.rightFuzzyUserphone.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUserphone"  separator="or" item="item">
+                    `Userphone` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.bussinessidList != null">
+                    `bussinessid` in
+                    <foreach collection="where.bussinessidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBussinessid!=null and where.fuzzyBussinessid.size()>0">
+                (
+                <foreach collection="where.fuzzyBussinessid"  separator="or" item="item">
+                    `Bussinessid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBussinessid!=null and where.rightFuzzyBussinessid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBussinessid"  separator="or" item="item">
+                    `Bussinessid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.addtimeList != null">
+                    `addtime` in
+                    <foreach collection="where.addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAddtime!=null and where.fuzzyAddtime.size()>0">
+                (
+                <foreach collection="where.fuzzyAddtime"  separator="or" item="item">
+                    `Addtime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAddtime!=null and where.rightFuzzyAddtime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAddtime"  separator="or" item="item">
+                    `Addtime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.userpasswdList != null">
+                    `userpasswd` in
+                    <foreach collection="where.userpasswdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUserpasswd!=null and where.fuzzyUserpasswd.size()>0">
+                (
+                <foreach collection="where.fuzzyUserpasswd"  separator="or" item="item">
+                    `Userpasswd` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUserpasswd!=null and where.rightFuzzyUserpasswd.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUserpasswd"  separator="or" item="item">
+                    `Userpasswd` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.userstatusList != null">
+                    `userstatus` in
+                    <foreach collection="where.userstatusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUserstatus!=null and where.fuzzyUserstatus.size()>0">
+                (
+                <foreach collection="where.fuzzyUserstatus"  separator="or" item="item">
+                    `Userstatus` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUserstatus!=null and where.rightFuzzyUserstatus.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUserstatus"  separator="or" item="item">
+                    `Userstatus` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.wrongnumList != null">
+                    `wrongnum` in
+                    <foreach collection="where.wrongnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyWrongnum!=null and where.fuzzyWrongnum.size()>0">
+                (
+                <foreach collection="where.fuzzyWrongnum"  separator="or" item="item">
+                    `Wrongnum` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyWrongnum!=null and where.rightFuzzyWrongnum.size()>0">
+                (
+                <foreach collection="where.rightFuzzyWrongnum"  separator="or" item="item">
+                    `Wrongnum` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.latestlogipList != null">
+                    `latestlogip` in
+                    <foreach collection="where.latestlogipList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyLatestlogip!=null and where.fuzzyLatestlogip.size()>0">
+                (
+                <foreach collection="where.fuzzyLatestlogip"  separator="or" item="item">
+                    `Latestlogip` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyLatestlogip!=null and where.rightFuzzyLatestlogip.size()>0">
+                (
+                <foreach collection="where.rightFuzzyLatestlogip"  separator="or" item="item">
+                    `Latestlogip` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.latesttimeList != null">
+                    `latesttime` in
+                    <foreach collection="where.latesttimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyLatesttime!=null and where.fuzzyLatesttime.size()>0">
+                (
+                <foreach collection="where.fuzzyLatesttime"  separator="or" item="item">
+                    `Latesttime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyLatesttime!=null and where.rightFuzzyLatesttime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyLatesttime"  separator="or" item="item">
+                    `Latesttime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyUser" id="JpyUserMap">
+        <result property="userid" column="userid"/>
+        <result property="username" column="username"/>
+        <result property="userphone" column="userphone"/>
+        <result property="bussinessid" column="bussinessid"/>
+        <result property="addtime" column="addtime"/>
+        <result property="userpasswd" column="userpasswd"/>
+        <result property="userstatus" column="userstatus"/>
+        <result property="wrongnum" column="wrongnum"/>
+        <result property="latestlogip" column="latestlogip"/>
+        <result property="latesttime" column="latesttime"/>
+    </resultMap>
+
+
+    <select id="queryJpyUser" resultMap="JpyUserMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_user`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="userid != null">
+                `userid` = #{userid} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="userphone != null and userphone!=''">
+                `userphone` = #{userphone} and
+            </if>
+            <if test="bussinessid != null and bussinessid!=''">
+                `bussinessid` = #{bussinessid} and
+            </if>
+            <if test="addtime != null and addtime!=''">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="userpasswd != null and userpasswd!=''">
+                `userpasswd` = #{userpasswd} and
+            </if>
+            <if test="userstatus != null and userstatus!=''">
+                `userstatus` = #{userstatus} and
+            </if>
+            <if test="wrongnum != null and wrongnum!=''">
+                `wrongnum` = #{wrongnum} and
+            </if>
+            <if test="latestlogip != null and latestlogip!=''">
+                `latestlogip` = #{latestlogip} and
+            </if>
+            <if test="latesttime != null and latesttime!=''">
+                `latesttime` = #{latesttime} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyUser$QueryBuilder) == true">
+                <if test="useridList != null">
+                    `userid` in
+                    <foreach collection="useridList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="useridSt !=null">
+                    `userid` >= #{useridSt} and
+                </if>
+                <if test="useridEd!=null">
+                    `userid` &lt;= #{useridEd} and
+                </if>
+                <if test="usernameList != null">
+                    `username` in
+                    <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="userphoneList != null">
+                    `userphone` in
+                    <foreach collection="userphoneList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUserphone!=null and fuzzyUserphone.size()>0">
+                    (
+                    <foreach collection="fuzzyUserphone"  separator="or" item="item">
+                        `Userphone` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserphone!=null and rightFuzzyUserphone.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserphone"  separator="or" item="item">
+                        `Userphone` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="bussinessidList != null">
+                    `bussinessid` in
+                    <foreach collection="bussinessidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBussinessid!=null and fuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="fuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussinessid!=null and rightFuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="addtimeList != null">
+                    `addtime` in
+                    <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAddtime!=null and fuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="fuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAddtime!=null and rightFuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="userpasswdList != null">
+                    `userpasswd` in
+                    <foreach collection="userpasswdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUserpasswd!=null and fuzzyUserpasswd.size()>0">
+                    (
+                    <foreach collection="fuzzyUserpasswd"  separator="or" item="item">
+                        `Userpasswd` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserpasswd!=null and rightFuzzyUserpasswd.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserpasswd"  separator="or" item="item">
+                        `Userpasswd` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="userstatusList != null">
+                    `userstatus` in
+                    <foreach collection="userstatusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUserstatus!=null and fuzzyUserstatus.size()>0">
+                    (
+                    <foreach collection="fuzzyUserstatus"  separator="or" item="item">
+                        `Userstatus` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserstatus!=null and rightFuzzyUserstatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserstatus"  separator="or" item="item">
+                        `Userstatus` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="wrongnumList != null">
+                    `wrongnum` in
+                    <foreach collection="wrongnumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyWrongnum!=null and fuzzyWrongnum.size()>0">
+                    (
+                    <foreach collection="fuzzyWrongnum"  separator="or" item="item">
+                        `Wrongnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWrongnum!=null and rightFuzzyWrongnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWrongnum"  separator="or" item="item">
+                        `Wrongnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="latestlogipList != null">
+                    `latestlogip` in
+                    <foreach collection="latestlogipList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyLatestlogip!=null and fuzzyLatestlogip.size()>0">
+                    (
+                    <foreach collection="fuzzyLatestlogip"  separator="or" item="item">
+                        `Latestlogip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLatestlogip!=null and rightFuzzyLatestlogip.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLatestlogip"  separator="or" item="item">
+                        `Latestlogip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="latesttimeList != null">
+                    `latesttime` in
+                    <foreach collection="latesttimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyLatesttime!=null and fuzzyLatesttime.size()>0">
+                    (
+                    <foreach collection="fuzzyLatesttime"  separator="or" item="item">
+                        `Latesttime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLatesttime!=null and rightFuzzyLatesttime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLatesttime"  separator="or" item="item">
+                        `Latesttime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyUserLimit1" resultMap="JpyUserMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_user`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="userid != null">
+                `userid` = #{userid} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="userphone != null and userphone!=''">
+                `userphone` = #{userphone} and
+            </if>
+            <if test="bussinessid != null and bussinessid!=''">
+                `bussinessid` = #{bussinessid} and
+            </if>
+            <if test="addtime != null and addtime!=''">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="userpasswd != null and userpasswd!=''">
+                `userpasswd` = #{userpasswd} and
+            </if>
+            <if test="userstatus != null and userstatus!=''">
+                `userstatus` = #{userstatus} and
+            </if>
+            <if test="wrongnum != null and wrongnum!=''">
+                `wrongnum` = #{wrongnum} and
+            </if>
+            <if test="latestlogip != null and latestlogip!=''">
+                `latestlogip` = #{latestlogip} and
+            </if>
+            <if test="latesttime != null and latesttime!=''">
+                `latesttime` = #{latesttime} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyUser$QueryBuilder) == true">
+                    <if test="useridList != null">
+                        `userid` in
+                        <foreach collection="useridList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="useridSt !=null">
+                    `userid` >= #{useridSt} and
+                </if>
+                <if test="useridEd!=null">
+                    `userid` &lt;= #{useridEd} and
+                </if>
+                    <if test="usernameList != null">
+                        `username` in
+                        <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="userphoneList != null">
+                        `userphone` in
+                        <foreach collection="userphoneList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUserphone!=null and fuzzyUserphone.size()>0">
+                    (
+                    <foreach collection="fuzzyUserphone"  separator="or" item="item">
+                        `Userphone` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserphone!=null and rightFuzzyUserphone.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserphone"  separator="or" item="item">
+                        `Userphone` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="bussinessidList != null">
+                        `bussinessid` in
+                        <foreach collection="bussinessidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBussinessid!=null and fuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="fuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussinessid!=null and rightFuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="addtimeList != null">
+                        `addtime` in
+                        <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAddtime!=null and fuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="fuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAddtime!=null and rightFuzzyAddtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAddtime"  separator="or" item="item">
+                        `Addtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="userpasswdList != null">
+                        `userpasswd` in
+                        <foreach collection="userpasswdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUserpasswd!=null and fuzzyUserpasswd.size()>0">
+                    (
+                    <foreach collection="fuzzyUserpasswd"  separator="or" item="item">
+                        `Userpasswd` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserpasswd!=null and rightFuzzyUserpasswd.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserpasswd"  separator="or" item="item">
+                        `Userpasswd` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="userstatusList != null">
+                        `userstatus` in
+                        <foreach collection="userstatusList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUserstatus!=null and fuzzyUserstatus.size()>0">
+                    (
+                    <foreach collection="fuzzyUserstatus"  separator="or" item="item">
+                        `Userstatus` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserstatus!=null and rightFuzzyUserstatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserstatus"  separator="or" item="item">
+                        `Userstatus` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="wrongnumList != null">
+                        `wrongnum` in
+                        <foreach collection="wrongnumList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyWrongnum!=null and fuzzyWrongnum.size()>0">
+                    (
+                    <foreach collection="fuzzyWrongnum"  separator="or" item="item">
+                        `Wrongnum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyWrongnum!=null and rightFuzzyWrongnum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyWrongnum"  separator="or" item="item">
+                        `Wrongnum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="latestlogipList != null">
+                        `latestlogip` in
+                        <foreach collection="latestlogipList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyLatestlogip!=null and fuzzyLatestlogip.size()>0">
+                    (
+                    <foreach collection="fuzzyLatestlogip"  separator="or" item="item">
+                        `Latestlogip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLatestlogip!=null and rightFuzzyLatestlogip.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLatestlogip"  separator="or" item="item">
+                        `Latestlogip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="latesttimeList != null">
+                        `latesttime` in
+                        <foreach collection="latesttimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyLatesttime!=null and fuzzyLatesttime.size()>0">
+                    (
+                    <foreach collection="fuzzyLatesttime"  separator="or" item="item">
+                        `Latesttime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLatesttime!=null and rightFuzzyLatesttime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLatesttime"  separator="or" item="item">
+                        `Latesttime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `userid`,
+        `username`,
+        `userphone`,
+        `bussinessid`,
+        `addtime`,
+        `userpasswd`,
+        `userstatus`,
+        `wrongnum`,
+        `latestlogip`,
+        `latesttime`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyUser$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.userid==true">
+                        `userid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.username==true">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userphone==true">
+                        `userphone`,
+                    </if>
+                    <if test="fetchFields.fetchFields.bussinessid==true">
+                        `bussinessid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.addtime==true">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userpasswd==true">
+                        `userpasswd`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userstatus==true">
+                        `userstatus`,
+                    </if>
+                    <if test="fetchFields.fetchFields.wrongnum==true">
+                        `wrongnum`,
+                    </if>
+                    <if test="fetchFields.fetchFields.latestlogip==true">
+                        `latestlogip`,
+                    </if>
+                    <if test="fetchFields.fetchFields.latesttime==true">
+                        `latesttime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.userid==null">
+                        `userid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.username==null">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userphone==null">
+                        `userphone`,
+                    </if>
+                    <if test="fetchFields.excludeFields.bussinessid==null">
+                        `bussinessid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.addtime==null">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userpasswd==null">
+                        `userpasswd`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userstatus==null">
+                        `userstatus`,
+                    </if>
+                    <if test="fetchFields.excludeFields.wrongnum==null">
+                        `wrongnum`,
+                    </if>
+                    <if test="fetchFields.excludeFields.latestlogip==null">
+                        `latestlogip`,
+                    </if>
+                    <if test="fetchFields.excludeFields.latesttime==null">
+                        `latesttime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyUser$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

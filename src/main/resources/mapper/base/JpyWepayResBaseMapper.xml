@@ -1,0 +1,1140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyWepayResBaseMapper">
+
+
+    <insert id="insertJpyWepayRes" >
+        INSERT INTO `jpy_wepay_res`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="mchid!=null">
+                        `mchid`,
+                    </if>
+                    <if test="out_trade_no!=null">
+                        `out_trade_no`,
+                    </if>
+                    <if test="create_time!=null">
+                        `create_time`,
+                    </if>
+                    <if test="transaction_id!=null">
+                        `transaction_id`,
+                    </if>
+                    <if test="trade_type!=null">
+                        `trade_type`,
+                    </if>
+                    <if test="trade_state!=null">
+                        `trade_state`,
+                    </if>
+                    <if test="trade_state_desc!=null">
+                        `trade_state_desc`,
+                    </if>
+                    <if test="bank_type!=null">
+                        `bank_type`,
+                    </if>
+                    <if test="attach!=null">
+                        `attach`,
+                    </if>
+                    <if test="success_time!=null">
+                        `success_time`,
+                    </if>
+                    <if test="payer!=null">
+                        `payer`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="mchid!=null">
+                    #{mchid},
+                </if>
+                <if test="out_trade_no!=null">
+                    #{out_trade_no},
+                </if>
+                <if test="create_time!=null">
+                    #{create_time},
+                </if>
+                <if test="transaction_id!=null">
+                    #{transaction_id},
+                </if>
+                <if test="trade_type!=null">
+                    #{trade_type},
+                </if>
+                <if test="trade_state!=null">
+                    #{trade_state},
+                </if>
+                <if test="trade_state_desc!=null">
+                    #{trade_state_desc},
+                </if>
+                <if test="bank_type!=null">
+                    #{bank_type},
+                </if>
+                <if test="attach!=null">
+                    #{attach},
+                </if>
+                <if test="success_time!=null">
+                    #{success_time},
+                </if>
+                <if test="payer!=null">
+                    #{payer},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyWepayRes">
+        UPDATE `jpy_wepay_res`
+        SET
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                `id` = #{id},
+            </if>
+            <if test="mchid != null and mchid!=''">
+                `mchid` = #{mchid},
+            </if>
+            <if test="out_trade_no != null and out_trade_no!=''">
+                `out_trade_no` = #{out_trade_no},
+            </if>
+            <if test="create_time != null and create_time!=''">
+                `create_time` = #{create_time},
+            </if>
+            <if test="transaction_id != null and transaction_id!=''">
+                `transaction_id` = #{transaction_id},
+            </if>
+            <if test="trade_type != null and trade_type!=''">
+                `trade_type` = #{trade_type},
+            </if>
+            <if test="trade_state != null and trade_state!=''">
+                `trade_state` = #{trade_state},
+            </if>
+            <if test="trade_state_desc != null and trade_state_desc!=''">
+                `trade_state_desc` = #{trade_state_desc},
+            </if>
+            <if test="bank_type != null and bank_type!=''">
+                `bank_type` = #{bank_type},
+            </if>
+            <if test="attach != null and attach!=''">
+                `attach` = #{attach},
+            </if>
+            <if test="success_time != null and success_time!=''">
+                `success_time` = #{success_time},
+            </if>
+            <if test="payer != null and payer!=''">
+                `payer` = #{payer},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_wepay_res`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.id != null and set.id!=''">
+            `id` = #{set.id},
+        </if>
+        <if test="set.mchid != null and set.mchid!=''">
+            `mchid` = #{set.mchid},
+        </if>
+        <if test="set.out_trade_no != null and set.out_trade_no!=''">
+            `out_trade_no` = #{set.out_trade_no},
+        </if>
+        <if test="set.create_time != null and set.create_time!=''">
+            `create_time` = #{set.create_time},
+        </if>
+        <if test="set.transaction_id != null and set.transaction_id!=''">
+            `transaction_id` = #{set.transaction_id},
+        </if>
+        <if test="set.trade_type != null and set.trade_type!=''">
+            `trade_type` = #{set.trade_type},
+        </if>
+        <if test="set.trade_state != null and set.trade_state!=''">
+            `trade_state` = #{set.trade_state},
+        </if>
+        <if test="set.trade_state_desc != null and set.trade_state_desc!=''">
+            `trade_state_desc` = #{set.trade_state_desc},
+        </if>
+        <if test="set.bank_type != null and set.bank_type!=''">
+            `bank_type` = #{set.bank_type},
+        </if>
+        <if test="set.attach != null and set.attach!=''">
+            `attach` = #{set.attach},
+        </if>
+        <if test="set.success_time != null and set.success_time!=''">
+            `success_time` = #{set.success_time},
+        </if>
+        <if test="set.payer != null and set.payer!=''">
+            `payer` = #{set.payer},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyId!=null and where.fuzzyId.size()>0">
+                (
+                <foreach collection="where.fuzzyId"  separator="or" item="item">
+                    `Id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyId!=null and where.rightFuzzyId.size()>0">
+                (
+                <foreach collection="where.rightFuzzyId"  separator="or" item="item">
+                    `Id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.mchidList != null">
+                    `mchid` in
+                    <foreach collection="where.mchidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyMchid!=null and where.fuzzyMchid.size()>0">
+                (
+                <foreach collection="where.fuzzyMchid"  separator="or" item="item">
+                    `Mchid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyMchid!=null and where.rightFuzzyMchid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyMchid"  separator="or" item="item">
+                    `Mchid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.out_trade_noList != null">
+                    `out_trade_no` in
+                    <foreach collection="where.out_trade_noList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyOut_trade_no!=null and where.fuzzyOut_trade_no.size()>0">
+                (
+                <foreach collection="where.fuzzyOut_trade_no"  separator="or" item="item">
+                    `Out_trade_no` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyOut_trade_no!=null and where.rightFuzzyOut_trade_no.size()>0">
+                (
+                <foreach collection="where.rightFuzzyOut_trade_no"  separator="or" item="item">
+                    `Out_trade_no` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.create_timeList != null">
+                    `create_time` in
+                    <foreach collection="where.create_timeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCreate_time!=null and where.fuzzyCreate_time.size()>0">
+                (
+                <foreach collection="where.fuzzyCreate_time"  separator="or" item="item">
+                    `Create_time` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCreate_time!=null and where.rightFuzzyCreate_time.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCreate_time"  separator="or" item="item">
+                    `Create_time` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.transaction_idList != null">
+                    `transaction_id` in
+                    <foreach collection="where.transaction_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTransaction_id!=null and where.fuzzyTransaction_id.size()>0">
+                (
+                <foreach collection="where.fuzzyTransaction_id"  separator="or" item="item">
+                    `Transaction_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTransaction_id!=null and where.rightFuzzyTransaction_id.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTransaction_id"  separator="or" item="item">
+                    `Transaction_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.trade_typeList != null">
+                    `trade_type` in
+                    <foreach collection="where.trade_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTrade_type!=null and where.fuzzyTrade_type.size()>0">
+                (
+                <foreach collection="where.fuzzyTrade_type"  separator="or" item="item">
+                    `Trade_type` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTrade_type!=null and where.rightFuzzyTrade_type.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTrade_type"  separator="or" item="item">
+                    `Trade_type` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.trade_stateList != null">
+                    `trade_state` in
+                    <foreach collection="where.trade_stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTrade_state!=null and where.fuzzyTrade_state.size()>0">
+                (
+                <foreach collection="where.fuzzyTrade_state"  separator="or" item="item">
+                    `Trade_state` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTrade_state!=null and where.rightFuzzyTrade_state.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTrade_state"  separator="or" item="item">
+                    `Trade_state` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.trade_state_descList != null">
+                    `trade_state_desc` in
+                    <foreach collection="where.trade_state_descList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTrade_state_desc!=null and where.fuzzyTrade_state_desc.size()>0">
+                (
+                <foreach collection="where.fuzzyTrade_state_desc"  separator="or" item="item">
+                    `Trade_state_desc` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTrade_state_desc!=null and where.rightFuzzyTrade_state_desc.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTrade_state_desc"  separator="or" item="item">
+                    `Trade_state_desc` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.bank_typeList != null">
+                    `bank_type` in
+                    <foreach collection="where.bank_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBank_type!=null and where.fuzzyBank_type.size()>0">
+                (
+                <foreach collection="where.fuzzyBank_type"  separator="or" item="item">
+                    `Bank_type` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBank_type!=null and where.rightFuzzyBank_type.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBank_type"  separator="or" item="item">
+                    `Bank_type` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.attachList != null">
+                    `attach` in
+                    <foreach collection="where.attachList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAttach!=null and where.fuzzyAttach.size()>0">
+                (
+                <foreach collection="where.fuzzyAttach"  separator="or" item="item">
+                    `Attach` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAttach!=null and where.rightFuzzyAttach.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAttach"  separator="or" item="item">
+                    `Attach` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.success_timeList != null">
+                    `success_time` in
+                    <foreach collection="where.success_timeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySuccess_time!=null and where.fuzzySuccess_time.size()>0">
+                (
+                <foreach collection="where.fuzzySuccess_time"  separator="or" item="item">
+                    `Success_time` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySuccess_time!=null and where.rightFuzzySuccess_time.size()>0">
+                (
+                <foreach collection="where.rightFuzzySuccess_time"  separator="or" item="item">
+                    `Success_time` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.payerList != null">
+                    `payer` in
+                    <foreach collection="where.payerList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPayer!=null and where.fuzzyPayer.size()>0">
+                (
+                <foreach collection="where.fuzzyPayer"  separator="or" item="item">
+                    `Payer` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPayer!=null and where.rightFuzzyPayer.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPayer"  separator="or" item="item">
+                    `Payer` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyWepayRes" id="JpyWepayResMap">
+        <result property="id" column="id"/>
+        <result property="mchid" column="mchid"/>
+        <result property="out_trade_no" column="out_trade_no"/>
+        <result property="create_time" column="create_time"/>
+        <result property="transaction_id" column="transaction_id"/>
+        <result property="trade_type" column="trade_type"/>
+        <result property="trade_state" column="trade_state"/>
+        <result property="trade_state_desc" column="trade_state_desc"/>
+        <result property="bank_type" column="bank_type"/>
+        <result property="attach" column="attach"/>
+        <result property="success_time" column="success_time"/>
+        <result property="payer" column="payer"/>
+    </resultMap>
+
+
+    <select id="queryJpyWepayRes" resultMap="JpyWepayResMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_wepay_res`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null and id!=''">
+                `id` = #{id} and
+            </if>
+            <if test="mchid != null and mchid!=''">
+                `mchid` = #{mchid} and
+            </if>
+            <if test="out_trade_no != null and out_trade_no!=''">
+                `out_trade_no` = #{out_trade_no} and
+            </if>
+            <if test="create_time != null and create_time!=''">
+                `create_time` = #{create_time} and
+            </if>
+            <if test="transaction_id != null and transaction_id!=''">
+                `transaction_id` = #{transaction_id} and
+            </if>
+            <if test="trade_type != null and trade_type!=''">
+                `trade_type` = #{trade_type} and
+            </if>
+            <if test="trade_state != null and trade_state!=''">
+                `trade_state` = #{trade_state} and
+            </if>
+            <if test="trade_state_desc != null and trade_state_desc!=''">
+                `trade_state_desc` = #{trade_state_desc} and
+            </if>
+            <if test="bank_type != null and bank_type!=''">
+                `bank_type` = #{bank_type} and
+            </if>
+            <if test="attach != null and attach!=''">
+                `attach` = #{attach} and
+            </if>
+            <if test="success_time != null and success_time!=''">
+                `success_time` = #{success_time} and
+            </if>
+            <if test="payer != null and payer!=''">
+                `payer` = #{payer} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyWepayRes$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyId!=null and fuzzyId.size()>0">
+                    (
+                    <foreach collection="fuzzyId"  separator="or" item="item">
+                        `Id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyId!=null and rightFuzzyId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyId"  separator="or" item="item">
+                        `Id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="mchidList != null">
+                    `mchid` in
+                    <foreach collection="mchidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyMchid!=null and fuzzyMchid.size()>0">
+                    (
+                    <foreach collection="fuzzyMchid"  separator="or" item="item">
+                        `Mchid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyMchid!=null and rightFuzzyMchid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyMchid"  separator="or" item="item">
+                        `Mchid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="out_trade_noList != null">
+                    `out_trade_no` in
+                    <foreach collection="out_trade_noList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyOut_trade_no!=null and fuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="fuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOut_trade_no!=null and rightFuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="create_timeList != null">
+                    `create_time` in
+                    <foreach collection="create_timeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCreate_time!=null and fuzzyCreate_time.size()>0">
+                    (
+                    <foreach collection="fuzzyCreate_time"  separator="or" item="item">
+                        `Create_time` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCreate_time!=null and rightFuzzyCreate_time.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCreate_time"  separator="or" item="item">
+                        `Create_time` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="transaction_idList != null">
+                    `transaction_id` in
+                    <foreach collection="transaction_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTransaction_id!=null and fuzzyTransaction_id.size()>0">
+                    (
+                    <foreach collection="fuzzyTransaction_id"  separator="or" item="item">
+                        `Transaction_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTransaction_id!=null and rightFuzzyTransaction_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTransaction_id"  separator="or" item="item">
+                        `Transaction_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="trade_typeList != null">
+                    `trade_type` in
+                    <foreach collection="trade_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTrade_type!=null and fuzzyTrade_type.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_type"  separator="or" item="item">
+                        `Trade_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_type!=null and rightFuzzyTrade_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_type"  separator="or" item="item">
+                        `Trade_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="trade_stateList != null">
+                    `trade_state` in
+                    <foreach collection="trade_stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTrade_state!=null and fuzzyTrade_state.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_state"  separator="or" item="item">
+                        `Trade_state` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_state!=null and rightFuzzyTrade_state.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_state"  separator="or" item="item">
+                        `Trade_state` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="trade_state_descList != null">
+                    `trade_state_desc` in
+                    <foreach collection="trade_state_descList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTrade_state_desc!=null and fuzzyTrade_state_desc.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_state_desc"  separator="or" item="item">
+                        `Trade_state_desc` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_state_desc!=null and rightFuzzyTrade_state_desc.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_state_desc"  separator="or" item="item">
+                        `Trade_state_desc` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="bank_typeList != null">
+                    `bank_type` in
+                    <foreach collection="bank_typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBank_type!=null and fuzzyBank_type.size()>0">
+                    (
+                    <foreach collection="fuzzyBank_type"  separator="or" item="item">
+                        `Bank_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBank_type!=null and rightFuzzyBank_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBank_type"  separator="or" item="item">
+                        `Bank_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="attachList != null">
+                    `attach` in
+                    <foreach collection="attachList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAttach!=null and fuzzyAttach.size()>0">
+                    (
+                    <foreach collection="fuzzyAttach"  separator="or" item="item">
+                        `Attach` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAttach!=null and rightFuzzyAttach.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAttach"  separator="or" item="item">
+                        `Attach` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="success_timeList != null">
+                    `success_time` in
+                    <foreach collection="success_timeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySuccess_time!=null and fuzzySuccess_time.size()>0">
+                    (
+                    <foreach collection="fuzzySuccess_time"  separator="or" item="item">
+                        `Success_time` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySuccess_time!=null and rightFuzzySuccess_time.size()>0">
+                    (
+                    <foreach collection="rightFuzzySuccess_time"  separator="or" item="item">
+                        `Success_time` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="payerList != null">
+                    `payer` in
+                    <foreach collection="payerList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPayer!=null and fuzzyPayer.size()>0">
+                    (
+                    <foreach collection="fuzzyPayer"  separator="or" item="item">
+                        `Payer` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayer!=null and rightFuzzyPayer.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayer"  separator="or" item="item">
+                        `Payer` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyWepayResLimit1" resultMap="JpyWepayResMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_wepay_res`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null and id!=''">
+                `id` = #{id} and
+            </if>
+            <if test="mchid != null and mchid!=''">
+                `mchid` = #{mchid} and
+            </if>
+            <if test="out_trade_no != null and out_trade_no!=''">
+                `out_trade_no` = #{out_trade_no} and
+            </if>
+            <if test="create_time != null and create_time!=''">
+                `create_time` = #{create_time} and
+            </if>
+            <if test="transaction_id != null and transaction_id!=''">
+                `transaction_id` = #{transaction_id} and
+            </if>
+            <if test="trade_type != null and trade_type!=''">
+                `trade_type` = #{trade_type} and
+            </if>
+            <if test="trade_state != null and trade_state!=''">
+                `trade_state` = #{trade_state} and
+            </if>
+            <if test="trade_state_desc != null and trade_state_desc!=''">
+                `trade_state_desc` = #{trade_state_desc} and
+            </if>
+            <if test="bank_type != null and bank_type!=''">
+                `bank_type` = #{bank_type} and
+            </if>
+            <if test="attach != null and attach!=''">
+                `attach` = #{attach} and
+            </if>
+            <if test="success_time != null and success_time!=''">
+                `success_time` = #{success_time} and
+            </if>
+            <if test="payer != null and payer!=''">
+                `payer` = #{payer} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyWepayRes$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyId!=null and fuzzyId.size()>0">
+                    (
+                    <foreach collection="fuzzyId"  separator="or" item="item">
+                        `Id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyId!=null and rightFuzzyId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyId"  separator="or" item="item">
+                        `Id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="mchidList != null">
+                        `mchid` in
+                        <foreach collection="mchidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyMchid!=null and fuzzyMchid.size()>0">
+                    (
+                    <foreach collection="fuzzyMchid"  separator="or" item="item">
+                        `Mchid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyMchid!=null and rightFuzzyMchid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyMchid"  separator="or" item="item">
+                        `Mchid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="out_trade_noList != null">
+                        `out_trade_no` in
+                        <foreach collection="out_trade_noList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyOut_trade_no!=null and fuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="fuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOut_trade_no!=null and rightFuzzyOut_trade_no.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOut_trade_no"  separator="or" item="item">
+                        `Out_trade_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="create_timeList != null">
+                        `create_time` in
+                        <foreach collection="create_timeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCreate_time!=null and fuzzyCreate_time.size()>0">
+                    (
+                    <foreach collection="fuzzyCreate_time"  separator="or" item="item">
+                        `Create_time` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCreate_time!=null and rightFuzzyCreate_time.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCreate_time"  separator="or" item="item">
+                        `Create_time` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="transaction_idList != null">
+                        `transaction_id` in
+                        <foreach collection="transaction_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTransaction_id!=null and fuzzyTransaction_id.size()>0">
+                    (
+                    <foreach collection="fuzzyTransaction_id"  separator="or" item="item">
+                        `Transaction_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTransaction_id!=null and rightFuzzyTransaction_id.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTransaction_id"  separator="or" item="item">
+                        `Transaction_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="trade_typeList != null">
+                        `trade_type` in
+                        <foreach collection="trade_typeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTrade_type!=null and fuzzyTrade_type.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_type"  separator="or" item="item">
+                        `Trade_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_type!=null and rightFuzzyTrade_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_type"  separator="or" item="item">
+                        `Trade_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="trade_stateList != null">
+                        `trade_state` in
+                        <foreach collection="trade_stateList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTrade_state!=null and fuzzyTrade_state.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_state"  separator="or" item="item">
+                        `Trade_state` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_state!=null and rightFuzzyTrade_state.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_state"  separator="or" item="item">
+                        `Trade_state` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="trade_state_descList != null">
+                        `trade_state_desc` in
+                        <foreach collection="trade_state_descList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTrade_state_desc!=null and fuzzyTrade_state_desc.size()>0">
+                    (
+                    <foreach collection="fuzzyTrade_state_desc"  separator="or" item="item">
+                        `Trade_state_desc` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrade_state_desc!=null and rightFuzzyTrade_state_desc.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrade_state_desc"  separator="or" item="item">
+                        `Trade_state_desc` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="bank_typeList != null">
+                        `bank_type` in
+                        <foreach collection="bank_typeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBank_type!=null and fuzzyBank_type.size()>0">
+                    (
+                    <foreach collection="fuzzyBank_type"  separator="or" item="item">
+                        `Bank_type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBank_type!=null and rightFuzzyBank_type.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBank_type"  separator="or" item="item">
+                        `Bank_type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="attachList != null">
+                        `attach` in
+                        <foreach collection="attachList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAttach!=null and fuzzyAttach.size()>0">
+                    (
+                    <foreach collection="fuzzyAttach"  separator="or" item="item">
+                        `Attach` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAttach!=null and rightFuzzyAttach.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAttach"  separator="or" item="item">
+                        `Attach` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="success_timeList != null">
+                        `success_time` in
+                        <foreach collection="success_timeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySuccess_time!=null and fuzzySuccess_time.size()>0">
+                    (
+                    <foreach collection="fuzzySuccess_time"  separator="or" item="item">
+                        `Success_time` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySuccess_time!=null and rightFuzzySuccess_time.size()>0">
+                    (
+                    <foreach collection="rightFuzzySuccess_time"  separator="or" item="item">
+                        `Success_time` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="payerList != null">
+                        `payer` in
+                        <foreach collection="payerList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPayer!=null and fuzzyPayer.size()>0">
+                    (
+                    <foreach collection="fuzzyPayer"  separator="or" item="item">
+                        `Payer` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayer!=null and rightFuzzyPayer.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayer"  separator="or" item="item">
+                        `Payer` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `mchid`,
+        `out_trade_no`,
+        `create_time`,
+        `transaction_id`,
+        `trade_type`,
+        `trade_state`,
+        `trade_state_desc`,
+        `bank_type`,
+        `attach`,
+        `success_time`,
+        `payer`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyWepayRes$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.mchid==true">
+                        `mchid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.out_trade_no==true">
+                        `out_trade_no`,
+                    </if>
+                    <if test="fetchFields.fetchFields.create_time==true">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.transaction_id==true">
+                        `transaction_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.trade_type==true">
+                        `trade_type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.trade_state==true">
+                        `trade_state`,
+                    </if>
+                    <if test="fetchFields.fetchFields.trade_state_desc==true">
+                        `trade_state_desc`,
+                    </if>
+                    <if test="fetchFields.fetchFields.bank_type==true">
+                        `bank_type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.attach==true">
+                        `attach`,
+                    </if>
+                    <if test="fetchFields.fetchFields.success_time==true">
+                        `success_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.payer==true">
+                        `payer`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.mchid==null">
+                        `mchid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.out_trade_no==null">
+                        `out_trade_no`,
+                    </if>
+                    <if test="fetchFields.excludeFields.create_time==null">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.transaction_id==null">
+                        `transaction_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.trade_type==null">
+                        `trade_type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.trade_state==null">
+                        `trade_state`,
+                    </if>
+                    <if test="fetchFields.excludeFields.trade_state_desc==null">
+                        `trade_state_desc`,
+                    </if>
+                    <if test="fetchFields.excludeFields.bank_type==null">
+                        `bank_type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.attach==null">
+                        `attach`,
+                    </if>
+                    <if test="fetchFields.excludeFields.success_time==null">
+                        `success_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.payer==null">
+                        `payer`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyWepayRes$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

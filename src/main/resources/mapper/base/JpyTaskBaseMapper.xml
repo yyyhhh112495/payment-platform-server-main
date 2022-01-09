@@ -1,0 +1,1336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyTaskBaseMapper">
+
+    <select id="queryJpys" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+        jpy_task.*,
+        jpy_org.bussinessname,
+        jpy_task.tradenum*(100-IFNULL(jpy_task.busration,jpy_org.bussratio))/100 transnum
+        FROM
+        jpy_task
+        LEFT JOIN jpy_org ON jpy_task.bussinessid = jpy_org.bussinessid
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="bussinessname != null and bussinessname!=''">
+                `bussinessname` = #{bussinessname} and
+            </if>
+            <if test="payres != null and payres!=''">
+                `payres` = #{payres} and
+            </if>
+            <if test="bussinessid != null and bussinessid!=''">
+                jpy_task.bussinessid = #{bussinessid} and
+            </if>
+        </trim>
+
+        order by jpy_task.tradegentime desc
+    </select>
+
+    <select id="cacJpysByStatus" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+        ROUND( sum( CASE jpy_task.payres WHEN '1' THEN jpy_task.tradenum ELSE '0' END ), 2 ) totalpay,
+        sum( CASE payres WHEN '1' THEN 1 ELSE 0 END ) paysuc,
+        sum( CASE jpy_task.payres WHEN '1' THEN 0 ELSE 1 END ) payfai,
+        ROUND( SUM( jpy_task.tradenum *( 100-IFNULL ( jpy_task.busration, jpy_org.bussratio ))/ 100 ), 2 ) jsnum
+        FROM
+        jpy_task
+        LEFT JOIN jpy_org ON jpy_task.bussinessid = jpy_org.bussinessid
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="bussinessid != null and bussinessid!=''">
+                   jpy_task.bussinessid = #{bussinessid}
+            </if>
+        </trim>
+
+    </select>
+
+
+    <select id="cacJpyTransBystatus" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+            transstatus,
+            ROUND(SUM( trannum ),2) trannum,
+                  ROUND(SUM( transprofit ),2) transprofit,
+                        ROUND(SUM( transnum ),2) transnum
+        FROM
+            jpy_trans
+        where transstatus ='1' and transnum is not null
+        GROUP BY
+            transstatus
+    </select>
+
+    <update id="udpateTaskByTranno" parameterType="java.util.Map">
+        UPDATE jpy_task
+        SET transstatus = #{transstatus}
+        WHERE
+            transno= #{transno}
+    </update>
+
+
+    <update id="updateTransByTranno">
+        UPDATE jpy_trans
+        SET
+            transcomtimer = #{transcomtimer},
+                transstatus=#{transstatus}
+        WHERE
+            transno = #{transno}
+    </update>
+
+    <select id="queryTransByTransno"  resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+            transno,
+            bussinessname,
+            SUM( transnum ) totalmon
+        FROM
+            jpy_trans
+        WHERE
+            transno = #{transno}
+        GROUP BY
+            transno,
+            bussinessname
+    </select>
+
+
+    <select id="getseqno" resultType="java.util.Map">
+        select jpy_seq('transno') seq
+    </select>
+
+    <update id="updateJpyTaskByTradenos" parameterType="java.util.Map">
+        UPDATE jpy_task
+        SET transstatus = #{transstatus},
+            trantime = #{transtimer},
+            transno = #{transno}
+        WHERE
+        tradeNo IN
+        <foreach collection="tasks" item="item" close=")" open="(" separator="," index="index">
+            #{item}
+        </foreach>
+
+    </update>
+
+
+    <update id="updateJpyTransByTradenos" parameterType="java.util.Map">
+        UPDATE jpy_trans
+        SET transno =#{transno},
+            transtimer =#{transtimer},
+            transstatus=#{transstatus}
+        WHERE
+            tranno IN
+        <foreach collection="tasks" item="item" close=")" open="(" separator="," index="index">
+            #{item}
+        </foreach>
+    </update>
+
+    <insert id="insertJpyTask" >
+        INSERT INTO `jpy_task`
+        (
+        <trim suffixOverrides=",">
+                    <if test="bussinessid!=null">
+                        `bussinessid`,
+                    </if>
+                    <if test="returl!=null">
+                        `returl`,
+                    </if>
+                    <if test="tradeNo!=null">
+                        `tradeNo`,
+                    </if>
+                    <if test="proname!=null">
+                        `proname`,
+                    </if>
+                    <if test="prono!=null">
+                        `prono`,
+                    </if>
+                    <if test="tradenum!=null">
+                        `tradenum`,
+                    </if>
+                    <if test="tradegentime!=null">
+                        `tradegentime`,
+                    </if>
+                    <if test="payrettime!=null">
+                        `payrettime`,
+                    </if>
+                    <if test="payres!=null">
+                        `payres`,
+                    </if>
+                    <if test="transstatus!=null">
+                        `transstatus`,
+                    </if>
+                    <if test="trantime!=null">
+                        `trantime`,
+                    </if>
+                    <if test="transno!=null">
+                        `transno`,
+                    </if>
+                    <if test="busration!=null">
+                        `busration`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="bussinessid!=null">
+                    #{bussinessid},
+                </if>
+                <if test="returl!=null">
+                    #{returl},
+                </if>
+                <if test="tradeNo!=null">
+                    #{tradeNo},
+                </if>
+                <if test="proname!=null">
+                    #{proname},
+                </if>
+                <if test="prono!=null">
+                    #{prono},
+                </if>
+                <if test="tradenum!=null">
+                    #{tradenum},
+                </if>
+                <if test="tradegentime!=null">
+                    #{tradegentime},
+                </if>
+                <if test="payrettime!=null">
+                    #{payrettime},
+                </if>
+                <if test="payres!=null">
+                    #{payres},
+                </if>
+                <if test="transstatus!=null">
+                    #{transstatus},
+                </if>
+                <if test="trantime!=null">
+                    #{trantime},
+                </if>
+                <if test="transno!=null">
+                    #{transno},
+                </if>
+                <if test="busration!=null">
+                    #{busration},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyTask">
+        UPDATE `jpy_task`
+        SET
+        <trim suffixOverrides=",">
+            <if test="bussinessid != null and bussinessid!=''">
+                `bussinessid` = #{bussinessid},
+            </if>
+            <if test="returl != null and returl!=''">
+                `returl` = #{returl},
+            </if>
+            <if test="proname != null and proname!=''">
+                `proname` = #{proname},
+            </if>
+            <if test="prono != null and prono!=''">
+                `prono` = #{prono},
+            </if>
+            <if test="tradenum != null and tradenum!=''">
+                `tradenum` = #{tradenum},
+            </if>
+            <if test="tradegentime != null and tradegentime!=''">
+                `tradegentime` = #{tradegentime},
+            </if>
+            <if test="payrettime != null and payrettime!=''">
+                `payrettime` = #{payrettime},
+            </if>
+            <if test="payres != null and payres!=''">
+                `payres` = #{payres},
+            </if>
+            <if test="transstatus != null and transstatus!=''">
+                `transstatus` = #{transstatus},
+            </if>
+            <if test="trantime != null and trantime!=''">
+                `trantime` = #{trantime},
+            </if>
+            <if test="transno != null and transno!=''">
+                `transno` = #{transno},
+            </if>
+            <if test="busration != null and busration!=''">
+                `busration` = #{busration},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `tradeNo` = #{tradeNo} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_task`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.bussinessid != null and set.bussinessid!=''">
+            `bussinessid` = #{set.bussinessid},
+        </if>
+        <if test="set.returl != null and set.returl!=''">
+            `returl` = #{set.returl},
+        </if>
+        <if test="set.proname != null and set.proname!=''">
+            `proname` = #{set.proname},
+        </if>
+        <if test="set.prono != null and set.prono!=''">
+            `prono` = #{set.prono},
+        </if>
+        <if test="set.tradenum != null and set.tradenum!=''">
+            `tradenum` = #{set.tradenum},
+        </if>
+        <if test="set.tradegentime != null and set.tradegentime!=''">
+            `tradegentime` = #{set.tradegentime},
+        </if>
+        <if test="set.payrettime != null and set.payrettime!=''">
+            `payrettime` = #{set.payrettime},
+        </if>
+        <if test="set.payres != null and set.payres!=''">
+            `payres` = #{set.payres},
+        </if>
+        <if test="set.transstatus != null and set.transstatus!=''">
+            `transstatus` = #{set.transstatus},
+        </if>
+        <if test="set.trantime != null and set.trantime!=''">
+            `trantime` = #{set.trantime},
+        </if>
+        <if test="set.transno != null and set.transno!=''">
+            `transno` = #{set.transno},
+        </if>
+        <if test="set.busration != null and set.busration!=''">
+            `busration` = #{set.busration},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.bussinessidList != null">
+                    `bussinessid` in
+                    <foreach collection="where.bussinessidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBussinessid!=null and where.fuzzyBussinessid.size()>0">
+                (
+                <foreach collection="where.fuzzyBussinessid"  separator="or" item="item">
+                    `Bussinessid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBussinessid!=null and where.rightFuzzyBussinessid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBussinessid"  separator="or" item="item">
+                    `Bussinessid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.returlList != null">
+                    `returl` in
+                    <foreach collection="where.returlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyReturl!=null and where.fuzzyReturl.size()>0">
+                (
+                <foreach collection="where.fuzzyReturl"  separator="or" item="item">
+                    `Returl` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyReturl!=null and where.rightFuzzyReturl.size()>0">
+                (
+                <foreach collection="where.rightFuzzyReturl"  separator="or" item="item">
+                    `Returl` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.tradeNoList != null">
+                    `tradeNo` in
+                    <foreach collection="where.tradeNoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTradeNo!=null and where.fuzzyTradeNo.size()>0">
+                (
+                <foreach collection="where.fuzzyTradeNo"  separator="or" item="item">
+                    `TradeNo` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTradeNo!=null and where.rightFuzzyTradeNo.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTradeNo"  separator="or" item="item">
+                    `TradeNo` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.pronameList != null">
+                    `proname` in
+                    <foreach collection="where.pronameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProname!=null and where.fuzzyProname.size()>0">
+                (
+                <foreach collection="where.fuzzyProname"  separator="or" item="item">
+                    `Proname` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProname!=null and where.rightFuzzyProname.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProname"  separator="or" item="item">
+                    `Proname` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.pronoList != null">
+                    `prono` in
+                    <foreach collection="where.pronoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProno!=null and where.fuzzyProno.size()>0">
+                (
+                <foreach collection="where.fuzzyProno"  separator="or" item="item">
+                    `Prono` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProno!=null and where.rightFuzzyProno.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProno"  separator="or" item="item">
+                    `Prono` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.tradenumList != null">
+                    `tradenum` in
+                    <foreach collection="where.tradenumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTradenum!=null and where.fuzzyTradenum.size()>0">
+                (
+                <foreach collection="where.fuzzyTradenum"  separator="or" item="item">
+                    `Tradenum` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTradenum!=null and where.rightFuzzyTradenum.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTradenum"  separator="or" item="item">
+                    `Tradenum` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.tradegentimeList != null">
+                    `tradegentime` in
+                    <foreach collection="where.tradegentimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTradegentime!=null and where.fuzzyTradegentime.size()>0">
+                (
+                <foreach collection="where.fuzzyTradegentime"  separator="or" item="item">
+                    `Tradegentime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTradegentime!=null and where.rightFuzzyTradegentime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTradegentime"  separator="or" item="item">
+                    `Tradegentime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.payrettimeList != null">
+                    `payrettime` in
+                    <foreach collection="where.payrettimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPayrettime!=null and where.fuzzyPayrettime.size()>0">
+                (
+                <foreach collection="where.fuzzyPayrettime"  separator="or" item="item">
+                    `Payrettime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPayrettime!=null and where.rightFuzzyPayrettime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPayrettime"  separator="or" item="item">
+                    `Payrettime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.payresList != null">
+                    `payres` in
+                    <foreach collection="where.payresList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPayres!=null and where.fuzzyPayres.size()>0">
+                (
+                <foreach collection="where.fuzzyPayres"  separator="or" item="item">
+                    `Payres` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPayres!=null and where.rightFuzzyPayres.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPayres"  separator="or" item="item">
+                    `Payres` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.transstatusList != null">
+                    `transstatus` in
+                    <foreach collection="where.transstatusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTransstatus!=null and where.fuzzyTransstatus.size()>0">
+                (
+                <foreach collection="where.fuzzyTransstatus"  separator="or" item="item">
+                    `Transstatus` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTransstatus!=null and where.rightFuzzyTransstatus.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTransstatus"  separator="or" item="item">
+                    `Transstatus` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.trantimeList != null">
+                    `trantime` in
+                    <foreach collection="where.trantimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTrantime!=null and where.fuzzyTrantime.size()>0">
+                (
+                <foreach collection="where.fuzzyTrantime"  separator="or" item="item">
+                    `Trantime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTrantime!=null and where.rightFuzzyTrantime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTrantime"  separator="or" item="item">
+                    `Trantime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.transnoList != null">
+                    `transno` in
+                    <foreach collection="where.transnoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTransno!=null and where.fuzzyTransno.size()>0">
+                (
+                <foreach collection="where.fuzzyTransno"  separator="or" item="item">
+                    `Transno` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTransno!=null and where.rightFuzzyTransno.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTransno"  separator="or" item="item">
+                    `Transno` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.busrationList != null">
+                    `busration` in
+                    <foreach collection="where.busrationList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBusration!=null and where.fuzzyBusration.size()>0">
+                (
+                <foreach collection="where.fuzzyBusration"  separator="or" item="item">
+                    `Busration` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBusration!=null and where.rightFuzzyBusration.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBusration"  separator="or" item="item">
+                    `Busration` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyTask" id="JpyTaskMap">
+        <result property="bussinessid" column="bussinessid"/>
+        <result property="returl" column="returl"/>
+        <result property="tradeNo" column="tradeNo"/>
+        <result property="proname" column="proname"/>
+        <result property="prono" column="prono"/>
+        <result property="tradenum" column="tradenum"/>
+        <result property="tradegentime" column="tradegentime"/>
+        <result property="payrettime" column="payrettime"/>
+        <result property="payres" column="payres"/>
+        <result property="transstatus" column="transstatus"/>
+        <result property="trantime" column="trantime"/>
+        <result property="transno" column="transno"/>
+        <result property="busration" column="busration"/>
+    </resultMap>
+
+
+    <select id="queryJpyTask" resultMap="JpyTaskMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_task`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="bussinessid != null and bussinessid!=''">
+                `bussinessid` = #{bussinessid} and
+            </if>
+            <if test="returl != null and returl!=''">
+                `returl` = #{returl} and
+            </if>
+            <if test="tradeNo != null and tradeNo!=''">
+                `tradeNo` = #{tradeNo} and
+            </if>
+            <if test="proname != null and proname!=''">
+                `proname` = #{proname} and
+            </if>
+            <if test="prono != null and prono!=''">
+                `prono` = #{prono} and
+            </if>
+            <if test="tradenum != null and tradenum!=''">
+                `tradenum` = #{tradenum} and
+            </if>
+            <if test="tradegentime != null and tradegentime!=''">
+                `tradegentime` = #{tradegentime} and
+            </if>
+            <if test="payrettime != null and payrettime!=''">
+                `payrettime` = #{payrettime} and
+            </if>
+            <if test="payres != null and payres!=''">
+                `payres` = #{payres} and
+            </if>
+            <if test="transstatus != null and transstatus!=''">
+                `transstatus` = #{transstatus} and
+            </if>
+            <if test="trantime != null and trantime!=''">
+                `trantime` = #{trantime} and
+            </if>
+            <if test="transno != null and transno!=''">
+                `transno` = #{transno} and
+            </if>
+            <if test="busration != null and busration!=''">
+                `busration` = #{busration} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyTask$QueryBuilder) == true">
+                <if test="bussinessidList != null">
+                    `bussinessid` in
+                    <foreach collection="bussinessidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBussinessid!=null and fuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="fuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussinessid!=null and rightFuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="returlList != null">
+                    `returl` in
+                    <foreach collection="returlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyReturl!=null and fuzzyReturl.size()>0">
+                    (
+                    <foreach collection="fuzzyReturl"  separator="or" item="item">
+                        `Returl` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReturl!=null and rightFuzzyReturl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReturl"  separator="or" item="item">
+                        `Returl` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="tradeNoList != null">
+                    `tradeNo` in
+                    <foreach collection="tradeNoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTradeNo!=null and fuzzyTradeNo.size()>0">
+                    (
+                    <foreach collection="fuzzyTradeNo"  separator="or" item="item">
+                        `TradeNo` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradeNo!=null and rightFuzzyTradeNo.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradeNo"  separator="or" item="item">
+                        `TradeNo` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="pronameList != null">
+                    `proname` in
+                    <foreach collection="pronameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyProname!=null and fuzzyProname.size()>0">
+                    (
+                    <foreach collection="fuzzyProname"  separator="or" item="item">
+                        `Proname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProname!=null and rightFuzzyProname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProname"  separator="or" item="item">
+                        `Proname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="pronoList != null">
+                    `prono` in
+                    <foreach collection="pronoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyProno!=null and fuzzyProno.size()>0">
+                    (
+                    <foreach collection="fuzzyProno"  separator="or" item="item">
+                        `Prono` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProno!=null and rightFuzzyProno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProno"  separator="or" item="item">
+                        `Prono` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="tradenumList != null">
+                    `tradenum` in
+                    <foreach collection="tradenumList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTradenum!=null and fuzzyTradenum.size()>0">
+                    (
+                    <foreach collection="fuzzyTradenum"  separator="or" item="item">
+                        `Tradenum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradenum!=null and rightFuzzyTradenum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradenum"  separator="or" item="item">
+                        `Tradenum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="tradegentimeList != null">
+                    `tradegentime` in
+                    <foreach collection="tradegentimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTradegentime!=null and fuzzyTradegentime.size()>0">
+                    (
+                    <foreach collection="fuzzyTradegentime"  separator="or" item="item">
+                        `Tradegentime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradegentime!=null and rightFuzzyTradegentime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradegentime"  separator="or" item="item">
+                        `Tradegentime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="payrettimeList != null">
+                    `payrettime` in
+                    <foreach collection="payrettimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPayrettime!=null and fuzzyPayrettime.size()>0">
+                    (
+                    <foreach collection="fuzzyPayrettime"  separator="or" item="item">
+                        `Payrettime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayrettime!=null and rightFuzzyPayrettime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayrettime"  separator="or" item="item">
+                        `Payrettime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="payresList != null">
+                    `payres` in
+                    <foreach collection="payresList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPayres!=null and fuzzyPayres.size()>0">
+                    (
+                    <foreach collection="fuzzyPayres"  separator="or" item="item">
+                        `Payres` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayres!=null and rightFuzzyPayres.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayres"  separator="or" item="item">
+                        `Payres` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="transstatusList != null">
+                    `transstatus` in
+                    <foreach collection="transstatusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTransstatus!=null and fuzzyTransstatus.size()>0">
+                    (
+                    <foreach collection="fuzzyTransstatus"  separator="or" item="item">
+                        `Transstatus` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTransstatus!=null and rightFuzzyTransstatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTransstatus"  separator="or" item="item">
+                        `Transstatus` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="trantimeList != null">
+                    `trantime` in
+                    <foreach collection="trantimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTrantime!=null and fuzzyTrantime.size()>0">
+                    (
+                    <foreach collection="fuzzyTrantime"  separator="or" item="item">
+                        `Trantime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrantime!=null and rightFuzzyTrantime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrantime"  separator="or" item="item">
+                        `Trantime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="transnoList != null">
+                    `transno` in
+                    <foreach collection="transnoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTransno!=null and fuzzyTransno.size()>0">
+                    (
+                    <foreach collection="fuzzyTransno"  separator="or" item="item">
+                        `Transno` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTransno!=null and rightFuzzyTransno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTransno"  separator="or" item="item">
+                        `Transno` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="busrationList != null">
+                    `busration` in
+                    <foreach collection="busrationList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBusration!=null and fuzzyBusration.size()>0">
+                    (
+                    <foreach collection="fuzzyBusration"  separator="or" item="item">
+                        `Busration` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBusration!=null and rightFuzzyBusration.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBusration"  separator="or" item="item">
+                        `Busration` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyTaskLimit1" resultMap="JpyTaskMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_task`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="bussinessid != null and bussinessid!=''">
+                `bussinessid` = #{bussinessid} and
+            </if>
+            <if test="returl != null and returl!=''">
+                `returl` = #{returl} and
+            </if>
+            <if test="tradeNo != null and tradeNo!=''">
+                `tradeNo` = #{tradeNo} and
+            </if>
+            <if test="proname != null and proname!=''">
+                `proname` = #{proname} and
+            </if>
+            <if test="prono != null and prono!=''">
+                `prono` = #{prono} and
+            </if>
+            <if test="tradenum != null and tradenum!=''">
+                `tradenum` = #{tradenum} and
+            </if>
+            <if test="tradegentime != null and tradegentime!=''">
+                `tradegentime` = #{tradegentime} and
+            </if>
+            <if test="payrettime != null and payrettime!=''">
+                `payrettime` = #{payrettime} and
+            </if>
+            <if test="payres != null and payres!=''">
+                `payres` = #{payres} and
+            </if>
+            <if test="transstatus != null and transstatus!=''">
+                `transstatus` = #{transstatus} and
+            </if>
+            <if test="trantime != null and trantime!=''">
+                `trantime` = #{trantime} and
+            </if>
+            <if test="transno != null and transno!=''">
+                `transno` = #{transno} and
+            </if>
+            <if test="busration != null and busration!=''">
+                `busration` = #{busration} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyTask$QueryBuilder) == true">
+                    <if test="bussinessidList != null">
+                        `bussinessid` in
+                        <foreach collection="bussinessidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBussinessid!=null and fuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="fuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussinessid!=null and rightFuzzyBussinessid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussinessid"  separator="or" item="item">
+                        `Bussinessid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="returlList != null">
+                        `returl` in
+                        <foreach collection="returlList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyReturl!=null and fuzzyReturl.size()>0">
+                    (
+                    <foreach collection="fuzzyReturl"  separator="or" item="item">
+                        `Returl` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReturl!=null and rightFuzzyReturl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReturl"  separator="or" item="item">
+                        `Returl` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="tradeNoList != null">
+                        `tradeNo` in
+                        <foreach collection="tradeNoList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTradeNo!=null and fuzzyTradeNo.size()>0">
+                    (
+                    <foreach collection="fuzzyTradeNo"  separator="or" item="item">
+                        `TradeNo` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradeNo!=null and rightFuzzyTradeNo.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradeNo"  separator="or" item="item">
+                        `TradeNo` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="pronameList != null">
+                        `proname` in
+                        <foreach collection="pronameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyProname!=null and fuzzyProname.size()>0">
+                    (
+                    <foreach collection="fuzzyProname"  separator="or" item="item">
+                        `Proname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProname!=null and rightFuzzyProname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProname"  separator="or" item="item">
+                        `Proname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="pronoList != null">
+                        `prono` in
+                        <foreach collection="pronoList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyProno!=null and fuzzyProno.size()>0">
+                    (
+                    <foreach collection="fuzzyProno"  separator="or" item="item">
+                        `Prono` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProno!=null and rightFuzzyProno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProno"  separator="or" item="item">
+                        `Prono` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="tradenumList != null">
+                        `tradenum` in
+                        <foreach collection="tradenumList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTradenum!=null and fuzzyTradenum.size()>0">
+                    (
+                    <foreach collection="fuzzyTradenum"  separator="or" item="item">
+                        `Tradenum` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradenum!=null and rightFuzzyTradenum.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradenum"  separator="or" item="item">
+                        `Tradenum` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="tradegentimeList != null">
+                        `tradegentime` in
+                        <foreach collection="tradegentimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTradegentime!=null and fuzzyTradegentime.size()>0">
+                    (
+                    <foreach collection="fuzzyTradegentime"  separator="or" item="item">
+                        `Tradegentime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradegentime!=null and rightFuzzyTradegentime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradegentime"  separator="or" item="item">
+                        `Tradegentime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="payrettimeList != null">
+                        `payrettime` in
+                        <foreach collection="payrettimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPayrettime!=null and fuzzyPayrettime.size()>0">
+                    (
+                    <foreach collection="fuzzyPayrettime"  separator="or" item="item">
+                        `Payrettime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayrettime!=null and rightFuzzyPayrettime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayrettime"  separator="or" item="item">
+                        `Payrettime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="payresList != null">
+                        `payres` in
+                        <foreach collection="payresList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPayres!=null and fuzzyPayres.size()>0">
+                    (
+                    <foreach collection="fuzzyPayres"  separator="or" item="item">
+                        `Payres` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayres!=null and rightFuzzyPayres.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayres"  separator="or" item="item">
+                        `Payres` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="transstatusList != null">
+                        `transstatus` in
+                        <foreach collection="transstatusList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTransstatus!=null and fuzzyTransstatus.size()>0">
+                    (
+                    <foreach collection="fuzzyTransstatus"  separator="or" item="item">
+                        `Transstatus` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTransstatus!=null and rightFuzzyTransstatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTransstatus"  separator="or" item="item">
+                        `Transstatus` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="trantimeList != null">
+                        `trantime` in
+                        <foreach collection="trantimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTrantime!=null and fuzzyTrantime.size()>0">
+                    (
+                    <foreach collection="fuzzyTrantime"  separator="or" item="item">
+                        `Trantime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTrantime!=null and rightFuzzyTrantime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTrantime"  separator="or" item="item">
+                        `Trantime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="transnoList != null">
+                        `transno` in
+                        <foreach collection="transnoList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTransno!=null and fuzzyTransno.size()>0">
+                    (
+                    <foreach collection="fuzzyTransno"  separator="or" item="item">
+                        `Transno` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTransno!=null and rightFuzzyTransno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTransno"  separator="or" item="item">
+                        `Transno` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="busrationList != null">
+                        `busration` in
+                        <foreach collection="busrationList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBusration!=null and fuzzyBusration.size()>0">
+                    (
+                    <foreach collection="fuzzyBusration"  separator="or" item="item">
+                        `Busration` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBusration!=null and rightFuzzyBusration.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBusration"  separator="or" item="item">
+                        `Busration` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `bussinessid`,
+        `returl`,
+        `tradeNo`,
+        `proname`,
+        `prono`,
+        `tradenum`,
+        `tradegentime`,
+        `payrettime`,
+        `payres`,
+        `transstatus`,
+        `trantime`,
+        `transno`,
+        `busration`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyTask$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.bussinessid==true">
+                        `bussinessid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.returl==true">
+                        `returl`,
+                    </if>
+                    <if test="fetchFields.fetchFields.tradeNo==true">
+                        `tradeNo`,
+                    </if>
+                    <if test="fetchFields.fetchFields.proname==true">
+                        `proname`,
+                    </if>
+                    <if test="fetchFields.fetchFields.prono==true">
+                        `prono`,
+                    </if>
+                    <if test="fetchFields.fetchFields.tradenum==true">
+                        `tradenum`,
+                    </if>
+                    <if test="fetchFields.fetchFields.tradegentime==true">
+                        `tradegentime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.payrettime==true">
+                        `payrettime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.payres==true">
+                        `payres`,
+                    </if>
+                    <if test="fetchFields.fetchFields.transstatus==true">
+                        `transstatus`,
+                    </if>
+                    <if test="fetchFields.fetchFields.trantime==true">
+                        `trantime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.transno==true">
+                        `transno`,
+                    </if>
+                    <if test="fetchFields.fetchFields.busration==true">
+                        `busration`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.bussinessid==null">
+                        `bussinessid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.returl==null">
+                        `returl`,
+                    </if>
+                    <if test="fetchFields.excludeFields.tradeNo==null">
+                        `tradeNo`,
+                    </if>
+                    <if test="fetchFields.excludeFields.proname==null">
+                        `proname`,
+                    </if>
+                    <if test="fetchFields.excludeFields.prono==null">
+                        `prono`,
+                    </if>
+                    <if test="fetchFields.excludeFields.tradenum==null">
+                        `tradenum`,
+                    </if>
+                    <if test="fetchFields.excludeFields.tradegentime==null">
+                        `tradegentime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.payrettime==null">
+                        `payrettime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.payres==null">
+                        `payres`,
+                    </if>
+                    <if test="fetchFields.excludeFields.transstatus==null">
+                        `transstatus`,
+                    </if>
+                    <if test="fetchFields.excludeFields.trantime==null">
+                        `trantime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.transno==null">
+                        `transno`,
+                    </if>
+                    <if test="fetchFields.excludeFields.busration==null">
+                        `busration`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyTask$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

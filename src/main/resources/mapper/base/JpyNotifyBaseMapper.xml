@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwp.jpy.mapper.base.JpyNotifyBaseMapper">
+
+
+    <insert id="insertJpyNotify" >
+        INSERT INTO `jpy_notify`
+        (
+        <trim suffixOverrides=",">
+                    <if test="notfiyid!=null">
+                        `notfiyid`,
+                    </if>
+                    <if test="tradeno!=null">
+                        `tradeno`,
+                    </if>
+                    <if test="bussid!=null">
+                        `bussid`,
+                    </if>
+                    <if test="reqbody!=null">
+                        `reqbody`,
+                    </if>
+                    <if test="reqtime!=null">
+                        `reqtime`,
+                    </if>
+                    <if test="reqcount!=null">
+                        `reqcount`,
+                    </if>
+                    <if test="rspret!=null">
+                        `rspret`,
+                    </if>
+                    <if test="rsptime!=null">
+                        `rsptime`,
+                    </if>
+                    <if test="rspbody!=null">
+                        `rspbody`,
+                    </if>
+                    <if test="requrl!=null">
+                        `requrl`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="notfiyid!=null">
+                    #{notfiyid},
+                </if>
+                <if test="tradeno!=null">
+                    #{tradeno},
+                </if>
+                <if test="bussid!=null">
+                    #{bussid},
+                </if>
+                <if test="reqbody!=null">
+                    #{reqbody},
+                </if>
+                <if test="reqtime!=null">
+                    #{reqtime},
+                </if>
+                <if test="reqcount!=null">
+                    #{reqcount},
+                </if>
+                <if test="rspret!=null">
+                    #{rspret},
+                </if>
+                <if test="rsptime!=null">
+                    #{rsptime},
+                </if>
+                <if test="rspbody!=null">
+                    #{rspbody},
+                </if>
+                <if test="requrl!=null">
+                    #{requrl},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateJpyNotify">
+        UPDATE `jpy_notify`
+        SET
+        <trim suffixOverrides=",">
+            <if test="tradeno != null and tradeno!=''">
+                `tradeno` = #{tradeno},
+            </if>
+            <if test="bussid != null and bussid!=''">
+                `bussid` = #{bussid},
+            </if>
+            <if test="reqbody != null and reqbody!=''">
+                `reqbody` = #{reqbody},
+            </if>
+            <if test="reqtime != null and reqtime!=''">
+                `reqtime` = #{reqtime},
+            </if>
+            <if test="reqcount != null and reqcount!=''">
+                `reqcount` = #{reqcount},
+            </if>
+            <if test="rspret != null and rspret!=''">
+                `rspret` = #{rspret},
+            </if>
+            <if test="rsptime != null and rsptime!=''">
+                `rsptime` = #{rsptime},
+            </if>
+            <if test="rspbody != null and rspbody!=''">
+                `rspbody` = #{rspbody},
+            </if>
+            <if test="requrl != null and requrl!=''">
+                `requrl` = #{requrl},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `notfiyid` = #{notfiyid} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `jpy_notify`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.tradeno != null and set.tradeno!=''">
+            `tradeno` = #{set.tradeno},
+        </if>
+        <if test="set.bussid != null and set.bussid!=''">
+            `bussid` = #{set.bussid},
+        </if>
+        <if test="set.reqbody != null and set.reqbody!=''">
+            `reqbody` = #{set.reqbody},
+        </if>
+        <if test="set.reqtime != null and set.reqtime!=''">
+            `reqtime` = #{set.reqtime},
+        </if>
+        <if test="set.reqcount != null and set.reqcount!=''">
+            `reqcount` = #{set.reqcount},
+        </if>
+        <if test="set.rspret != null and set.rspret!=''">
+            `rspret` = #{set.rspret},
+        </if>
+        <if test="set.rsptime != null and set.rsptime!=''">
+            `rsptime` = #{set.rsptime},
+        </if>
+        <if test="set.rspbody != null and set.rspbody!=''">
+            `rspbody` = #{set.rspbody},
+        </if>
+        <if test="set.requrl != null and set.requrl!=''">
+            `requrl` = #{set.requrl},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.notfiyidList != null">
+                    `notfiyid` in
+                    <foreach collection="where.notfiyidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyNotfiyid!=null and where.fuzzyNotfiyid.size()>0">
+                (
+                <foreach collection="where.fuzzyNotfiyid"  separator="or" item="item">
+                    `Notfiyid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyNotfiyid!=null and where.rightFuzzyNotfiyid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyNotfiyid"  separator="or" item="item">
+                    `Notfiyid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.tradenoList != null">
+                    `tradeno` in
+                    <foreach collection="where.tradenoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTradeno!=null and where.fuzzyTradeno.size()>0">
+                (
+                <foreach collection="where.fuzzyTradeno"  separator="or" item="item">
+                    `Tradeno` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTradeno!=null and where.rightFuzzyTradeno.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTradeno"  separator="or" item="item">
+                    `Tradeno` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.bussidList != null">
+                    `bussid` in
+                    <foreach collection="where.bussidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBussid!=null and where.fuzzyBussid.size()>0">
+                (
+                <foreach collection="where.fuzzyBussid"  separator="or" item="item">
+                    `Bussid` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBussid!=null and where.rightFuzzyBussid.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBussid"  separator="or" item="item">
+                    `Bussid` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.reqbodyList != null">
+                    `reqbody` in
+                    <foreach collection="where.reqbodyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyReqbody!=null and where.fuzzyReqbody.size()>0">
+                (
+                <foreach collection="where.fuzzyReqbody"  separator="or" item="item">
+                    `Reqbody` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyReqbody!=null and where.rightFuzzyReqbody.size()>0">
+                (
+                <foreach collection="where.rightFuzzyReqbody"  separator="or" item="item">
+                    `Reqbody` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.reqtimeList != null">
+                    `reqtime` in
+                    <foreach collection="where.reqtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyReqtime!=null and where.fuzzyReqtime.size()>0">
+                (
+                <foreach collection="where.fuzzyReqtime"  separator="or" item="item">
+                    `Reqtime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyReqtime!=null and where.rightFuzzyReqtime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyReqtime"  separator="or" item="item">
+                    `Reqtime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.reqcountList != null">
+                    `reqcount` in
+                    <foreach collection="where.reqcountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyReqcount!=null and where.fuzzyReqcount.size()>0">
+                (
+                <foreach collection="where.fuzzyReqcount"  separator="or" item="item">
+                    `Reqcount` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyReqcount!=null and where.rightFuzzyReqcount.size()>0">
+                (
+                <foreach collection="where.rightFuzzyReqcount"  separator="or" item="item">
+                    `Reqcount` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.rspretList != null">
+                    `rspret` in
+                    <foreach collection="where.rspretList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyRspret!=null and where.fuzzyRspret.size()>0">
+                (
+                <foreach collection="where.fuzzyRspret"  separator="or" item="item">
+                    `Rspret` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyRspret!=null and where.rightFuzzyRspret.size()>0">
+                (
+                <foreach collection="where.rightFuzzyRspret"  separator="or" item="item">
+                    `Rspret` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.rsptimeList != null">
+                    `rsptime` in
+                    <foreach collection="where.rsptimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyRsptime!=null and where.fuzzyRsptime.size()>0">
+                (
+                <foreach collection="where.fuzzyRsptime"  separator="or" item="item">
+                    `Rsptime` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyRsptime!=null and where.rightFuzzyRsptime.size()>0">
+                (
+                <foreach collection="where.rightFuzzyRsptime"  separator="or" item="item">
+                    `Rsptime` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.rspbodyList != null">
+                    `rspbody` in
+                    <foreach collection="where.rspbodyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyRspbody!=null and where.fuzzyRspbody.size()>0">
+                (
+                <foreach collection="where.fuzzyRspbody"  separator="or" item="item">
+                    `Rspbody` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyRspbody!=null and where.rightFuzzyRspbody.size()>0">
+                (
+                <foreach collection="where.rightFuzzyRspbody"  separator="or" item="item">
+                    `Rspbody` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.requrlList != null">
+                    `requrl` in
+                    <foreach collection="where.requrlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyRequrl!=null and where.fuzzyRequrl.size()>0">
+                (
+                <foreach collection="where.fuzzyRequrl"  separator="or" item="item">
+                    `Requrl` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyRequrl!=null and where.rightFuzzyRequrl.size()>0">
+                (
+                <foreach collection="where.rightFuzzyRequrl"  separator="or" item="item">
+                    `Requrl` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.cwp.jpy.model.JpyNotify" id="JpyNotifyMap">
+        <result property="notfiyid" column="notfiyid"/>
+        <result property="tradeno" column="tradeno"/>
+        <result property="bussid" column="bussid"/>
+        <result property="reqbody" column="reqbody"/>
+        <result property="reqtime" column="reqtime"/>
+        <result property="reqcount" column="reqcount"/>
+        <result property="rspret" column="rspret"/>
+        <result property="rsptime" column="rsptime"/>
+        <result property="rspbody" column="rspbody"/>
+        <result property="requrl" column="requrl"/>
+    </resultMap>
+
+
+    <select id="queryJpyNotify" resultMap="JpyNotifyMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_notify`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="notfiyid != null and notfiyid!=''">
+                `notfiyid` = #{notfiyid} and
+            </if>
+            <if test="tradeno != null and tradeno!=''">
+                `tradeno` = #{tradeno} and
+            </if>
+            <if test="bussid != null and bussid!=''">
+                `bussid` = #{bussid} and
+            </if>
+            <if test="reqbody != null and reqbody!=''">
+                `reqbody` = #{reqbody} and
+            </if>
+            <if test="reqtime != null and reqtime!=''">
+                `reqtime` = #{reqtime} and
+            </if>
+            <if test="reqcount != null and reqcount!=''">
+                `reqcount` = #{reqcount} and
+            </if>
+            <if test="rspret != null and rspret!=''">
+                `rspret` = #{rspret} and
+            </if>
+            <if test="rsptime != null and rsptime!=''">
+                `rsptime` = #{rsptime} and
+            </if>
+            <if test="rspbody != null and rspbody!=''">
+                `rspbody` = #{rspbody} and
+            </if>
+            <if test="requrl != null and requrl!=''">
+                `requrl` = #{requrl} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyNotify$QueryBuilder) == true">
+                <if test="notfiyidList != null">
+                    `notfiyid` in
+                    <foreach collection="notfiyidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyNotfiyid!=null and fuzzyNotfiyid.size()>0">
+                    (
+                    <foreach collection="fuzzyNotfiyid"  separator="or" item="item">
+                        `Notfiyid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotfiyid!=null and rightFuzzyNotfiyid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotfiyid"  separator="or" item="item">
+                        `Notfiyid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="tradenoList != null">
+                    `tradeno` in
+                    <foreach collection="tradenoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTradeno!=null and fuzzyTradeno.size()>0">
+                    (
+                    <foreach collection="fuzzyTradeno"  separator="or" item="item">
+                        `Tradeno` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradeno!=null and rightFuzzyTradeno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradeno"  separator="or" item="item">
+                        `Tradeno` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="bussidList != null">
+                    `bussid` in
+                    <foreach collection="bussidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBussid!=null and fuzzyBussid.size()>0">
+                    (
+                    <foreach collection="fuzzyBussid"  separator="or" item="item">
+                        `Bussid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussid!=null and rightFuzzyBussid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussid"  separator="or" item="item">
+                        `Bussid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="reqbodyList != null">
+                    `reqbody` in
+                    <foreach collection="reqbodyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyReqbody!=null and fuzzyReqbody.size()>0">
+                    (
+                    <foreach collection="fuzzyReqbody"  separator="or" item="item">
+                        `Reqbody` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReqbody!=null and rightFuzzyReqbody.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReqbody"  separator="or" item="item">
+                        `Reqbody` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="reqtimeList != null">
+                    `reqtime` in
+                    <foreach collection="reqtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyReqtime!=null and fuzzyReqtime.size()>0">
+                    (
+                    <foreach collection="fuzzyReqtime"  separator="or" item="item">
+                        `Reqtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReqtime!=null and rightFuzzyReqtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReqtime"  separator="or" item="item">
+                        `Reqtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="reqcountList != null">
+                    `reqcount` in
+                    <foreach collection="reqcountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyReqcount!=null and fuzzyReqcount.size()>0">
+                    (
+                    <foreach collection="fuzzyReqcount"  separator="or" item="item">
+                        `Reqcount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReqcount!=null and rightFuzzyReqcount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReqcount"  separator="or" item="item">
+                        `Reqcount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="rspretList != null">
+                    `rspret` in
+                    <foreach collection="rspretList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRspret!=null and fuzzyRspret.size()>0">
+                    (
+                    <foreach collection="fuzzyRspret"  separator="or" item="item">
+                        `Rspret` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRspret!=null and rightFuzzyRspret.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRspret"  separator="or" item="item">
+                        `Rspret` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="rsptimeList != null">
+                    `rsptime` in
+                    <foreach collection="rsptimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRsptime!=null and fuzzyRsptime.size()>0">
+                    (
+                    <foreach collection="fuzzyRsptime"  separator="or" item="item">
+                        `Rsptime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRsptime!=null and rightFuzzyRsptime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRsptime"  separator="or" item="item">
+                        `Rsptime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="rspbodyList != null">
+                    `rspbody` in
+                    <foreach collection="rspbodyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRspbody!=null and fuzzyRspbody.size()>0">
+                    (
+                    <foreach collection="fuzzyRspbody"  separator="or" item="item">
+                        `Rspbody` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRspbody!=null and rightFuzzyRspbody.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRspbody"  separator="or" item="item">
+                        `Rspbody` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="requrlList != null">
+                    `requrl` in
+                    <foreach collection="requrlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRequrl!=null and fuzzyRequrl.size()>0">
+                    (
+                    <foreach collection="fuzzyRequrl"  separator="or" item="item">
+                        `Requrl` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRequrl!=null and rightFuzzyRequrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRequrl"  separator="or" item="item">
+                        `Requrl` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryJpyNotifyLimit1" resultMap="JpyNotifyMap">
+        select
+        <include refid="baseResult"></include>
+        from  `jpy_notify`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="notfiyid != null and notfiyid!=''">
+                `notfiyid` = #{notfiyid} and
+            </if>
+            <if test="tradeno != null and tradeno!=''">
+                `tradeno` = #{tradeno} and
+            </if>
+            <if test="bussid != null and bussid!=''">
+                `bussid` = #{bussid} and
+            </if>
+            <if test="reqbody != null and reqbody!=''">
+                `reqbody` = #{reqbody} and
+            </if>
+            <if test="reqtime != null and reqtime!=''">
+                `reqtime` = #{reqtime} and
+            </if>
+            <if test="reqcount != null and reqcount!=''">
+                `reqcount` = #{reqcount} and
+            </if>
+            <if test="rspret != null and rspret!=''">
+                `rspret` = #{rspret} and
+            </if>
+            <if test="rsptime != null and rsptime!=''">
+                `rsptime` = #{rsptime} and
+            </if>
+            <if test="rspbody != null and rspbody!=''">
+                `rspbody` = #{rspbody} and
+            </if>
+            <if test="requrl != null and requrl!=''">
+                `requrl` = #{requrl} and
+            </if>
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyNotify$QueryBuilder) == true">
+                    <if test="notfiyidList != null">
+                        `notfiyid` in
+                        <foreach collection="notfiyidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyNotfiyid!=null and fuzzyNotfiyid.size()>0">
+                    (
+                    <foreach collection="fuzzyNotfiyid"  separator="or" item="item">
+                        `Notfiyid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNotfiyid!=null and rightFuzzyNotfiyid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNotfiyid"  separator="or" item="item">
+                        `Notfiyid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="tradenoList != null">
+                        `tradeno` in
+                        <foreach collection="tradenoList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTradeno!=null and fuzzyTradeno.size()>0">
+                    (
+                    <foreach collection="fuzzyTradeno"  separator="or" item="item">
+                        `Tradeno` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTradeno!=null and rightFuzzyTradeno.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTradeno"  separator="or" item="item">
+                        `Tradeno` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="bussidList != null">
+                        `bussid` in
+                        <foreach collection="bussidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBussid!=null and fuzzyBussid.size()>0">
+                    (
+                    <foreach collection="fuzzyBussid"  separator="or" item="item">
+                        `Bussid` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBussid!=null and rightFuzzyBussid.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBussid"  separator="or" item="item">
+                        `Bussid` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="reqbodyList != null">
+                        `reqbody` in
+                        <foreach collection="reqbodyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyReqbody!=null and fuzzyReqbody.size()>0">
+                    (
+                    <foreach collection="fuzzyReqbody"  separator="or" item="item">
+                        `Reqbody` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReqbody!=null and rightFuzzyReqbody.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReqbody"  separator="or" item="item">
+                        `Reqbody` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="reqtimeList != null">
+                        `reqtime` in
+                        <foreach collection="reqtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyReqtime!=null and fuzzyReqtime.size()>0">
+                    (
+                    <foreach collection="fuzzyReqtime"  separator="or" item="item">
+                        `Reqtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReqtime!=null and rightFuzzyReqtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReqtime"  separator="or" item="item">
+                        `Reqtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="reqcountList != null">
+                        `reqcount` in
+                        <foreach collection="reqcountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyReqcount!=null and fuzzyReqcount.size()>0">
+                    (
+                    <foreach collection="fuzzyReqcount"  separator="or" item="item">
+                        `Reqcount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyReqcount!=null and rightFuzzyReqcount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyReqcount"  separator="or" item="item">
+                        `Reqcount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="rspretList != null">
+                        `rspret` in
+                        <foreach collection="rspretList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRspret!=null and fuzzyRspret.size()>0">
+                    (
+                    <foreach collection="fuzzyRspret"  separator="or" item="item">
+                        `Rspret` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRspret!=null and rightFuzzyRspret.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRspret"  separator="or" item="item">
+                        `Rspret` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="rsptimeList != null">
+                        `rsptime` in
+                        <foreach collection="rsptimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRsptime!=null and fuzzyRsptime.size()>0">
+                    (
+                    <foreach collection="fuzzyRsptime"  separator="or" item="item">
+                        `Rsptime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRsptime!=null and rightFuzzyRsptime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRsptime"  separator="or" item="item">
+                        `Rsptime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="rspbodyList != null">
+                        `rspbody` in
+                        <foreach collection="rspbodyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRspbody!=null and fuzzyRspbody.size()>0">
+                    (
+                    <foreach collection="fuzzyRspbody"  separator="or" item="item">
+                        `Rspbody` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRspbody!=null and rightFuzzyRspbody.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRspbody"  separator="or" item="item">
+                        `Rspbody` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="requrlList != null">
+                        `requrl` in
+                        <foreach collection="requrlList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRequrl!=null and fuzzyRequrl.size()>0">
+                    (
+                    <foreach collection="fuzzyRequrl"  separator="or" item="item">
+                        `Requrl` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRequrl!=null and rightFuzzyRequrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRequrl"  separator="or" item="item">
+                        `Requrl` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `notfiyid`,
+        `tradeno`,
+        `bussid`,
+        `reqbody`,
+        `reqtime`,
+        `reqcount`,
+        `rspret`,
+        `rsptime`,
+        `rspbody`,
+        `requrl`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.cwp.jpy.model.JpyNotify$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.notfiyid==true">
+                        `notfiyid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.tradeno==true">
+                        `tradeno`,
+                    </if>
+                    <if test="fetchFields.fetchFields.bussid==true">
+                        `bussid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.reqbody==true">
+                        `reqbody`,
+                    </if>
+                    <if test="fetchFields.fetchFields.reqtime==true">
+                        `reqtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.reqcount==true">
+                        `reqcount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.rspret==true">
+                        `rspret`,
+                    </if>
+                    <if test="fetchFields.fetchFields.rsptime==true">
+                        `rsptime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.rspbody==true">
+                        `rspbody`,
+                    </if>
+                    <if test="fetchFields.fetchFields.requrl==true">
+                        `requrl`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.notfiyid==null">
+                        `notfiyid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.tradeno==null">
+                        `tradeno`,
+                    </if>
+                    <if test="fetchFields.excludeFields.bussid==null">
+                        `bussid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.reqbody==null">
+                        `reqbody`,
+                    </if>
+                    <if test="fetchFields.excludeFields.reqtime==null">
+                        `reqtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.reqcount==null">
+                        `reqcount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.rspret==null">
+                        `rspret`,
+                    </if>
+                    <if test="fetchFields.excludeFields.rsptime==null">
+                        `rsptime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.rspbody==null">
+                        `rspbody`,
+                    </if>
+                    <if test="fetchFields.excludeFields.requrl==null">
+                        `requrl`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.cwp.jpy.model.JpyNotify$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
