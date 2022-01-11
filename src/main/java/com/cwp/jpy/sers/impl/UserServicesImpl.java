@@ -318,6 +318,7 @@ public class UserServicesImpl implements UserServices {
     public Object queryTaskInfo(JSONObject jsonObject) {
         String bussinessname = jsonObject.getString("bussinessname");
         String taskstatus = jsonObject.getString("payres");
+        String tradeNo = jsonObject.getString("tradeNo");
         String headTellerid = jsonObject.getString("headTellerid");
         String exportFlag = jsonObject.getString("export");
         JpyUser jpyUser = new JpyUser();
@@ -330,6 +331,9 @@ public class UserServicesImpl implements UserServices {
         }
         if(!StringUtilEx.isNullOrEmpty(taskstatus)){
             queryParam.put("payres",taskstatus);
+        }
+        if(!StringUtilEx.isNullOrEmpty(tradeNo)){
+            queryParam.put("tradeNo",tradeNo);
         }
         if(!"1".equals(jpyUser.getBussinessid())){
             queryParam.put("bussinessid",jpyUser.getBussinessid());
@@ -371,8 +375,10 @@ public class UserServicesImpl implements UserServices {
         if(null != tableHeaderList && tableHeaderList.size()>0 ){
             Map<String, Object> item = tableHeaderList.get(0);
             log.info("------item---{}",item);
-
+            if(null!=item && !item.isEmpty()){
+                log.info("---------item is not empty-----");
             retJson.putAll(item);
+            }
         }
 
         PageHelper.startPage(page, pagesize);
@@ -430,8 +436,10 @@ public class UserServicesImpl implements UserServices {
         if(null != tableHeaderList && tableHeaderList.size()>0 ){
             Map<String, Object> item = tableHeaderList.get(0);
             log.info("------item---{}",item);
+            if(null!=item && !item.isEmpty()){
 
             retJson.putAll(item);
+            }
         }
         PageHelper.startPage(page, pagesize);
         List<JpyTaskTrans> jpyTrans1 = jpyTransMapper.queryJpyTaskTran(queryMap);

@@ -36,4 +36,7 @@ public interface JpyTaskBaseMapper {
     int udpateTaskByTranno(Map<String,Object> object);
     int updateTransByTranno(Map<String,Object> object);
 
+    int delTaskById(String id);
+    int delTransById(String id);
+    int delTaskTransById(String id);
 }

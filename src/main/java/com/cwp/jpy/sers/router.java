@@ -182,4 +182,8 @@ public class router {
         return export(new File(tfilename));
     }
 
+    @RequestMapping(value = "/delRecords")
+    public Object delRecords(@RequestBody JSONObject jsonObject){
+        return taskServices.delRecords(jsonObject);
+    }
 }

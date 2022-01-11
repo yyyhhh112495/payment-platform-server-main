@@ -3,14 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cwp.jpy.mapper.base.JpyTaskBaseMapper">
 
+    <delete id="delTaskById" parameterType="java.lang.String">
+        delete from jpy_task where jpy_task.bussinessid=#{id}
+    </delete>
+    <delete id="delTransById" parameterType="java.lang.String">
+        delete from jpy_trans where jpy_trans.bussinessid=#{id}
+    </delete>
+    <delete id="delTaskTransById" parameterType="java.lang.String">
+        delete from jpy_transrecord where jpy_transrecord.bussid=#{id}
+    </delete>
     <select id="queryJpys" resultType="java.util.Map" parameterType="java.util.Map">
         SELECT
         jpy_task.*,
         jpy_org.bussinessname,
-        jpy_task.tradenum*(100-IFNULL(jpy_task.busration,jpy_org.bussratio))/100 transnum
+        jpy_task.tradenum *(
+        100-IFNULL ( jpy_task.busration, jpy_org.bussratio ))/ 100 transnum,
+        IFNULL( jpy_ali_res.buyer_logon_id, jpy_wepay_res.payer ) payAccount,
+        jpy_trans.paychannel  payChanel
         FROM
         jpy_task
         LEFT JOIN jpy_org ON jpy_task.bussinessid = jpy_org.bussinessid
+        LEFT JOIN jpy_ali_res ON jpy_task.tradeNo = jpy_ali_res.out_trade_no
+        LEFT JOIN jpy_wepay_res ON jpy_task.tradeNo = jpy_wepay_res.out_trade_no
+        LEFT JOIN jpy_trans on jpy_task.tradeNo=jpy_trans.tranno
         <trim prefix="where" suffixOverrides="and | or">
             <if test="bussinessname != null and bussinessname!=''">
                 `bussinessname` = #{bussinessname} and
@@ -20,6 +35,9 @@
             </if>
             <if test="bussinessid != null and bussinessid!=''">
                 jpy_task.bussinessid = #{bussinessid} and
+            </if>
+            <if test="tradeNo != null and tradeNo!=''">
+                jpy_task.tradeNo = #{tradeNo} and
             </if>
         </trim>
 
@@ -31,7 +49,8 @@
         ROUND( sum( CASE jpy_task.payres WHEN '1' THEN jpy_task.tradenum ELSE '0' END ), 2 ) totalpay,
         sum( CASE payres WHEN '1' THEN 1 ELSE 0 END ) paysuc,
         sum( CASE jpy_task.payres WHEN '1' THEN 0 ELSE 1 END ) payfai,
-        ROUND( SUM( jpy_task.tradenum *( 100-IFNULL ( jpy_task.busration, jpy_org.bussratio ))/ 100 ), 2 ) jsnum
+        ROUND( SUM(( CASE jpy_task.payres WHEN '1' THEN jpy_task.tradenum ELSE '0' END )
+            *( 100-IFNULL ( jpy_task.busration, jpy_org.bussratio ))/ 100 ), 2 ) jsnum
         FROM
         jpy_task
         LEFT JOIN jpy_org ON jpy_task.bussinessid = jpy_org.bussinessid

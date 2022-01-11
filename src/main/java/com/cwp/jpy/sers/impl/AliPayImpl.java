@@ -6,7 +6,9 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeWapPayResponse;
 import com.cwp.jpy.beans.AppConfigs;
 import com.cwp.jpy.beans.BaseConstant;
@@ -14,10 +16,7 @@ import com.cwp.jpy.mapper.*;
 import com.cwp.jpy.model.*;
 import com.cwp.jpy.sers.AliPay;
 import com.cwp.jpy.sers.UtilServices;
-import com.cwp.jpy.utils.HttpClientUtil;
-import com.cwp.jpy.utils.MD5Utils;
-import com.cwp.jpy.utils.MathUtil;
-import com.cwp.jpy.utils.StringUtilEx;
+import com.cwp.jpy.utils.*;
 import com.wechat.pay.contrib.apache.httpclient.WechatPayHttpClientBuilder;
 import com.wechat.pay.contrib.apache.httpclient.auth.*;
 import com.wechat.pay.contrib.apache.httpclient.util.AesUtil;
@@ -94,7 +93,7 @@ public class AliPayImpl implements AliPay {
             log.info("-----configure count is : {}",JSONObject.toJSONString(queryCount));
 
             String bussinessId = jsonObject.getString("bussinessId");//商户号
-            String returnUrl = jsonObject.getString("returnUrl");//成功回跳url
+            String returnUrl = jsonObject.getString("returl");//成功回跳url
             String tradeNo = jsonObject.getString("tradeNo");//交易流水号
             String proName = jsonObject.getString("proName");//产品名称
             String proNo = jsonObject.getString("proNo");//产品编号
@@ -125,6 +124,7 @@ public class AliPayImpl implements AliPay {
             jpyTrans.setCountratio(queryCount.getAlipayration());
             jpyTrans.setCollectcountid(String.valueOf(queryCount.getCountid()));
             jpyTrans.setCollectcountname(queryCount.getCountname());
+            jpyTrans.setCountid(String.valueOf(queryCount.getCountid()));
 
             JpyTask jpyTask = new JpyTask();
             jpyTask.setTradeNo(tradeNo);
@@ -155,6 +155,7 @@ public class AliPayImpl implements AliPay {
             String host = appConfigs.getHost();
             try {
                 String urlDeco = URLDecoder.decode(returnUrl,"utf-8");
+                urlDeco = URLDecoder.decode(urlDeco,"utf-8");
                 log.info("-----urldeco---{}",urlDeco);
                 jpyTask.setReturl(urlDeco);
             } catch (UnsupportedEncodingException e) {
@@ -384,6 +385,7 @@ public class AliPayImpl implements AliPay {
             String requrl = queryJpytask.getReturl();
             JpyNotify jpyNotify = new JpyNotify();
             jpyNotify.setNotfiyid(notifyno);
+            jpyNotify.setTradeno(tradeno);
             jpyNotify.setBussid(queryJpytask.getBussinessid());
             jpyNotify.setReqbody(reqJson.toJSONString());
             jpyNotify.setRequrl(requrl);
@@ -394,14 +396,14 @@ public class AliPayImpl implements AliPay {
             jpyOrg.setBussinessid(Integer.valueOf(queryJpytask.getBussinessid()));
             JpyOrg queryJpyOrg = jpyOrgMapper.queryJpyOrgLimit1(jpyOrg);
             String privateKey = queryJpyOrg.getPrikey();
-            log.info("-----a:{]-----notfiyid: {}",a,notifyno);
+            log.info("-----a:{}-----notfiyid: {}",a,notifyno);
             String reqbody = reqJson.toJSONString();
             String reqbase64 = new String(Base64.getEncoder().encode(reqbody.getBytes(StandardCharsets.UTF_8)));
             Map<String, String> headers = new HashMap<>();
             try {
                 String sginature = MD5Utils.digestMD5((reqbase64+privateKey).getBytes(StandardCharsets.UTF_8));
                 headers.put("signature",sginature);
-                String rsp = HttpClientUtil.postJson(requrl,reqbase64,new HashMap<>());
+                String rsp = HttpClientUtil.postJson(requrl,reqbase64,headers);
                 jpyNotify.setRspbody(rsp);
                 jpyNotify.setRsptime(sdf.format(new Date()));
                 log.info("---rsp---{}",rsp);
@@ -520,7 +522,12 @@ public class AliPayImpl implements AliPay {
         jpyTask.setTradeNo(out_trade_no);
         JpyTrans jpytrans = new JpyTrans();
         jpytrans.setTranno(out_trade_no);
+        try{
         notifyChannel(out_trade_no);//通知下游渠道 支付成功
+        }catch (Exception e){
+            log.info("-------notify down channel fail----");
+            log.info("-------"+e.toString());
+        }
         JpyTask queryTask = jpyTaskMapper.queryJpyTaskLimit1(jpyTask);
         JpyTrans jpyTrans = jpyTransMapper.queryJpyTransLimit1(jpytrans);
         if(null!=jpyTrans){
@@ -550,4 +557,66 @@ public class AliPayImpl implements AliPay {
         }
     }
 
+    public Object queryPayRetByTradeno(JSONObject jsonObject){
+        JSONObject retJson = new JSONObject();
+        String tradeno = jsonObject.getString("tradeno");
+        if(StringUtilEx.isNullOrEmpty(tradeno)){
+            return ResponseUtil.retErro(retJson,"参数错误");
+        }
+        JpyTrans jpyTrans = new JpyTrans();
+        jpyTrans.setTranno(tradeno);
+        JpyTrans queryJpyTrans = jpyTransMapper.queryJpyTransLimit1(jpyTrans);
+        if(null!=queryJpyTrans){
+            String paychannel = queryJpyTrans.getPaychannel();
+            String countid = queryJpyTrans.getCountid();
+            if(StringUtilEx.isNullOrEmpty(countid)){
+                countid = "1";
+            }
+            JpyCount jpyCount = new JpyCount();
+            jpyCount.setCountid(Integer.valueOf(countid));
+            JpyCount queryCount = jpyCountMapper.queryJpyCountLimit1(jpyCount);
+            if(null == queryCount){
+                return ResponseUtil.retErro(retJson,"未找到配置账户");
+            }
+            log.info("----tradeno:{}--paychannel:{}",tradeno,paychannel);
+            if("alipay".equals(paychannel)){
+                log.info("query to ali");
+                String privatekey = queryCount.getAlipayprikey();
+                String alipayPublicKey = queryCount.getAlipaypukey();
+                String appid = queryCount.getAliappid();
+                String serverUrl = appConfigs.getAlipayserverUrl();
+                AlipayClient alipayClient = new DefaultAlipayClient(
+                        serverUrl,
+                        appid,privatekey,
+                        "json","UTF-8",
+                        alipayPublicKey,"RSA2");
+                AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+                JSONObject bizContent = new JSONObject();
+                bizContent.put("out_trade_no", tradeno);
+                request.setBizContent(bizContent.toString());
+                AlipayTradeQueryResponse response = null;
+                try {
+                    response = alipayClient.execute(request);
+                    if(response.isSuccess()){
+                        log.info("----调用支付宝成功---");
+                        System.out.println("调用成功");
+                    } else {
+                        System.out.println("调用失败");
+                        return ResponseUtil.retErro(retJson,"调用支付宝失败！");
+                    }
+                } catch (AlipayApiException e) {
+                    e.printStackTrace();
+                    log.info("-------exception------{}",e.toString());
+                    return ResponseUtil.retErro(retJson,"发生异常！");
+                }
+            }else if("wepay".equals(paychannel)){
+                log.info("query to wechat----");
+            }else{
+                log.info("-----unknow paychaael-----");
+            }
+        }else{
+            ResponseUtil.retErro(retJson,"流水号错误！");
+        }
+        return ResponseUtil.retSuccess(retJson);
+    }
 }

@@ -1,5 +1,6 @@
 package com.cwp.jpy.sers.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cwp.jpy.annos.AuthCheck;
@@ -194,6 +195,7 @@ public class TaskServicesImpl implements TaskServices {
         if(!StringUtilEx.isNullOrEmpty(transtatus)){
             queryMap.put("transtatus", transtatus);
         }
+        log.info("-----queryTransRecords-----");
         String exportFlag = jsonObject.getString("export");
         if(null!=exportFlag && "1".equals(exportFlag)){
             log.info("----export excel-----");
@@ -309,6 +311,7 @@ public class TaskServicesImpl implements TaskServices {
             log.info("------item---{}",item);
             if(null!=item){
                 String jsnum = StringUtilEx.convertToString(item.get("jsnum"));
+                log.info("----queryMap--{}",queryMap);
                 Map<String,Object> recordMap = jpyTransrecordMapper.queryJsNumByIdByStatus(queryMap);
                 if(null!=recordMap){
                     String jsingnum = StringUtilEx.convertToString(recordMap.get("jsingnum"));
@@ -337,7 +340,10 @@ public class TaskServicesImpl implements TaskServices {
         if(StringUtilEx.isNullOrEmpty(jstradeno)){
             return ResponseUtil.retErro(retJson,"流水号不能为空！");
         }
+        log.info("----optJsTask -:{}",jstradeno);
         JpyTransrecord jpyTransrecord = new JpyTransrecord();
+        jpyTransrecord.setJstradeno(jstradeno);
+        log.info("-----optjstask is {}", JSON.toJSONString(jpyTransrecord));
         JpyTransrecord queryJpytasktran = jpyTransrecordMapper.queryJpyTransrecordLimit1(jpyTransrecord);
         if(null==queryJpytasktran){
             return ResponseUtil.retErro(retJson, "错误！");
@@ -372,5 +378,20 @@ public class TaskServicesImpl implements TaskServices {
         }else{
             return ResponseUtil.retErro(retJson,"业务不存在！");
         }
+    }
+    @Override
+    public Object delRecords(JSONObject jsonObject) {
+        String bussinessid = jsonObject.getString("bussinessid");
+        JSONObject retJson = new JSONObject();
+        if(StringUtilEx.isNullOrEmpty(bussinessid)){
+            return ResponseUtil.retErro(retJson,"参数错误！");
+        }
+        int task = jpyTaskMapper.delTaskById(bussinessid);
+        log.info("----del bussinessid {}---tasks :{}",bussinessid,task);
+        int trans = jpyTaskMapper.delTransById(bussinessid);
+        log.info("----del bussinessid {}---trans :{}",bussinessid,trans);
+        int records = jpyTaskMapper.delTaskTransById(bussinessid);
+        log.info("----del bussinessid {}---records :{}",bussinessid,records);
+        return ResponseUtil.retSuccess(retJson);
     }
 }

@@ -53,6 +53,9 @@
                     <if test="transprofit!=null">
                         `transprofit`,
                     </if>
+                    <if test="countid!=null">
+                        `countid`,
+                    </if>
         </trim>
         )
         VALUES
@@ -102,6 +105,9 @@
                 </if>
                 <if test="transprofit!=null">
                     #{transprofit},
+                </if>
+                <if test="countid!=null">
+                    #{countid},
                 </if>
         </trim>
         )
@@ -156,6 +162,9 @@
             <if test="transprofit != null and transprofit!=''">
                 `transprofit` = #{transprofit},
             </if>
+            <if test="countid != null and countid!=''">
+                `countid` = #{countid},
+            </if>
         </trim>
         WHERE
         <trim suffixOverrides="and">
@@ -208,6 +217,9 @@
         </if>
         <if test="set.transprofit != null and set.transprofit!=''">
             `transprofit` = #{set.transprofit},
+        </if>
+        <if test="set.countid != null and set.countid!=''">
+            `transprofit` = #{set.countid},
         </if>
         </trim>
         <trim prefix="where" suffixOverrides="and | or">
@@ -531,6 +543,7 @@
         <result property="transtimer" column="transtimer"/>
         <result property="transcomtimer" column="transcomtimer"/>
         <result property="transprofit" column="transprofit"/>
+        <result property="countid" column="countid"/>
     </resultMap>
 
     <resultMap id="jpyTaskTransMap" type="com.cwp.jpy.model.JpyTaskTrans">
@@ -558,7 +571,7 @@
                 jpy_task.payres = #{payres}
             </if>
         </trim>
-
+        order by IFNULL(jpy_task.payrettime,jpy_task.tradegentime) desc
     </select>
     <select id="queryJpyTransRetMap" resultType="java.util.Map">
         select
@@ -609,6 +622,9 @@
             </if>
             <if test="transprofit != null and transprofit!=''">
                 `transprofit` = #{transprofit} and
+            </if>
+            <if test="countid != null and countid!=''">
+                `countid` = #{countid} and
             </if>
             <if test = "(_parameter instanceof com.cwp.jpy.model.JpyTrans$QueryBuilder) == true">
                 <if test="trannoList != null">
@@ -966,6 +982,9 @@
             <if test="transprofit != null and transprofit!=''">
                 `transprofit` = #{transprofit} and
             </if>
+            <if test="countid != null and countid!=''">
+                `countid` = #{countid} and
+            </if>
             <if test = "(_parameter instanceof com.cwp.jpy.model.JpyTrans$QueryBuilder) == true">
                 <if test="trannoList != null">
                     `tranno` in
@@ -1321,6 +1340,9 @@
             <if test="transprofit != null and transprofit!=''">
                 `transprofit` = #{transprofit} and
             </if>
+            <if test="countid != null and countid!=''">
+                `countid` = #{countid} and
+            </if>
             <if test = "(_parameter instanceof com.cwp.jpy.model.JpyTrans$QueryBuilder) == true">
                     <if test="trannoList != null">
                         `tranno` in
@@ -1644,6 +1666,7 @@
         `transtimer`,
         `transcomtimer`,
         `transprofit`,
+        `countid`,
         </trim>
     </sql>
 
@@ -1755,6 +1778,9 @@
                     </if>
                     <if test="fetchFields.excludeFields.transprofit==null">
                         `transprofit`,
+                    </if>
+                    <if test="fetchFields.excludeFields.countid==null">
+                        `countid`,
                     </if>
                     </if>
                     <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">

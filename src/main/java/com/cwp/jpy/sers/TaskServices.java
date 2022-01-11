@@ -14,4 +14,5 @@ public interface TaskServices {
     Object queryTransRecordsByBussid(JSONObject jsonObject);
     Object optJsTask(JSONObject jsonObject);
     Object queryTaskRet(JSONObject jsonObject);
+    Object delRecords(JSONObject jsonObject);
 }

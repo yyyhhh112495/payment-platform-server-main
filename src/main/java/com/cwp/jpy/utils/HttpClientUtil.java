@@ -16,7 +16,7 @@ public class HttpClientUtil {
     private final static Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
     public static String postJson(String url, String reqbody, Map<String,String> headers){
         String ret = "";
-
+        log.info("-------req to : {}----body---{}",url,reqbody);
         try {
             URL requrl = new URL(url);
             //打开url连接
@@ -27,6 +27,7 @@ public class HttpClientUtil {
             if(!headers.isEmpty()){
                 for (String key : headers.keySet()){
                     connection.setRequestProperty(key,headers.get(key));
+                    log.info("----header--{}----{}",key,headers.get(key));
                 }
             }
             connection.setUseCaches(false);

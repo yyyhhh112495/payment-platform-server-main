@@ -105,6 +105,13 @@ public class JpyTrans implements Serializable {
     private String transprofit;
 
 
+    private String countid;
+    public String getCountid() {
+        return countid;
+    }
+    public void setCountid(String countid) {
+        this.countid = countid;
+    }
     public void setTranno(String tranno){this.tranno = tranno;}
 
     public String getTranno(){return this.tranno;}

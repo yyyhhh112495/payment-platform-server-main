@@ -16,13 +16,13 @@
 
     <select id="queryJsNumByIdByStatus" resultType="java.util.Map" parameterType="java.util.Map">
         SELECT
-        IFNULL( SUM( CASE transtatus WHEN '0' THEN transtatus ELSE '0' END ), 0 ) jsingnum,
-        IFNULL( SUM( CASE transtatus WHEN '0' THEN transtatus ELSE '0' END ), 0 ) jsednum
+        IFNULL( SUM( CASE transtatus WHEN '0' THEN jsnum ELSE '0' END ), 0 ) jsingnum,
+        IFNULL( SUM( CASE transtatus WHEN '1' THEN jsnum ELSE '0' END ), 0 ) jsednum
         FROM
         jpy_transrecord
         <trim prefix="where" suffixOverrides="and | or">
-            <if test="bussisid != null and bussisid!=''">
-                bussid=#{bussisid} and
+            <if test="bussinessid != null and bussinessid!=''">
+                bussid=#{bussinessid} and
             </if>
         </trim>
     </select>
